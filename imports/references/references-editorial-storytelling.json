@@ -1,0 +1,409 @@
+{
+  "references": [
+    {
+      "title": "Monocle \u2014 Media Brand Homepage",
+      "source": "Other",
+      "url": "https://www.monocle.com",
+      "type": "website",
+      "description": "A media brand site with distinctive typographic identity and magazine-like content architecture.",
+      "whySaved": "Essential for editorial brand systems, media commerce, and cultured storytelling online.",
+      "whatToLearn": [
+        "Editorial brand systems",
+        "Magazine-like IA",
+        "Typography as brand",
+        "Media commerce cues"
+      ],
+      "industries": [
+        "Media",
+        "Retail",
+        "Travel"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Article",
+        "Product"
+      ],
+      "styles": [
+        "Editorial",
+        "Sophisticated",
+        "Minimal",
+        "Elegant"
+      ],
+      "patterns": [
+        "Editorial Layout",
+        "Content Grid",
+        "Navigation",
+        "Storytelling"
+      ],
+      "tags": [
+        "serif typography",
+        "editorial grid",
+        "large typography"
+      ]
+    },
+    {
+      "title": "It's Nice That \u2014 Creative Industry Editorial",
+      "source": "Other",
+      "url": "https://www.itsnicethat.com",
+      "type": "website",
+      "description": "A creative industry editorial platform with dense inspiration feeds and cultural coverage.",
+      "whySaved": "Useful for inspiration-media layouts and creative sector publishing patterns.",
+      "whatToLearn": [
+        "Inspiration feed density",
+        "Creative taxonomy",
+        "Article card systems",
+        "Cultural coverage tone"
+      ],
+      "industries": [
+        "Media",
+        "Creative",
+        "Agency"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Article",
+        "Blog"
+      ],
+      "styles": [
+        "Editorial",
+        "Bold",
+        "Clean",
+        "Artistic"
+      ],
+      "patterns": [
+        "Content Grid",
+        "Card Grid",
+        "Editorial Layout",
+        "Navigation"
+      ],
+      "tags": [
+        "dense layout",
+        "editorial grid",
+        "bold colors"
+      ]
+    },
+    {
+      "title": "The Verge \u2014 Technology Editorial Site",
+      "source": "Other",
+      "url": "https://www.theverge.com",
+      "type": "website",
+      "description": "A technology media site with distinctive visual identity and story package design.",
+      "whySaved": "Strong for news packaging, feature stories, and opinionated tech media branding.",
+      "whatToLearn": [
+        "Feature story packaging",
+        "News homepage modules",
+        "Opinionated brand voice",
+        "Media advertising integration"
+      ],
+      "industries": [
+        "Media",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Article",
+        "Blog"
+      ],
+      "styles": [
+        "Editorial",
+        "Bold",
+        "Dark",
+        "Technical"
+      ],
+      "patterns": [
+        "Editorial Layout",
+        "Content Grid",
+        "Navigation",
+        "Storytelling"
+      ],
+      "tags": [
+        "dense layout",
+        "bold colors",
+        "editorial grid"
+      ]
+    },
+    {
+      "title": "NPR \u2014 Public Media Homepage",
+      "source": "Other",
+      "url": "https://www.npr.org",
+      "type": "website",
+      "description": "A public media homepage with audio-first storytelling and trustworthy news architecture.",
+      "whySaved": "Helpful for public-interest media UX and audio content presentation.",
+      "whatToLearn": [
+        "Audio-first content modules",
+        "Public media trust",
+        "News IA",
+        "Story collection design"
+      ],
+      "industries": [
+        "Media",
+        "Education",
+        "Nonprofit"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Article",
+        "Resources"
+      ],
+      "styles": [
+        "Institutional",
+        "Editorial",
+        "Clean",
+        "Human-centered"
+      ],
+      "patterns": [
+        "Content Grid",
+        "Editorial Layout",
+        "Navigation",
+        "Storytelling"
+      ],
+      "tags": [
+        "dense layout",
+        "editorial grid",
+        "neutral colors"
+      ]
+    },
+    {
+      "title": "GQ \u2014 Fashion & Culture Magazine Site",
+      "source": "Other",
+      "url": "https://www.gq.com",
+      "type": "website",
+      "description": "A fashion and culture magazine site with strong visual hierarchy and lifestyle storytelling.",
+      "whySaved": "Useful for fashion editorial systems and commerce-adjacent magazine design.",
+      "whatToLearn": [
+        "Fashion editorial hierarchy",
+        "Lifestyle story packages",
+        "Commerce-adjacent CTAs",
+        "Visual feature heroes"
+      ],
+      "industries": [
+        "Media",
+        "Retail",
+        "Entertainment"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Article"
+      ],
+      "styles": [
+        "Editorial",
+        "Luxury",
+        "Bold",
+        "Sophisticated"
+      ],
+      "patterns": [
+        "Editorial Hero",
+        "Editorial Layout",
+        "Image Gallery",
+        "Content Grid"
+      ],
+      "tags": [
+        "lifestyle photography",
+        "large typography",
+        "editorial grid"
+      ]
+    },
+    {
+      "title": "Vogue \u2014 Fashion Editorial Homepage",
+      "source": "Other",
+      "url": "https://www.vogue.com",
+      "type": "website",
+      "description": "A flagship fashion editorial site with cinematic imagery and aspirational storytelling.",
+      "whySaved": "Reference for high-fashion editorial heroes and culture publishing at scale.",
+      "whatToLearn": [
+        "Fashion hero imagery",
+        "Aspirational storytelling",
+        "Section navigation",
+        "Editorial commerce cues"
+      ],
+      "industries": [
+        "Media",
+        "Retail",
+        "Entertainment"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Article"
+      ],
+      "styles": [
+        "Editorial",
+        "Luxury",
+        "Cinematic",
+        "Elegant"
+      ],
+      "patterns": [
+        "Editorial Hero",
+        "Image Gallery",
+        "Editorial Layout",
+        "Navigation"
+      ],
+      "tags": [
+        "lifestyle photography",
+        "large typography"
+      ]
+    },
+    {
+      "title": "TED \u2014 Ideas Platform Website",
+      "source": "Other",
+      "url": "https://www.ted.com",
+      "type": "website",
+      "description": "An ideas platform organizing talks, themes, and events with clear content discovery systems.",
+      "whySaved": "Excellent for talk/video library UX and idea-driven brand systems.",
+      "whatToLearn": [
+        "Talk library discovery",
+        "Theme taxonomies",
+        "Video-first storytelling",
+        "Event promotion patterns"
+      ],
+      "industries": [
+        "Education",
+        "Media",
+        "Social Impact"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Resources",
+        "Campaign"
+      ],
+      "styles": [
+        "Bold",
+        "Clean",
+        "Human-centered",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Content Grid",
+        "Card Grid",
+        "CTA",
+        "Storytelling"
+      ],
+      "tags": [
+        "video",
+        "bold colors",
+        "grid layout"
+      ]
+    },
+    {
+      "title": "Khan Academy \u2014 Education Platform Site",
+      "source": "Other",
+      "url": "https://www.khanacademy.org",
+      "type": "website",
+      "description": "An education nonprofit platform with learner pathways and clear pedagogical product design.",
+      "whySaved": "Useful for learning product UX and education nonprofit marketing.",
+      "whatToLearn": [
+        "Learner pathway design",
+        "Subject taxonomy",
+        "Education product clarity",
+        "Nonprofit credibility"
+      ],
+      "industries": [
+        "Education",
+        "Nonprofit",
+        "Social Impact"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "Resources"
+      ],
+      "styles": [
+        "Friendly",
+        "Clean",
+        "Human-centered",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Content Grid",
+        "CTA"
+      ],
+      "tags": [
+        "illustration",
+        "light theme"
+      ]
+    },
+    {
+      "title": "Duolingo \u2014 Language Learning Product Site",
+      "source": "Other",
+      "url": "https://www.duolingo.com",
+      "type": "website",
+      "description": "A playful language learning product site with distinctive illustration and conversion simplicity.",
+      "whySaved": "Strong for playful education branding and onboarding-focused landing pages.",
+      "whatToLearn": [
+        "Playful brand systems",
+        "Onboarding-focused landing",
+        "Illustration language",
+        "Simple conversion"
+      ],
+      "industries": [
+        "Education",
+        "Technology",
+        "SaaS"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "Signup"
+      ],
+      "styles": [
+        "Playful",
+        "Colorful",
+        "Friendly",
+        "Bold"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "CTA",
+        "Product Showcase"
+      ],
+      "tags": [
+        "illustration",
+        "colorful"
+      ]
+    },
+    {
+      "title": "Classy \u2014 Nonprofit Fundraising Platform",
+      "source": "Other",
+      "url": "https://www.classy.org",
+      "type": "website",
+      "description": "A fundraising platform for nonprofits with campaign tools and donor experience storytelling.",
+      "whySaved": "Helpful bridge between nonprofit missions and SaaS fundraising product design.",
+      "whatToLearn": [
+        "Fundraising product UX",
+        "Nonprofit campaign tooling",
+        "Donor experience cues",
+        "Trust messaging"
+      ],
+      "industries": [
+        "Nonprofit",
+        "SaaS",
+        "Social Impact"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "Donation"
+      ],
+      "styles": [
+        "Human-centered",
+        "Clean",
+        "Friendly",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "CTA",
+        "Testimonials",
+        "Logo Cloud"
+      ],
+      "tags": [
+        "lifestyle photography",
+        "grid layout"
+      ]
+    }
+  ]
+}

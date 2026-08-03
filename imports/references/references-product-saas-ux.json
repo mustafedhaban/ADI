@@ -1,0 +1,414 @@
+{
+  "references": [
+    {
+      "title": "Superhuman \u2014 Email Productivity Product Site",
+      "source": "Other",
+      "url": "https://www.superhuman.com",
+      "type": "website",
+      "description": "A premium productivity email product site with refined dark visuals and power-user positioning.",
+      "whySaved": "Excellent for premium SaaS UX marketing aimed at speed and mastery.",
+      "whatToLearn": [
+        "Power-user positioning",
+        "Premium dark product UI",
+        "Speed as brand promise",
+        "Invite/waitlist patterns"
+      ],
+      "industries": [
+        "SaaS",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Premium",
+        "Dark",
+        "Minimal",
+        "Sophisticated"
+      ],
+      "patterns": [
+        "Hero",
+        "Product Showcase",
+        "Features",
+        "CTA"
+      ],
+      "tags": [
+        "dark theme",
+        "product photography",
+        "whitespace"
+      ]
+    },
+    {
+      "title": "Arc Browser \u2014 Product Marketing Site",
+      "source": "Other",
+      "url": "https://arc.net",
+      "type": "website",
+      "description": "A browser product site with distinctive brand voice and feature storytelling for a reimagined web browser.",
+      "whySaved": "Useful for consumer productivity products that must teach a new interaction model.",
+      "whatToLearn": [
+        "Teaching new interaction models",
+        "Distinctive product brand voice",
+        "Feature storytelling",
+        "Download conversion"
+      ],
+      "industries": [
+        "Technology",
+        "SaaS"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Playful",
+        "Bold",
+        "Colorful",
+        "Clean"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Product Showcase",
+        "CTA"
+      ],
+      "tags": [
+        "colorful",
+        "illustration",
+        "product photography"
+      ]
+    },
+    {
+      "title": "Brex \u2014 Fintech Spend Platform",
+      "source": "Other",
+      "url": "https://www.brex.com",
+      "type": "website",
+      "description": "A fintech spend platform homepage with clear product lines and enterprise-ready trust cues.",
+      "whySaved": "Good for fintech product UX marketing and multi-product SaaS packaging.",
+      "whatToLearn": [
+        "Multi-product fintech packaging",
+        "Enterprise trust cues",
+        "Spend platform education",
+        "Conversion CTAs"
+      ],
+      "industries": [
+        "Fintech",
+        "Finance",
+        "SaaS",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "Solutions"
+      ],
+      "styles": [
+        "Clean",
+        "Corporate",
+        "Minimal",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Logo Cloud",
+        "CTA",
+        "Product Showcase"
+      ],
+      "tags": [
+        "light theme",
+        "grid layout",
+        "whitespace"
+      ]
+    },
+    {
+      "title": "Ramp \u2014 Finance Automation Platform",
+      "source": "Other",
+      "url": "https://www.ramp.com",
+      "type": "website",
+      "description": "A finance automation SaaS site emphasizing savings, control, and operational clarity.",
+      "whySaved": "Strong for B2B fintech clarity and metrics-led product storytelling.",
+      "whatToLearn": [
+        "Metrics-led storytelling",
+        "Operational clarity",
+        "B2B fintech conversion",
+        "Product education modules"
+      ],
+      "industries": [
+        "Fintech",
+        "Finance",
+        "SaaS",
+        "Corporate"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Clean",
+        "Technical",
+        "Minimal",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Statistics",
+        "CTA",
+        "Logo Cloud"
+      ],
+      "tags": [
+        "light theme",
+        "grid layout",
+        "neutral colors"
+      ]
+    },
+    {
+      "title": "Plaid \u2014 Financial Connectivity Platform",
+      "source": "Other",
+      "url": "https://www.plaid.com",
+      "type": "website",
+      "description": "A financial infrastructure platform site explaining invisible plumbing products to developers and businesses.",
+      "whySaved": "Useful for infrastructure SaaS storytelling where the product is mostly API/invisible.",
+      "whatToLearn": [
+        "Infrastructure product storytelling",
+        "Developer + business dual audience",
+        "Trust and security cues",
+        "API product education"
+      ],
+      "industries": [
+        "Fintech",
+        "Finance",
+        "Technology",
+        "SaaS"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "Resources"
+      ],
+      "styles": [
+        "Technical",
+        "Clean",
+        "Minimal",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Logo Cloud",
+        "CTA",
+        "Navigation"
+      ],
+      "tags": [
+        "illustration",
+        "light theme",
+        "whitespace"
+      ]
+    },
+    {
+      "title": "HubSpot \u2014 CRM Marketing Platform",
+      "source": "Other",
+      "url": "https://www.hubspot.com",
+      "type": "website",
+      "description": "A CRM and marketing platform homepage with extensive product education and inbound methodology storytelling.",
+      "whySaved": "Useful for complex multi-product SaaS IA and education-led growth marketing.",
+      "whatToLearn": [
+        "Multi-product SaaS IA",
+        "Education-led growth content",
+        "Persona-based journeys",
+        "Conversion path variety"
+      ],
+      "industries": [
+        "SaaS",
+        "Technology",
+        "Agency"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "Resources"
+      ],
+      "styles": [
+        "Corporate",
+        "Friendly",
+        "Clean",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Content Grid",
+        "CTA",
+        "Logo Cloud"
+      ],
+      "tags": [
+        "grid layout",
+        "illustration",
+        "light theme"
+      ]
+    },
+    {
+      "title": "Mailchimp \u2014 Email Marketing Platform",
+      "source": "Other",
+      "url": "https://www.mailchimp.com",
+      "type": "website",
+      "description": "An email marketing platform with distinctive brand illustration and approachable SMB product UX.",
+      "whySaved": "Strong for playful SaaS branding that still converts small business audiences.",
+      "whatToLearn": [
+        "Playful SaaS branding",
+        "SMB conversion UX",
+        "Product education simplicity",
+        "Brand illustration systems"
+      ],
+      "industries": [
+        "SaaS",
+        "Technology",
+        "E-commerce"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Playful",
+        "Friendly",
+        "Colorful",
+        "Clean"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "CTA",
+        "Product Showcase"
+      ],
+      "tags": [
+        "illustration",
+        "colorful",
+        "friendly"
+      ]
+    },
+    {
+      "title": "Square \u2014 Commerce Tools Homepage",
+      "source": "Other",
+      "url": "https://squareup.com",
+      "type": "website",
+      "description": "A commerce tools homepage covering payments, POS, and seller growth products.",
+      "whySaved": "Helpful for multi-product commerce SaaS and seller-facing product packaging.",
+      "whatToLearn": [
+        "Seller-facing product packaging",
+        "Payments + software bundling",
+        "Hardware/software storytelling",
+        "Local business CTAs"
+      ],
+      "industries": [
+        "Finance",
+        "Fintech",
+        "Retail",
+        "E-commerce"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Clean",
+        "Friendly",
+        "Minimal",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Product Showcase",
+        "CTA",
+        "Logo Cloud"
+      ],
+      "tags": [
+        "product photography",
+        "light theme",
+        "grid layout"
+      ]
+    },
+    {
+      "title": "Wise \u2014 International Money Transfer",
+      "source": "Other",
+      "url": "https://www.wise.com",
+      "type": "website",
+      "description": "A consumer fintech site for international transfers with clarity-first UX and transparent pricing cues.",
+      "whySaved": "Excellent for consumer fintech clarity, trust, and transparent fee communication.",
+      "whatToLearn": [
+        "Transparent pricing communication",
+        "Consumer fintech trust",
+        "Clarity-first UX",
+        "Calculator/tool patterns"
+      ],
+      "industries": [
+        "Fintech",
+        "Finance",
+        "Travel"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Clean",
+        "Friendly",
+        "Minimal",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "CTA",
+        "Statistics"
+      ],
+      "tags": [
+        "light theme",
+        "whitespace",
+        "illustration"
+      ]
+    },
+    {
+      "title": "Robinhood \u2014 Retail Investing Product Site",
+      "source": "Other",
+      "url": "https://www.robinhood.com",
+      "type": "website",
+      "description": "A retail investing product site with minimal visuals and commission-free investing messaging.",
+      "whySaved": "Useful for consumer finance product marketing with radical simplicity.",
+      "whatToLearn": [
+        "Radical simplicity",
+        "Consumer finance trust balance",
+        "App-led product marketing",
+        "Minimal visual systems"
+      ],
+      "industries": [
+        "Finance",
+        "Fintech",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Minimal",
+        "Clean",
+        "Dark",
+        "Bold"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Product Showcase",
+        "CTA"
+      ],
+      "tags": [
+        "dark theme",
+        "minimal",
+        "product photography"
+      ]
+    }
+  ]
+}

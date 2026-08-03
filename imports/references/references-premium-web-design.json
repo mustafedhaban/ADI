@@ -1,0 +1,623 @@
+{
+  "references": [
+    {
+      "title": "Apple \u2014 Product Marketing Homepage",
+      "source": "Other",
+      "url": "https://www.apple.com",
+      "type": "website",
+      "description": "A restrained premium product marketing site with cinematic photography and precise typography.",
+      "whySaved": "Demonstrates how whitespace, image cropping, and product hero sequencing create a luxury technology feel.",
+      "whatToLearn": [
+        "Hero composition",
+        "Typography hierarchy",
+        "Product photography framing",
+        "CTA restraint"
+      ],
+      "industries": [
+        "Technology",
+        "E-commerce"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Minimal",
+        "Premium",
+        "Light",
+        "Sophisticated"
+      ],
+      "patterns": [
+        "Hero",
+        "Product Hero",
+        "Image Gallery",
+        "CTA",
+        "Navigation"
+      ],
+      "tags": [
+        "large typography",
+        "whitespace",
+        "product photography",
+        "full width"
+      ]
+    },
+    {
+      "title": "Airbnb \u2014 Hospitality Marketplace Homepage",
+      "source": "Other",
+      "url": "https://www.airbnb.com",
+      "type": "website",
+      "description": "A warm hospitality marketplace homepage combining search-first UX with lifestyle imagery.",
+      "whySaved": "Useful for balancing conversion-focused search UI with emotional destination storytelling.",
+      "whatToLearn": [
+        "Search-first hero",
+        "Card grid density",
+        "Lifestyle photography",
+        "Trust signals"
+      ],
+      "industries": [
+        "Hospitality",
+        "Travel",
+        "E-commerce"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Friendly",
+        "Human-centered",
+        "Light",
+        "Clean"
+      ],
+      "patterns": [
+        "Hero",
+        "Card Grid",
+        "Content Grid",
+        "Social Proof",
+        "Navigation"
+      ],
+      "tags": [
+        "lifestyle photography",
+        "grid layout",
+        "whitespace"
+      ]
+    },
+    {
+      "title": "Spotify \u2014 Music Platform Marketing Site",
+      "source": "Other",
+      "url": "https://www.spotify.com",
+      "type": "website",
+      "description": "A bold consumer brand site using saturated color, large type, and campaign-led storytelling.",
+      "whySaved": "Shows how brand color systems and oversized typography can drive energy without clutter.",
+      "whatToLearn": [
+        "Bold color systems",
+        "Campaign storytelling",
+        "CTA hierarchy",
+        "Feature sections"
+      ],
+      "industries": [
+        "Entertainment",
+        "Media",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "Landing Page"
+      ],
+      "styles": [
+        "Bold",
+        "Colorful",
+        "Playful",
+        "Dark"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "CTA",
+        "Storytelling"
+      ],
+      "tags": [
+        "bold colors",
+        "large typography",
+        "dark theme",
+        "expressive typography"
+      ]
+    },
+    {
+      "title": "Nike \u2014 Brand Commerce Homepage",
+      "source": "Other",
+      "url": "https://www.nike.com",
+      "type": "website",
+      "description": "A high-energy commerce homepage pairing athletic photography with strong merchandising modules.",
+      "whySaved": "Strong reference for campaign heroes, product showcases, and category navigation at scale.",
+      "whatToLearn": [
+        "Campaign hero",
+        "Product showcase modules",
+        "Category navigation",
+        "Motion-led CTAs"
+      ],
+      "industries": [
+        "Retail",
+        "E-commerce",
+        "Entertainment"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Bold",
+        "Cinematic",
+        "Dark",
+        "Premium"
+      ],
+      "patterns": [
+        "Hero",
+        "Product Showcase",
+        "Image Gallery",
+        "Navigation",
+        "CTA"
+      ],
+      "tags": [
+        "lifestyle photography",
+        "full width",
+        "bold colors",
+        "oversized elements"
+      ]
+    },
+    {
+      "title": "Framer \u2014 Design Tool Marketing Site",
+      "source": "Land-book",
+      "url": "https://www.framer.com",
+      "type": "website",
+      "description": "A polished product marketing site for a design tool, blending motion demos with crisp feature storytelling.",
+      "whySaved": "Excellent for studying how SaaS tools sell capability through interactive product heroes.",
+      "whatToLearn": [
+        "Product demo hero",
+        "Feature storytelling",
+        "Pricing CTA flow",
+        "Motion as explanation"
+      ],
+      "industries": [
+        "Technology",
+        "SaaS",
+        "Creative"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "Pricing"
+      ],
+      "styles": [
+        "Premium",
+        "Dark",
+        "Technical",
+        "Clean"
+      ],
+      "patterns": [
+        "Hero",
+        "Product Hero",
+        "Features",
+        "Pricing",
+        "CTA"
+      ],
+      "tags": [
+        "dark theme",
+        "scroll animation",
+        "gradient"
+      ]
+    },
+    {
+      "title": "Webflow \u2014 No-code Platform Homepage",
+      "source": "Other",
+      "url": "https://webflow.com",
+      "type": "website",
+      "description": "A conversion-oriented SaaS homepage with clear value props, social proof, and product visuals.",
+      "whySaved": "Useful model for feature grids, logo clouds, and designer/developer dual audience messaging.",
+      "whatToLearn": [
+        "Value proposition clarity",
+        "Logo cloud placement",
+        "Feature grid structure",
+        "Audience segmentation"
+      ],
+      "industries": [
+        "Technology",
+        "SaaS",
+        "Agency"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Clean",
+        "Light",
+        "Technical",
+        "Minimal"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Logo Cloud",
+        "Testimonials",
+        "CTA"
+      ],
+      "tags": [
+        "grid layout",
+        "light theme",
+        "illustration",
+        "whitespace"
+      ]
+    },
+    {
+      "title": "Lusion \u2014 Immersive Web Experience Studio",
+      "source": "Awwwards",
+      "url": "https://www.lusion.co",
+      "type": "website",
+      "description": "An immersive studio experience using WebGL, scroll storytelling, and cinematic transitions.",
+      "whySaved": "Reference for high-craft motion systems and how experimental interaction can still communicate capability.",
+      "whatToLearn": [
+        "WebGL storytelling",
+        "Scroll-driven narrative",
+        "Portfolio presentation",
+        "Performance vs spectacle balance"
+      ],
+      "industries": [
+        "Agency",
+        "Creative",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Portfolio"
+      ],
+      "styles": [
+        "Experimental",
+        "Cinematic",
+        "Dark",
+        "Futuristic"
+      ],
+      "patterns": [
+        "Full Screen Hero",
+        "Storytelling",
+        "Portfolio",
+        "Navigation"
+      ],
+      "tags": [
+        "scroll animation",
+        "3D",
+        "dark theme",
+        "page transition"
+      ]
+    },
+    {
+      "title": "Cuberto \u2014 Digital Agency Portfolio",
+      "source": "Awwwards",
+      "url": "https://www.cuberto.com",
+      "type": "website",
+      "description": "A distinctive agency site known for custom cursors, fluid motion, and bold typographic moments.",
+      "whySaved": "Useful for studying expressive interaction design without losing portfolio clarity.",
+      "whatToLearn": [
+        "Custom cursor interaction",
+        "Typographic motion",
+        "Case study entry points",
+        "Dark UI atmosphere"
+      ],
+      "industries": [
+        "Agency",
+        "Creative"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Portfolio",
+        "About"
+      ],
+      "styles": [
+        "Experimental",
+        "Bold",
+        "Dark",
+        "Artistic"
+      ],
+      "patterns": [
+        "Hero",
+        "Portfolio",
+        "Case Studies",
+        "Navigation"
+      ],
+      "tags": [
+        "cursor interaction",
+        "dark theme",
+        "expressive typography",
+        "hover interaction"
+      ]
+    },
+    {
+      "title": "Locomotive \u2014 Creative Production Studio",
+      "source": "Awwwards",
+      "url": "https://locomotive.ca",
+      "type": "website",
+      "description": "A creative studio site showcasing scrollcraft, editorial layouts, and high-end case studies.",
+      "whySaved": "Strong teaching example for scroll libraries, case study pacing, and editorial agency aesthetics.",
+      "whatToLearn": [
+        "Scrollcraft techniques",
+        "Case study pacing",
+        "Editorial agency layout",
+        "Project taxonomy"
+      ],
+      "industries": [
+        "Agency",
+        "Creative",
+        "Media"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Portfolio",
+        "Case Studies"
+      ],
+      "styles": [
+        "Editorial",
+        "Premium",
+        "Dark",
+        "Sophisticated"
+      ],
+      "patterns": [
+        "Hero",
+        "Case Studies",
+        "Portfolio",
+        "Storytelling"
+      ],
+      "tags": [
+        "scroll animation",
+        "editorial grid",
+        "dark theme",
+        "large typography"
+      ]
+    },
+    {
+      "title": "Immaculate \u2014 Design Studio Website",
+      "source": "Godly",
+      "url": "https://www.immaculate.co",
+      "type": "website",
+      "description": "A refined studio website with polished visual systems and carefully staged project presentation.",
+      "whySaved": "Good reference for boutique studio positioning through restraint and visual quality.",
+      "whatToLearn": [
+        "Studio positioning",
+        "Project card composition",
+        "Visual system consistency",
+        "CTA understatement"
+      ],
+      "industries": [
+        "Agency",
+        "Creative",
+        "Portfolio"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Portfolio"
+      ],
+      "styles": [
+        "Minimal",
+        "Premium",
+        "Elegant",
+        "Clean"
+      ],
+      "patterns": [
+        "Hero",
+        "Portfolio",
+        "CTA",
+        "Minimal Navigation"
+      ],
+      "tags": [
+        "whitespace",
+        "product photography"
+      ]
+    },
+    {
+      "title": "Dropbox \u2014 Product Marketing Site",
+      "source": "Other",
+      "url": "https://www.dropbox.com",
+      "type": "website",
+      "description": "A friendly yet structured product marketing site using illustration systems and clear feature architecture.",
+      "whySaved": "Helpful for approachable B2B/consumer hybrid messaging and modular feature storytelling.",
+      "whatToLearn": [
+        "Illustration system usage",
+        "Feature modularity",
+        "Friendly brand tone",
+        "Conversion path clarity"
+      ],
+      "industries": [
+        "Technology",
+        "SaaS"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Friendly",
+        "Clean",
+        "Playful",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Logo Cloud",
+        "CTA"
+      ],
+      "tags": [
+        "illustration",
+        "light theme",
+        "card grid"
+      ]
+    },
+    {
+      "title": "Shopify \u2014 Commerce Platform Homepage",
+      "source": "Other",
+      "url": "https://www.shopify.com",
+      "type": "website",
+      "description": "A high-conversion commerce platform homepage with strong social proof and merchant success storytelling.",
+      "whySaved": "Excellent for merchant-facing SaaS patterns: proof, templates, and get-started conversion.",
+      "whatToLearn": [
+        "Merchant social proof",
+        "Template showcase",
+        "Multi-CTA hierarchy",
+        "Success metrics presentation"
+      ],
+      "industries": [
+        "E-commerce",
+        "SaaS",
+        "Retail",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "Landing Page"
+      ],
+      "styles": [
+        "Clean",
+        "Bold",
+        "Light",
+        "Corporate"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Statistics",
+        "Testimonials",
+        "CTA"
+      ],
+      "tags": [
+        "grid layout",
+        "lifestyle photography",
+        "bold colors"
+      ]
+    },
+    {
+      "title": "Vercel \u2014 Developer Platform Homepage",
+      "source": "Other",
+      "url": "https://www.vercel.com",
+      "type": "website",
+      "description": "A technical yet elegant developer platform site with dark UI, product demos, and performance messaging.",
+      "whySaved": "Reference for developer-tool aesthetics that still feel premium and approachable.",
+      "whatToLearn": [
+        "Developer-tool visual language",
+        "Code as product demo",
+        "Dark technical UI",
+        "Performance messaging"
+      ],
+      "industries": [
+        "Technology",
+        "SaaS"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Technical",
+        "Dark",
+        "Minimal",
+        "Premium"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Product Showcase",
+        "Logo Cloud",
+        "CTA"
+      ],
+      "tags": [
+        "dark theme",
+        "gradient"
+      ]
+    },
+    {
+      "title": "Notion \u2014 Workspace Product Homepage",
+      "source": "Other",
+      "url": "https://www.notion.so",
+      "type": "website",
+      "description": "A product-led homepage that explains a flexible workspace through templates, use cases, and clean UI captures.",
+      "whySaved": "Useful for multi-audience product marketing and template-led onboarding narratives.",
+      "whatToLearn": [
+        "Use-case segmentation",
+        "Template gallery patterns",
+        "UI capture presentation",
+        "Product-led storytelling"
+      ],
+      "industries": [
+        "SaaS",
+        "Technology",
+        "Education"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Clean",
+        "Minimal",
+        "Friendly",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Content Grid",
+        "CTA",
+        "Product Showcase"
+      ],
+      "tags": [
+        "product photography",
+        "whitespace",
+        "grid layout",
+        "illustration"
+      ]
+    },
+    {
+      "title": "Figma \u2014 Collaborative Design Tool Site",
+      "source": "Figma Community",
+      "url": "https://www.figma.com",
+      "type": "website",
+      "description": "A collaborative design platform homepage emphasizing community, product demos, and designer workflows.",
+      "whySaved": "Strong model for community-driven product marketing and multi-role value communication.",
+      "whatToLearn": [
+        "Community as growth loop",
+        "Workflow storytelling",
+        "Product demo framing",
+        "Role-based messaging"
+      ],
+      "industries": [
+        "Technology",
+        "SaaS",
+        "Creative",
+        "Agency"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Clean",
+        "Colorful",
+        "Friendly",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Logo Cloud",
+        "CTA",
+        "Product Showcase"
+      ],
+      "tags": [
+        "illustration",
+        "colorful",
+        "product photography",
+        "grid layout"
+      ]
+    }
+  ]
+}

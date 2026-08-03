@@ -1,0 +1,78 @@
+{
+  "references": [
+    {
+      "title": "Linear — Product Homepage",
+      "source": "Land-book",
+      "url": "https://linear.app",
+      "type": "website",
+      "description": "A refined SaaS homepage with restrained motion and precise typography.",
+      "whySaved": "Exemplifies premium product marketing with calm visual hierarchy.",
+      "whatToLearn": [
+        "Hero composition",
+        "Typography hierarchy",
+        "CTA placement"
+      ],
+      "industries": ["Technology", "SaaS"],
+      "pageTypes": ["Homepage", "Product"],
+      "styles": ["Minimal", "Premium", "Dark"],
+      "patterns": ["Hero", "Features", "CTA", "Logo Cloud"],
+      "tags": ["large typography", "dark theme", "whitespace"]
+    },
+    {
+      "title": "Stripe — Payments Platform",
+      "source": "Awwwards",
+      "url": "https://stripe.com",
+      "type": "website",
+      "description": "A technical yet approachable finance marketing site with rich gradients.",
+      "whySaved": "Strong balance of technical credibility and visual warmth.",
+      "whatToLearn": [
+        "Gradient usage",
+        "Feature storytelling",
+        "Documentation-adjacent marketing"
+      ],
+      "industries": ["Finance", "Fintech", "Technology"],
+      "pageTypes": ["Homepage", "Product"],
+      "styles": ["Technical", "Premium", "Clean"],
+      "patterns": ["Hero", "Features", "Logo Cloud", "CTA"],
+      "tags": ["gradient", "grid layout", "illustration"]
+    },
+    {
+      "title": "Editorial NGO Landing",
+      "source": "Behance",
+      "url": "https://example.com/editorial-ngo",
+      "type": "website",
+      "description": "Nonprofit landing page using documentary photography and large type.",
+      "whySaved": "Human-centered storytelling suited to social impact brands.",
+      "whatToLearn": [
+        "Image cropping",
+        "Storytelling sections",
+        "Donation CTA"
+      ],
+      "industries": ["NGO", "Nonprofit", "Social Impact"],
+      "pageTypes": ["Landing Page", "Donation"],
+      "styles": ["Editorial", "Human-centered", "Organic"],
+      "patterns": ["Editorial Hero", "Storytelling", "Donation CTA", "Statistics"],
+      "tags": ["documentary photography", "large typography", "asymmetric layout"]
+    },
+    {
+      "title": "Mobbin — Mobile Patterns",
+      "source": "Mobbin",
+      "url": "https://mobbin.com",
+      "type": "mobile",
+      "description": "Mobile UI reference platform showcasing real product screens.",
+      "whySaved": "Useful for researching mobile navigation and onboarding patterns.",
+      "whatToLearn": ["Mobile navigation", "Screen density", "Component reuse"],
+      "industries": ["Technology", "SaaS"],
+      "pageTypes": ["Dashboard", "Product"],
+      "styles": ["Clean", "Minimal"],
+      "patterns": ["Mobile Navigation", "Card Grid"],
+      "tags": ["dense layout", "grid layout"]
+    },
+    {
+      "title": "Invalid Missing Type Example",
+      "source": "Other",
+      "url": "https://example.com/missing-type",
+      "description": "This record is intentionally invalid for import validation demos."
+    }
+  ]
+}

@@ -1,0 +1,415 @@
+{
+  "references": [
+    {
+      "title": "Pentagram \u2014 Design Studio Archive",
+      "source": "Other",
+      "url": "https://www.pentagram.com",
+      "type": "website",
+      "description": "A legendary multi-disciplinary design studio archive organized by partners, disciplines, and clients.",
+      "whySaved": "Essential for deep portfolio architecture and partner-led agency positioning.",
+      "whatToLearn": [
+        "Archive-scale portfolio IA",
+        "Partner-led navigation",
+        "Discipline taxonomies",
+        "Case study depth"
+      ],
+      "industries": [
+        "Agency",
+        "Creative",
+        "Portfolio"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Portfolio",
+        "About",
+        "Case Studies"
+      ],
+      "styles": [
+        "Minimal",
+        "Editorial",
+        "Sophisticated",
+        "Clean"
+      ],
+      "patterns": [
+        "Portfolio",
+        "Case Studies",
+        "Navigation",
+        "Content Grid"
+      ],
+      "tags": [
+        "whitespace",
+        "editorial grid",
+        "grid layout"
+      ]
+    },
+    {
+      "title": "Sagmeister & Walsh \u2014 Studio Archive",
+      "source": "Other",
+      "url": "https://www.sagmeisterwalsh.com",
+      "type": "website",
+      "description": "A provocative design studio site known for bold visual experiments and distinctive project presentation.",
+      "whySaved": "Useful for studying expressive studio branding and memorable case study presentation.",
+      "whatToLearn": [
+        "Expressive studio identity",
+        "Memorable case studies",
+        "Bold visual experiments",
+        "Portfolio pacing"
+      ],
+      "industries": [
+        "Agency",
+        "Creative",
+        "Portfolio"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Portfolio",
+        "Case Studies"
+      ],
+      "styles": [
+        "Experimental",
+        "Bold",
+        "Artistic",
+        "Colorful"
+      ],
+      "patterns": [
+        "Portfolio",
+        "Case Studies",
+        "Hero",
+        "Image Gallery"
+      ],
+      "tags": [
+        "bold colors",
+        "expressive typography",
+        "collage"
+      ]
+    },
+    {
+      "title": "Instrument \u2014 Technology-led Creative Agency",
+      "source": "Other",
+      "url": "https://www.instrument.com",
+      "type": "website",
+      "description": "A technology-led agency site presenting brand, product, and marketing work in a continuous stream.",
+      "whySaved": "Strong for stream-based portfolio homepages and multi-capability agency storytelling.",
+      "whatToLearn": [
+        "Stream portfolio layouts",
+        "Multi-capability packaging",
+        "Client roster presentation",
+        "Work filtering"
+      ],
+      "industries": [
+        "Agency",
+        "Creative",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Portfolio",
+        "Case Studies"
+      ],
+      "styles": [
+        "Clean",
+        "Minimal",
+        "Sophisticated",
+        "Light"
+      ],
+      "patterns": [
+        "Portfolio",
+        "Case Studies",
+        "Content Grid",
+        "Navigation"
+      ],
+      "tags": [
+        "grid layout",
+        "whitespace",
+        "product photography"
+      ]
+    },
+    {
+      "title": "Huge \u2014 Digital Agency Website",
+      "source": "Other",
+      "url": "https://www.hugeinc.com",
+      "type": "website",
+      "description": "A digital agency site emphasizing strategy, design, and technology through case-led narratives.",
+      "whySaved": "Helpful for large digital agency positioning and case study systems.",
+      "whatToLearn": [
+        "Case-led agency storytelling",
+        "Service packaging",
+        "Enterprise client proof",
+        "Studio culture cues"
+      ],
+      "industries": [
+        "Agency",
+        "Technology",
+        "Corporate"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Case Studies",
+        "Services",
+        "About"
+      ],
+      "styles": [
+        "Corporate",
+        "Clean",
+        "Bold",
+        "Technical"
+      ],
+      "patterns": [
+        "Hero",
+        "Case Studies",
+        "Services",
+        "CTA"
+      ],
+      "tags": [
+        "large typography",
+        "grid layout",
+        "bold colors"
+      ]
+    },
+    {
+      "title": "R/GA \u2014 Digital Product Agency",
+      "source": "Other",
+      "url": "https://www.rga.com",
+      "type": "website",
+      "description": "A digital product and marketing agency site with innovation-led work and enterprise focus.",
+      "whySaved": "Useful for product+marketing hybrid agency brands and innovation storytelling.",
+      "whatToLearn": [
+        "Innovation-led case studies",
+        "Enterprise agency tone",
+        "Hybrid product/marketing packaging",
+        "Work taxonomy"
+      ],
+      "industries": [
+        "Agency",
+        "Technology",
+        "Corporate"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Case Studies",
+        "Services"
+      ],
+      "styles": [
+        "Technical",
+        "Corporate",
+        "Dark",
+        "Clean"
+      ],
+      "patterns": [
+        "Hero",
+        "Case Studies",
+        "Services",
+        "Navigation"
+      ],
+      "tags": [
+        "dark theme",
+        "dense layout",
+        "grid layout"
+      ]
+    },
+    {
+      "title": "AKQA \u2014 Creative Technology Agency",
+      "source": "Other",
+      "url": "https://www.akqa.com",
+      "type": "website",
+      "description": "A creative technology agency homepage showcasing ambitious digital products and campaigns.",
+      "whySaved": "Excellent for frontier creative-tech positioning and high-ambition case presentation.",
+      "whatToLearn": [
+        "Frontier creative positioning",
+        "Campaign+product hybrid cases",
+        "Bold typographic voice",
+        "Work highlight modules"
+      ],
+      "industries": [
+        "Agency",
+        "Technology",
+        "Creative"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Case Studies",
+        "About"
+      ],
+      "styles": [
+        "Bold",
+        "Experimental",
+        "Dark",
+        "Futuristic"
+      ],
+      "patterns": [
+        "Hero",
+        "Case Studies",
+        "Storytelling",
+        "Navigation"
+      ],
+      "tags": [
+        "large typography",
+        "dark theme",
+        "expressive typography"
+      ]
+    },
+    {
+      "title": "Fantasy \u2014 Digital Product Studio",
+      "source": "Other",
+      "url": "https://www.fantasy.co",
+      "type": "website",
+      "description": "A digital product studio site with refined case studies and product craft emphasis.",
+      "whySaved": "Good for boutique product studio portfolios that need to feel premium and precise.",
+      "whatToLearn": [
+        "Product craft case studies",
+        "Boutique studio tone",
+        "Visual restraint",
+        "Client outcome framing"
+      ],
+      "industries": [
+        "Agency",
+        "Technology",
+        "Creative"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Portfolio",
+        "Case Studies"
+      ],
+      "styles": [
+        "Premium",
+        "Minimal",
+        "Sophisticated",
+        "Clean"
+      ],
+      "patterns": [
+        "Portfolio",
+        "Case Studies",
+        "Hero",
+        "CTA"
+      ],
+      "tags": [
+        "whitespace",
+        "product photography"
+      ]
+    },
+    {
+      "title": "BASIC \u2014 Creative Agency Website",
+      "source": "Awwwards",
+      "url": "https://www.basicagency.com",
+      "type": "website",
+      "description": "A creative agency site known for high-craft web experiences and bold visual systems.",
+      "whySaved": "Useful for agency sites that demonstrate craft through the medium itself.",
+      "whatToLearn": [
+        "Craft-as-portfolio approach",
+        "Bold visual systems",
+        "Motion-led storytelling",
+        "Case entry design"
+      ],
+      "industries": [
+        "Agency",
+        "Creative"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Portfolio",
+        "Case Studies"
+      ],
+      "styles": [
+        "Experimental",
+        "Bold",
+        "Dark",
+        "Artistic"
+      ],
+      "patterns": [
+        "Hero",
+        "Portfolio",
+        "Case Studies",
+        "Storytelling"
+      ],
+      "tags": [
+        "scroll animation",
+        "dark theme",
+        "bold colors"
+      ]
+    },
+    {
+      "title": "Resn \u2014 Experimental Digital Agency",
+      "source": "Awwwards",
+      "url": "https://www.resn.co.nz",
+      "type": "website",
+      "description": "An experimental digital agency site pushing interaction, playfulness, and technical craft.",
+      "whySaved": "Strong for experimental interaction references and playful agency branding.",
+      "whatToLearn": [
+        "Experimental interaction",
+        "Playful agency voice",
+        "Technical craft demos",
+        "Memorable first impressions"
+      ],
+      "industries": [
+        "Agency",
+        "Creative",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Portfolio"
+      ],
+      "styles": [
+        "Experimental",
+        "Playful",
+        "Colorful",
+        "Artistic"
+      ],
+      "patterns": [
+        "Hero",
+        "Portfolio",
+        "Storytelling",
+        "Navigation"
+      ],
+      "tags": [
+        "hover interaction",
+        "scroll animation",
+        "colorful"
+      ]
+    },
+    {
+      "title": "Active Theory \u2014 Immersive Web Studio",
+      "source": "Awwwards",
+      "url": "https://www.activetheory.net",
+      "type": "website",
+      "description": "An immersive web studio specializing in WebGL experiences and interactive storytelling.",
+      "whySaved": "Essential for immersive web references and experiential digital campaigns.",
+      "whatToLearn": [
+        "WebGL experience design",
+        "Immersive storytelling",
+        "Campaign microsite craft",
+        "Performance considerations"
+      ],
+      "industries": [
+        "Agency",
+        "Creative",
+        "Entertainment",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Portfolio",
+        "Case Studies"
+      ],
+      "styles": [
+        "Experimental",
+        "Cinematic",
+        "Futuristic",
+        "Dark"
+      ],
+      "patterns": [
+        "Full Screen Hero",
+        "Storytelling",
+        "Portfolio",
+        "Image Gallery"
+      ],
+      "tags": [
+        "3D",
+        "scroll animation",
+        "dark theme",
+        "video"
+      ]
+    }
+  ]
+}

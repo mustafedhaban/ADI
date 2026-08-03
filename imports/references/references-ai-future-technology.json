@@ -1,0 +1,416 @@
+{
+  "references": [
+    {
+      "title": "Anthropic \u2014 AI Research Company Site",
+      "source": "Other",
+      "url": "https://www.anthropic.com",
+      "type": "website",
+      "description": "An AI research company website emphasizing safety, clarity, and restrained technical branding.",
+      "whySaved": "Useful for serious AI brand positioning that avoids hype aesthetics.",
+      "whatToLearn": [
+        "Research brand tone",
+        "Safety messaging",
+        "Technical clarity",
+        "Restrained visual system"
+      ],
+      "industries": [
+        "AI",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "About",
+        "Product"
+      ],
+      "styles": [
+        "Minimal",
+        "Technical",
+        "Light",
+        "Institutional"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "CTA",
+        "Navigation"
+      ],
+      "tags": [
+        "whitespace",
+        "neutral colors",
+        "light theme"
+      ]
+    },
+    {
+      "title": "Runway \u2014 Generative AI Creative Suite",
+      "source": "Other",
+      "url": "https://runwayml.com",
+      "type": "website",
+      "description": "A generative AI creative tool site with cinematic visuals and product capability storytelling.",
+      "whySaved": "Strong for AI product marketing where demos and creative outcomes must feel tangible.",
+      "whatToLearn": [
+        "Cinematic AI demos",
+        "Capability storytelling",
+        "Creative tool branding",
+        "Feature discovery"
+      ],
+      "industries": [
+        "AI",
+        "Technology",
+        "Creative",
+        "Media"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Cinematic",
+        "Futuristic",
+        "Dark",
+        "Experimental"
+      ],
+      "patterns": [
+        "Hero",
+        "Product Showcase",
+        "Features",
+        "CTA"
+      ],
+      "tags": [
+        "video",
+        "dark theme",
+        "gradient",
+        "abstract imagery"
+      ]
+    },
+    {
+      "title": "Hugging Face \u2014 AI Community Platform",
+      "source": "Other",
+      "url": "https://huggingface.co",
+      "type": "website",
+      "description": "An AI community and model hub with utilitarian navigation and developer-first information design.",
+      "whySaved": "Helpful for community platform IA and developer product ecosystems.",
+      "whatToLearn": [
+        "Community hub IA",
+        "Model/card listing patterns",
+        "Developer-first navigation",
+        "Open ecosystem cues"
+      ],
+      "industries": [
+        "AI",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "Resources"
+      ],
+      "styles": [
+        "Technical",
+        "Clean",
+        "Light",
+        "Friendly"
+      ],
+      "patterns": [
+        "Hero",
+        "Content Grid",
+        "Card Grid",
+        "Navigation",
+        "CTA"
+      ],
+      "tags": [
+        "grid layout",
+        "dense layout",
+        "illustration"
+      ]
+    },
+    {
+      "title": "Stability AI \u2014 Generative AI Company",
+      "source": "Other",
+      "url": "https://www.stability.ai",
+      "type": "website",
+      "description": "A generative AI company site communicating models, research, and creative possibilities.",
+      "whySaved": "Useful for AI company storytelling that balances research credibility with creative aspiration.",
+      "whatToLearn": [
+        "Research vs product balance",
+        "Visual abstraction",
+        "Model capability communication",
+        "CTA paths"
+      ],
+      "industries": [
+        "AI",
+        "Technology",
+        "Creative"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "About"
+      ],
+      "styles": [
+        "Futuristic",
+        "Dark",
+        "Technical",
+        "Artistic"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "CTA",
+        "Storytelling"
+      ],
+      "tags": [
+        "abstract imagery",
+        "dark theme",
+        "gradient"
+      ]
+    },
+    {
+      "title": "ElevenLabs \u2014 AI Voice Platform",
+      "source": "Other",
+      "url": "https://www.elevenlabs.io",
+      "type": "website",
+      "description": "An AI voice platform homepage with clear demos, use cases, and product conversion flows.",
+      "whySaved": "Good model for audio AI products that need instant experiential proof.",
+      "whatToLearn": [
+        "Interactive audio demos",
+        "Use-case segmentation",
+        "Product proof before signup",
+        "Clean AI branding"
+      ],
+      "industries": [
+        "AI",
+        "Technology",
+        "Media"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Clean",
+        "Technical",
+        "Dark",
+        "Minimal"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Product Showcase",
+        "CTA"
+      ],
+      "tags": [
+        "dark theme",
+        "product photography",
+        "gradient"
+      ]
+    },
+    {
+      "title": "Synthesia \u2014 AI Video Generation Platform",
+      "source": "Other",
+      "url": "https://www.synthesia.io",
+      "type": "website",
+      "description": "An AI video generation SaaS site focused on business use cases and template-driven creation.",
+      "whySaved": "Useful for enterprise AI product marketing with practical outcome framing.",
+      "whatToLearn": [
+        "Business use-case framing",
+        "Template-led product story",
+        "Enterprise trust cues",
+        "Demo CTAs"
+      ],
+      "industries": [
+        "AI",
+        "SaaS",
+        "Technology",
+        "Corporate"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "Solutions"
+      ],
+      "styles": [
+        "Corporate",
+        "Clean",
+        "Light",
+        "Technical"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Logo Cloud",
+        "CTA",
+        "Product Showcase"
+      ],
+      "tags": [
+        "product photography",
+        "grid layout",
+        "light theme"
+      ]
+    },
+    {
+      "title": "Descript \u2014 AI Audio/Video Editing Tool",
+      "source": "Other",
+      "url": "https://www.descript.com",
+      "type": "website",
+      "description": "A creative AI editing tool site explaining text-based editing through clear product narratives.",
+      "whySaved": "Excellent for teaching novel interaction paradigms via marketing storytelling.",
+      "whatToLearn": [
+        "Explaining novel UX paradigms",
+        "Product walkthrough sections",
+        "Creator audience tone",
+        "Feature education"
+      ],
+      "industries": [
+        "AI",
+        "Technology",
+        "Media",
+        "Creative"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Friendly",
+        "Clean",
+        "Playful",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Product Showcase",
+        "CTA"
+      ],
+      "tags": [
+        "illustration",
+        "product photography",
+        "light theme"
+      ]
+    },
+    {
+      "title": "Jasper \u2014 AI Content Platform",
+      "source": "Other",
+      "url": "https://www.jasper.ai",
+      "type": "website",
+      "description": "An AI content platform homepage targeting marketing teams with templates and workflow benefits.",
+      "whySaved": "Useful for marketing-focused AI SaaS positioning and workflow-led feature pages.",
+      "whatToLearn": [
+        "Marketing persona targeting",
+        "Template catalogs",
+        "Workflow benefit modules",
+        "Pricing conversion"
+      ],
+      "industries": [
+        "AI",
+        "SaaS",
+        "Media",
+        "Agency"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "Pricing"
+      ],
+      "styles": [
+        "Bold",
+        "Clean",
+        "Colorful",
+        "Corporate"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Pricing",
+        "CTA",
+        "Testimonials"
+      ],
+      "tags": [
+        "colorful",
+        "grid layout",
+        "illustration"
+      ]
+    },
+    {
+      "title": "Copy.ai \u2014 AI Writing Assistant Site",
+      "source": "Other",
+      "url": "https://www.copy.ai",
+      "type": "website",
+      "description": "An AI writing assistant site with rapid value demonstration and go-to-market focused messaging.",
+      "whySaved": "Good reference for lightweight AI tool landing pages and conversion-first structure.",
+      "whatToLearn": [
+        "Rapid value demo",
+        "Conversion-first landing structure",
+        "Use-case chips",
+        "Signup friction reduction"
+      ],
+      "industries": [
+        "AI",
+        "SaaS",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Landing Page",
+        "Product"
+      ],
+      "styles": [
+        "Clean",
+        "Playful",
+        "Light",
+        "Friendly"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "CTA",
+        "Logo Cloud"
+      ],
+      "tags": [
+        "illustration",
+        "light theme",
+        "whitespace"
+      ]
+    },
+    {
+      "title": "Cursor \u2014 AI Code Editor Marketing Site",
+      "source": "Other",
+      "url": "https://www.cursor.com",
+      "type": "website",
+      "description": "An AI code editor site with developer aesthetics, product demos, and technical credibility.",
+      "whySaved": "Strong for AI developer tools that must feel serious, fast, and trustworthy.",
+      "whatToLearn": [
+        "Developer tool branding",
+        "Code-demo storytelling",
+        "Technical credibility",
+        "Minimal conversion UI"
+      ],
+      "industries": [
+        "AI",
+        "Technology",
+        "SaaS"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Dark",
+        "Technical",
+        "Minimal",
+        "Premium"
+      ],
+      "patterns": [
+        "Hero",
+        "Product Showcase",
+        "Features",
+        "CTA"
+      ],
+      "tags": [
+        "dark theme",
+        "gradient",
+        "dense layout"
+      ]
+    }
+  ]
+}

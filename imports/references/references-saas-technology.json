@@ -1,0 +1,411 @@
+{
+  "references": [
+    {
+      "title": "Intercom \u2014 Customer Messaging Platform",
+      "source": "Other",
+      "url": "https://www.intercom.com",
+      "type": "website",
+      "description": "A SaaS marketing site focused on customer communication products with clear use-case paths and product UI.",
+      "whySaved": "Useful for B2B SaaS information architecture and product-led conversion storytelling.",
+      "whatToLearn": [
+        "Use-case navigation",
+        "Product UI screenshots",
+        "Feature hierarchy",
+        "Enterprise CTA patterns"
+      ],
+      "industries": [
+        "SaaS",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "Solutions"
+      ],
+      "styles": [
+        "Clean",
+        "Corporate",
+        "Light",
+        "Friendly"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Logo Cloud",
+        "CTA",
+        "Testimonials"
+      ],
+      "tags": [
+        "product photography",
+        "grid layout",
+        "light theme"
+      ]
+    },
+    {
+      "title": "Asana \u2014 Work Management Homepage",
+      "source": "Other",
+      "url": "https://www.asana.com",
+      "type": "website",
+      "description": "A work management SaaS homepage with colorful brand system and team productivity narratives.",
+      "whySaved": "Good reference for friendly enterprise SaaS branding and feature education.",
+      "whatToLearn": [
+        "Friendly enterprise tone",
+        "Feature education modules",
+        "Team use-case cards",
+        "Signup CTAs"
+      ],
+      "industries": [
+        "SaaS",
+        "Technology",
+        "Corporate"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Friendly",
+        "Colorful",
+        "Clean",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Logo Cloud",
+        "CTA",
+        "Testimonials"
+      ],
+      "tags": [
+        "colorful",
+        "illustration",
+        "card grid"
+      ]
+    },
+    {
+      "title": "Atlassian \u2014 Enterprise Software Ecosystem",
+      "source": "Other",
+      "url": "https://www.atlassian.com",
+      "type": "website",
+      "description": "An enterprise software marketing site organizing multiple products under one brand system.",
+      "whySaved": "Helpful for multi-product navigation, solution pages, and enterprise trust building.",
+      "whatToLearn": [
+        "Multi-product IA",
+        "Solution page patterns",
+        "Enterprise trust cues",
+        "Resource hubs"
+      ],
+      "industries": [
+        "Technology",
+        "SaaS",
+        "Corporate"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Solutions",
+        "Product",
+        "Resources"
+      ],
+      "styles": [
+        "Corporate",
+        "Clean",
+        "Technical",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Logo Cloud",
+        "Navigation",
+        "CTA"
+      ],
+      "tags": [
+        "grid layout",
+        "light theme"
+      ]
+    },
+    {
+      "title": "Miro \u2014 Visual Collaboration Platform",
+      "source": "Other",
+      "url": "https://www.miro.com",
+      "type": "website",
+      "description": "A visual collaboration SaaS site emphasizing templates, team workflows, and product demos.",
+      "whySaved": "Strong for template-led growth loops and collaborative product storytelling.",
+      "whatToLearn": [
+        "Template marketplace cues",
+        "Collaborative product demos",
+        "Audience segmentation",
+        "Feature grids"
+      ],
+      "industries": [
+        "SaaS",
+        "Technology",
+        "Education"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Playful",
+        "Clean",
+        "Colorful",
+        "Friendly"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Content Grid",
+        "CTA",
+        "Logo Cloud"
+      ],
+      "tags": [
+        "illustration",
+        "colorful",
+        "grid layout"
+      ]
+    },
+    {
+      "title": "Slack \u2014 Workplace Messaging Homepage",
+      "source": "Other",
+      "url": "https://www.slack.com",
+      "type": "website",
+      "description": "A workplace messaging product site with clear value props, integrations proof, and conversion paths.",
+      "whySaved": "Useful for integration ecosystems and approachable enterprise product marketing.",
+      "whatToLearn": [
+        "Integration logo clouds",
+        "Value prop clarity",
+        "Channel/use-case storytelling",
+        "Conversion CTAs"
+      ],
+      "industries": [
+        "SaaS",
+        "Technology",
+        "Corporate"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Friendly",
+        "Clean",
+        "Colorful",
+        "Corporate"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Logo Cloud",
+        "CTA",
+        "Testimonials"
+      ],
+      "tags": [
+        "colorful",
+        "illustration",
+        "grid layout"
+      ]
+    },
+    {
+      "title": "Loom \u2014 Async Video Messaging Site",
+      "source": "Other",
+      "url": "https://www.loom.com",
+      "type": "website",
+      "description": "An async video product homepage with simple demos, benefit-led copy, and approachable visuals.",
+      "whySaved": "Good model for explaining a new workflow product quickly through demo-led heroes.",
+      "whatToLearn": [
+        "Demo-led hero",
+        "Benefit-first copy",
+        "Simple onboarding CTAs",
+        "Product walkthrough modules"
+      ],
+      "industries": [
+        "SaaS",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Friendly",
+        "Clean",
+        "Playful",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Product Hero",
+        "Features",
+        "CTA"
+      ],
+      "tags": [
+        "product photography",
+        "illustration",
+        "light theme"
+      ]
+    },
+    {
+      "title": "Cal.com \u2014 Open Scheduling Infrastructure",
+      "source": "Other",
+      "url": "https://www.cal.com",
+      "type": "website",
+      "description": "An open-source scheduling product site with developer-friendly aesthetics and clear product promises.",
+      "whySaved": "Useful for open-source SaaS positioning and developer-adjacent product marketing.",
+      "whatToLearn": [
+        "Open-source credibility cues",
+        "Scheduling product UX cues",
+        "Dark/light balance",
+        "CTA simplicity"
+      ],
+      "industries": [
+        "SaaS",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Minimal",
+        "Technical",
+        "Clean",
+        "Dark"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "CTA",
+        "Product Showcase"
+      ],
+      "tags": [
+        "dark theme",
+        "minimal",
+        "whitespace"
+      ]
+    },
+    {
+      "title": "Raycast \u2014 Productivity Launcher Site",
+      "source": "Other",
+      "url": "https://www.raycast.com",
+      "type": "website",
+      "description": "A productivity tool site with refined dark UI, extension ecosystem messaging, and crisp product visuals.",
+      "whySaved": "Excellent for power-user product marketing and extension marketplace narratives.",
+      "whatToLearn": [
+        "Power-user tone",
+        "Extension ecosystem presentation",
+        "Dark premium UI",
+        "Keyboard-first product cues"
+      ],
+      "industries": [
+        "SaaS",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Dark",
+        "Premium",
+        "Technical",
+        "Minimal"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Product Showcase",
+        "CTA"
+      ],
+      "tags": [
+        "dark theme",
+        "product photography",
+        "gradient"
+      ]
+    },
+    {
+      "title": "Pitch \u2014 Presentation Software Homepage",
+      "source": "Other",
+      "url": "https://www.pitch.com",
+      "type": "website",
+      "description": "A presentation SaaS homepage with polished visuals, collaborative features, and template-led growth.",
+      "whySaved": "Helpful for creative productivity tools that need to feel both beautiful and practical.",
+      "whatToLearn": [
+        "Template-led acquisition",
+        "Collaborative feature storytelling",
+        "Polished product shots",
+        "Pricing CTA flow"
+      ],
+      "industries": [
+        "SaaS",
+        "Technology",
+        "Creative"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "Pricing"
+      ],
+      "styles": [
+        "Premium",
+        "Clean",
+        "Light",
+        "Sophisticated"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Product Showcase",
+        "Pricing",
+        "CTA"
+      ],
+      "tags": [
+        "product photography",
+        "whitespace",
+        "gradient"
+      ]
+    },
+    {
+      "title": "Mercury \u2014 Startup Banking Website",
+      "source": "Other",
+      "url": "https://www.mercury.com",
+      "type": "website",
+      "description": "A fintech banking site for startups with calm visual systems and clear product education.",
+      "whySaved": "Strong reference for trustworthy financial SaaS design without looking institutional or dated.",
+      "whatToLearn": [
+        "Trust-building visual language",
+        "Product education modules",
+        "Calm fintech aesthetics",
+        "Conversion clarity"
+      ],
+      "industries": [
+        "Finance",
+        "Fintech",
+        "SaaS",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Minimal",
+        "Clean",
+        "Light",
+        "Sophisticated"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Logo Cloud",
+        "CTA",
+        "Statistics"
+      ],
+      "tags": [
+        "whitespace",
+        "light theme",
+        "neutral colors"
+      ]
+    }
+  ]
+}

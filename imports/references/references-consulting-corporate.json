@@ -1,0 +1,429 @@
+{
+  "references": [
+    {
+      "title": "Deloitte \u2014 Global Consulting Homepage",
+      "source": "Other",
+      "url": "https://www.deloitte.com",
+      "type": "website",
+      "description": "A global consulting firm site with institutional structure, insights hubs, and service taxonomies.",
+      "whySaved": "Useful for large corporate IA, services navigation, and thought-leadership content systems.",
+      "whatToLearn": [
+        "Services taxonomy",
+        "Insights/resource hubs",
+        "Institutional navigation",
+        "Trust-led branding"
+      ],
+      "industries": [
+        "Consulting",
+        "Corporate"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Services",
+        "Resources",
+        "About"
+      ],
+      "styles": [
+        "Corporate",
+        "Institutional",
+        "Clean",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Services",
+        "Navigation",
+        "Content Grid",
+        "Footer"
+      ],
+      "tags": [
+        "dense layout",
+        "grid layout",
+        "light theme"
+      ]
+    },
+    {
+      "title": "Accenture \u2014 Technology Consulting Site",
+      "source": "Other",
+      "url": "https://www.accenture.com",
+      "type": "website",
+      "description": "A technology consulting homepage combining services, industries, and innovation storytelling.",
+      "whySaved": "Strong for multi-audience corporate sites spanning industries and capabilities.",
+      "whatToLearn": [
+        "Industry x capability matrices",
+        "Innovation storytelling",
+        "Enterprise CTA patterns",
+        "Mega navigation"
+      ],
+      "industries": [
+        "Consulting",
+        "Corporate",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Services",
+        "Solutions"
+      ],
+      "styles": [
+        "Corporate",
+        "Technical",
+        "Dark",
+        "Institutional"
+      ],
+      "patterns": [
+        "Hero",
+        "Services",
+        "Mega Menu",
+        "Case Studies",
+        "CTA"
+      ],
+      "tags": [
+        "dense layout",
+        "dark theme",
+        "grid layout"
+      ]
+    },
+    {
+      "title": "IDEO \u2014 Design Consultancy Website",
+      "source": "Other",
+      "url": "https://www.ideo.com",
+      "type": "website",
+      "description": "A design consultancy site emphasizing human-centered process, case studies, and cultural voice.",
+      "whySaved": "Excellent for consultancies that sell process and thinking rather than only deliverables.",
+      "whatToLearn": [
+        "Process storytelling",
+        "Case study framing",
+        "Human-centered brand voice",
+        "Studio culture presentation"
+      ],
+      "industries": [
+        "Consulting",
+        "Creative",
+        "Agency"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Case Studies",
+        "About",
+        "Services"
+      ],
+      "styles": [
+        "Human-centered",
+        "Editorial",
+        "Clean",
+        "Friendly"
+      ],
+      "patterns": [
+        "Hero",
+        "Case Studies",
+        "Storytelling",
+        "Team",
+        "CTA"
+      ],
+      "tags": [
+        "documentary photography",
+        "editorial grid",
+        "whitespace"
+      ]
+    },
+    {
+      "title": "IBM \u2014 Enterprise Technology Homepage",
+      "source": "Other",
+      "url": "https://www.ibm.com",
+      "type": "website",
+      "description": "An enterprise technology homepage with product ecosystems, research cues, and corporate authority.",
+      "whySaved": "Useful for complex enterprise product landscapes and trustworthy corporate design systems.",
+      "whatToLearn": [
+        "Enterprise product ecosystems",
+        "Research credibility cues",
+        "Complex IA simplification",
+        "Corporate systems"
+      ],
+      "industries": [
+        "Technology",
+        "Corporate",
+        "Consulting"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "Solutions",
+        "Resources"
+      ],
+      "styles": [
+        "Corporate",
+        "Technical",
+        "Institutional",
+        "Clean"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Navigation",
+        "Logo Cloud",
+        "CTA"
+      ],
+      "tags": [
+        "dense layout",
+        "grid layout",
+        "neutral colors"
+      ]
+    },
+    {
+      "title": "PwC \u2014 Professional Services Homepage",
+      "source": "Other",
+      "url": "https://www.pwc.com",
+      "type": "website",
+      "description": "A professional services site with insights-led content architecture and institutional branding.",
+      "whySaved": "Good reference for accounting/consulting firms balancing services and thought leadership.",
+      "whatToLearn": [
+        "Insights-led IA",
+        "Service line navigation",
+        "Institutional typography",
+        "Global firm patterns"
+      ],
+      "industries": [
+        "Consulting",
+        "Corporate",
+        "Finance"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Services",
+        "Resources",
+        "About"
+      ],
+      "styles": [
+        "Corporate",
+        "Institutional",
+        "Clean",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Services",
+        "Content Grid",
+        "Navigation",
+        "Footer"
+      ],
+      "tags": [
+        "dense layout",
+        "light theme",
+        "serif typography"
+      ]
+    },
+    {
+      "title": "EY \u2014 Professional Services Website",
+      "source": "Other",
+      "url": "https://www.ey.com",
+      "type": "website",
+      "description": "A global professional services homepage with yellow brand accents and structured service offerings.",
+      "whySaved": "Useful for distinctive corporate brand color systems within institutional constraints.",
+      "whatToLearn": [
+        "Brand accent systems",
+        "Service taxonomy",
+        "Thought leadership modules",
+        "Global navigation"
+      ],
+      "industries": [
+        "Consulting",
+        "Corporate",
+        "Finance"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Services",
+        "Resources"
+      ],
+      "styles": [
+        "Corporate",
+        "Institutional",
+        "Bold",
+        "Clean"
+      ],
+      "patterns": [
+        "Hero",
+        "Services",
+        "Navigation",
+        "Content Grid",
+        "CTA"
+      ],
+      "tags": [
+        "bold colors",
+        "grid layout",
+        "dense layout"
+      ]
+    },
+    {
+      "title": "KPMG \u2014 Advisory Firm Homepage",
+      "source": "Other",
+      "url": "https://www.kpmg.com",
+      "type": "website",
+      "description": "An advisory firm site with industry solutions, insights, and corporate credibility patterns.",
+      "whySaved": "Helpful for industry-solution matrices and professional services content design.",
+      "whatToLearn": [
+        "Industry solution pages",
+        "Insights libraries",
+        "Corporate credibility",
+        "Careers/employer branding cues"
+      ],
+      "industries": [
+        "Consulting",
+        "Corporate",
+        "Finance"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Services",
+        "Resources",
+        "Careers"
+      ],
+      "styles": [
+        "Corporate",
+        "Institutional",
+        "Clean",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Services",
+        "Navigation",
+        "Content Grid",
+        "Footer"
+      ],
+      "tags": [
+        "dense layout",
+        "light theme",
+        "grid layout"
+      ]
+    },
+    {
+      "title": "Oliver Wyman \u2014 Management Consulting Site",
+      "source": "Other",
+      "url": "https://www.oliverwyman.com",
+      "type": "website",
+      "description": "A management consulting website with research-led content and refined corporate aesthetics.",
+      "whySaved": "Strong for boutique/premium consulting positioning through content quality and restraint.",
+      "whatToLearn": [
+        "Research-led marketing",
+        "Premium consulting tone",
+        "Insight publication design",
+        "Sparse corporate UI"
+      ],
+      "industries": [
+        "Consulting",
+        "Corporate"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Resources",
+        "Services",
+        "About"
+      ],
+      "styles": [
+        "Sophisticated",
+        "Corporate",
+        "Minimal",
+        "Editorial"
+      ],
+      "patterns": [
+        "Hero",
+        "Content Grid",
+        "Services",
+        "Navigation"
+      ],
+      "tags": [
+        "whitespace",
+        "serif typography",
+        "editorial grid"
+      ]
+    },
+    {
+      "title": "Slalom \u2014 Business & Technology Consultancy",
+      "source": "Other",
+      "url": "https://www.slalom.com",
+      "type": "website",
+      "description": "A consultancy site emphasizing people, delivery culture, and approachable enterprise services.",
+      "whySaved": "Useful for human-centered consulting brands that still need to sell enterprise capability.",
+      "whatToLearn": [
+        "People-first consulting branding",
+        "Service storytelling",
+        "Case study cards",
+        "Approachable enterprise tone"
+      ],
+      "industries": [
+        "Consulting",
+        "Technology",
+        "Corporate"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Services",
+        "Case Studies",
+        "Careers"
+      ],
+      "styles": [
+        "Friendly",
+        "Corporate",
+        "Human-centered",
+        "Clean"
+      ],
+      "patterns": [
+        "Hero",
+        "Services",
+        "Case Studies",
+        "Team",
+        "CTA"
+      ],
+      "tags": [
+        "lifestyle photography",
+        "card grid",
+        "light theme"
+      ]
+    },
+    {
+      "title": "Thoughtworks \u2014 Technology Consultancy Site",
+      "source": "Other",
+      "url": "https://www.thoughtworks.com",
+      "type": "website",
+      "description": "A technology consultancy homepage mixing engineering credibility with insights and services.",
+      "whySaved": "Good model for technical consultancies that publish thinking as a growth engine.",
+      "whatToLearn": [
+        "Engineering credibility",
+        "Insights as acquisition",
+        "Service packaging",
+        "Technical brand voice"
+      ],
+      "industries": [
+        "Consulting",
+        "Technology",
+        "Corporate"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Services",
+        "Resources",
+        "Case Studies"
+      ],
+      "styles": [
+        "Technical",
+        "Corporate",
+        "Clean",
+        "Minimal"
+      ],
+      "patterns": [
+        "Hero",
+        "Services",
+        "Content Grid",
+        "Case Studies",
+        "CTA"
+      ],
+      "tags": [
+        "dense layout",
+        "grid layout",
+        "neutral colors"
+      ]
+    }
+  ]
+}

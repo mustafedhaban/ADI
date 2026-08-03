@@ -1,0 +1,417 @@
+{
+  "references": [
+    {
+      "title": "Andela \u2014 African Tech Talent Platform",
+      "source": "Other",
+      "url": "https://www.andela.com",
+      "type": "website",
+      "description": "A technology talent platform rooted in African engineering excellence with modern SaaS marketing.",
+      "whySaved": "Useful for African tech brand positioning that feels global without losing origin identity.",
+      "whatToLearn": [
+        "Talent marketplace storytelling",
+        "African tech brand voice",
+        "Enterprise trust cues",
+        "Product-led hiring UX"
+      ],
+      "industries": [
+        "Technology",
+        "SaaS",
+        "Education",
+        "Agency"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "About"
+      ],
+      "styles": [
+        "Clean",
+        "Corporate",
+        "Human-centered",
+        "Minimal"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Logo Cloud",
+        "CTA",
+        "Team"
+      ],
+      "tags": [
+        "lifestyle photography",
+        "grid layout",
+        "whitespace"
+      ]
+    },
+    {
+      "title": "Flutterwave \u2014 African Payments Platform",
+      "source": "Other",
+      "url": "https://flutterwave.com",
+      "type": "website",
+      "description": "A pan-African payments company homepage with bold brand color and clear merchant value props.",
+      "whySaved": "Strong reference for African fintech marketing and cross-border product communication.",
+      "whatToLearn": [
+        "Fintech trust design",
+        "Merchant conversion",
+        "Bold brand systems",
+        "Regional product messaging"
+      ],
+      "industries": [
+        "Fintech",
+        "Finance",
+        "Technology",
+        "E-commerce"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Bold",
+        "Colorful",
+        "Clean",
+        "Premium"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Logo Cloud",
+        "CTA",
+        "Statistics"
+      ],
+      "tags": [
+        "bold colors",
+        "gradient",
+        "product photography"
+      ]
+    },
+    {
+      "title": "Flutterwave Design \u2014 African Product Design Team",
+      "source": "Other",
+      "url": "https://flutterwave.design",
+      "type": "website",
+      "description": "A design team site from an African fintech sharing product thinking, writing, and craft culture.",
+      "whySaved": "Useful for design-org storytelling and African product design community presence.",
+      "whatToLearn": [
+        "Design team publishing",
+        "Craft culture storytelling",
+        "Editorial content layout",
+        "Team identity"
+      ],
+      "industries": [
+        "Fintech",
+        "Creative",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Blog",
+        "About"
+      ],
+      "styles": [
+        "Editorial",
+        "Human-centered",
+        "Clean",
+        "Modern African"
+      ],
+      "patterns": [
+        "Hero",
+        "Content Grid",
+        "Storytelling",
+        "Team"
+      ],
+      "tags": [
+        "editorial grid",
+        "large typography",
+        "lifestyle photography"
+      ]
+    },
+    {
+      "title": "Chipper Cash \u2014 Cross-border Payments App Site",
+      "source": "Other",
+      "url": "https://www.chippercash.com",
+      "type": "website",
+      "description": "A consumer fintech site for African cross-border payments with mobile-first product presentation.",
+      "whySaved": "Good for consumer fintech clarity and mobile product marketing aimed at African users.",
+      "whatToLearn": [
+        "Mobile-first product marketing",
+        "Consumer fintech trust",
+        "Benefit-led sections",
+        "App download CTAs"
+      ],
+      "industries": [
+        "Fintech",
+        "Finance",
+        "Technology"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Friendly",
+        "Clean",
+        "Colorful",
+        "Human-centered"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Product Showcase",
+        "CTA"
+      ],
+      "tags": [
+        "product photography",
+        "mobile",
+        "colorful"
+      ]
+    },
+    {
+      "title": "Yoco \u2014 African SME Payments",
+      "source": "Other",
+      "url": "https://www.yoco.com",
+      "type": "website",
+      "description": "A South African SME payments company site focused on merchants, hardware, and growth tools.",
+      "whySaved": "Useful for SME-facing fintech and hardware+software product storytelling.",
+      "whatToLearn": [
+        "SME merchant journeys",
+        "Hardware product showcase",
+        "Local market tone",
+        "Feature education"
+      ],
+      "industries": [
+        "Fintech",
+        "Finance",
+        "Retail",
+        "E-commerce"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Friendly",
+        "Clean",
+        "Bold",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Product Showcase",
+        "CTA",
+        "Testimonials"
+      ],
+      "tags": [
+        "product photography",
+        "lifestyle photography",
+        "bold colors"
+      ]
+    },
+    {
+      "title": "Konga \u2014 Nigerian E-commerce Platform",
+      "source": "Other",
+      "url": "https://www.konga.com",
+      "type": "website",
+      "description": "A Nigerian e-commerce marketplace homepage with dense catalog commerce patterns.",
+      "whySaved": "Helpful for African e-commerce UX density, promotions, and category navigation.",
+      "whatToLearn": [
+        "Marketplace density",
+        "Promo modules",
+        "Category navigation",
+        "Mobile commerce cues"
+      ],
+      "industries": [
+        "E-commerce",
+        "Retail"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Bold",
+        "Colorful",
+        "Clean",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Card Grid",
+        "Navigation",
+        "CTA"
+      ],
+      "tags": [
+        "dense layout",
+        "bold colors",
+        "grid layout"
+      ]
+    },
+    {
+      "title": "MTN \u2014 African Telecom Brand Site",
+      "source": "Other",
+      "url": "https://www.mtn.com",
+      "type": "website",
+      "description": "A major African telecom brand site with yellow identity system and consumer service pathways.",
+      "whySaved": "Strong for large African consumer brand systems and service navigation.",
+      "whatToLearn": [
+        "Strong brand color systems",
+        "Consumer service IA",
+        "Campaign modules",
+        "Telecom product packaging"
+      ],
+      "industries": [
+        "Technology",
+        "Media",
+        "Retail"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "About"
+      ],
+      "styles": [
+        "Bold",
+        "Colorful",
+        "Corporate",
+        "Clean"
+      ],
+      "patterns": [
+        "Hero",
+        "Features",
+        "Navigation",
+        "CTA"
+      ],
+      "tags": [
+        "bold colors",
+        "high contrast",
+        "grid layout"
+      ]
+    },
+    {
+      "title": "Design Indaba \u2014 African Creative Festival",
+      "source": "Other",
+      "url": "https://www.designindaba.com",
+      "type": "website",
+      "description": "A leading African creative festival and media platform covering design, culture, and innovation.",
+      "whySaved": "Excellent for African creative industry editorial design and cultural programming sites.",
+      "whatToLearn": [
+        "Festival content design",
+        "Creative industry editorial",
+        "Event storytelling",
+        "Cultural brand voice"
+      ],
+      "industries": [
+        "Creative",
+        "Media",
+        "Entertainment",
+        "Agency"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Blog",
+        "Campaign"
+      ],
+      "styles": [
+        "Modern African",
+        "Editorial",
+        "Bold",
+        "Artistic"
+      ],
+      "patterns": [
+        "Hero",
+        "Content Grid",
+        "Storytelling",
+        "Navigation"
+      ],
+      "tags": [
+        "editorial grid",
+        "bold colors",
+        "expressive typography"
+      ]
+    },
+    {
+      "title": "Africa Is a Country \u2014 Political Culture Publication",
+      "source": "Other",
+      "url": "https://www.africasacountry.com",
+      "type": "website",
+      "description": "An African political culture publication with strong editorial identity and essay-led layouts.",
+      "whySaved": "Useful for African editorial design, opinion publishing, and critical cultural voice online.",
+      "whatToLearn": [
+        "Editorial publishing systems",
+        "Essay-led homepage",
+        "Opinion brand voice",
+        "Long-form reading UX"
+      ],
+      "industries": [
+        "Media",
+        "Social Impact",
+        "Education"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Article",
+        "Blog"
+      ],
+      "styles": [
+        "Editorial",
+        "Modern African",
+        "Bold",
+        "Monochrome"
+      ],
+      "patterns": [
+        "Editorial Layout",
+        "Content Grid",
+        "Storytelling",
+        "Navigation"
+      ],
+      "tags": [
+        "editorial grid",
+        "serif typography",
+        "large typography"
+      ]
+    },
+    {
+      "title": "African Arguments \u2014 African Affairs Journalism",
+      "source": "Other",
+      "url": "https://www.africanarguments.org",
+      "type": "website",
+      "description": "A journalism platform focused on African affairs with clean article systems and topical navigation.",
+      "whySaved": "Good reference for African current-affairs publishing and research-oriented content design.",
+      "whatToLearn": [
+        "Topical journalism IA",
+        "Article card systems",
+        "Research-oriented tone",
+        "Clean news layouts"
+      ],
+      "industries": [
+        "Media",
+        "Government",
+        "Social Impact",
+        "Education"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Article",
+        "Blog"
+      ],
+      "styles": [
+        "Editorial",
+        "Clean",
+        "Institutional",
+        "Light"
+      ],
+      "patterns": [
+        "Content Grid",
+        "Editorial Layout",
+        "Navigation",
+        "Storytelling"
+      ],
+      "tags": [
+        "editorial grid",
+        "serif typography",
+        "dense layout"
+      ]
+    }
+  ]
+}

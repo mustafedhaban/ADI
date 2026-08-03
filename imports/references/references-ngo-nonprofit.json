@@ -1,0 +1,435 @@
+{
+  "references": [
+    {
+      "title": "charity: water \u2014 Nonprofit Campaign Site",
+      "source": "Other",
+      "url": "https://charitywater.org",
+      "type": "website",
+      "description": "A nonprofit site famous for transparency storytelling, donation UX, and emotionally clear campaigns.",
+      "whySaved": "Essential reference for donation flows, impact proof, and campaign-led nonprofit design.",
+      "whatToLearn": [
+        "Donation UX",
+        "Impact transparency",
+        "Campaign storytelling",
+        "Emotional photography"
+      ],
+      "industries": [
+        "Nonprofit",
+        "NGO",
+        "Social Impact"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Donation",
+        "Campaign",
+        "About"
+      ],
+      "styles": [
+        "Human-centered",
+        "Bold",
+        "Clean",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Donation CTA",
+        "Storytelling",
+        "Statistics",
+        "CTA"
+      ],
+      "tags": [
+        "documentary photography",
+        "bold colors",
+        "large typography"
+      ]
+    },
+    {
+      "title": "American Red Cross \u2014 Humanitarian Organization",
+      "source": "Other",
+      "url": "https://www.redcross.org",
+      "type": "website",
+      "description": "A major humanitarian organization site with emergency services, donation paths, and resource hubs.",
+      "whySaved": "Useful for urgent CTA hierarchy and multi-audience nonprofit information architecture.",
+      "whatToLearn": [
+        "Urgent CTA hierarchy",
+        "Multi-audience IA",
+        "Resource hubs",
+        "Crisis communication patterns"
+      ],
+      "industries": [
+        "Nonprofit",
+        "NGO",
+        "Healthcare",
+        "Social Impact"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Donation",
+        "Resources",
+        "About"
+      ],
+      "styles": [
+        "Institutional",
+        "Clean",
+        "Light",
+        "Human-centered"
+      ],
+      "patterns": [
+        "Hero",
+        "Donation CTA",
+        "Navigation",
+        "Content Grid",
+        "CTA"
+      ],
+      "tags": [
+        "dense layout",
+        "grid layout",
+        "high contrast"
+      ]
+    },
+    {
+      "title": "Doctors Without Borders \u2014 Humanitarian Site",
+      "source": "Other",
+      "url": "https://www.doctorswithoutborders.org",
+      "type": "website",
+      "description": "A medical humanitarian organization site combining field storytelling with donation and advocacy.",
+      "whySaved": "Strong for documentary imagery and mission-driven content systems.",
+      "whatToLearn": [
+        "Field storytelling",
+        "Documentary imagery",
+        "Donation + advocacy balance",
+        "Mission clarity"
+      ],
+      "industries": [
+        "Nonprofit",
+        "NGO",
+        "Healthcare",
+        "Social Impact"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Donation",
+        "About",
+        "Campaign"
+      ],
+      "styles": [
+        "Human-centered",
+        "Editorial",
+        "Institutional",
+        "Dark"
+      ],
+      "patterns": [
+        "Editorial Hero",
+        "Storytelling",
+        "Donation CTA",
+        "Statistics"
+      ],
+      "tags": [
+        "documentary photography",
+        "editorial grid",
+        "large typography"
+      ]
+    },
+    {
+      "title": "World Wildlife Fund \u2014 Conservation Nonprofit",
+      "source": "Other",
+      "url": "https://www.worldwildlife.org",
+      "type": "website",
+      "description": "A conservation nonprofit site with species campaigns, donation UX, and educational content.",
+      "whySaved": "Helpful for cause-based visual systems and campaign microsite patterns within a parent brand.",
+      "whatToLearn": [
+        "Cause campaign modules",
+        "Species/topic taxonomies",
+        "Donation conversion",
+        "Educational content design"
+      ],
+      "industries": [
+        "Nonprofit",
+        "NGO",
+        "Social Impact"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Donation",
+        "Campaign",
+        "Resources"
+      ],
+      "styles": [
+        "Organic",
+        "Human-centered",
+        "Clean",
+        "Bold"
+      ],
+      "patterns": [
+        "Hero",
+        "Donation CTA",
+        "Image Gallery",
+        "Storytelling",
+        "CTA"
+      ],
+      "tags": [
+        "documentary photography",
+        "bold colors",
+        "nature imagery"
+      ]
+    },
+    {
+      "title": "Amnesty International \u2014 Human Rights Site",
+      "source": "Other",
+      "url": "https://www.amnesty.org",
+      "type": "website",
+      "description": "A human rights organization site focusing on campaigns, petitions, and urgent action CTAs.",
+      "whySaved": "Useful for advocacy UX: petitions, campaigns, and issue education.",
+      "whatToLearn": [
+        "Petition/action CTAs",
+        "Campaign cards",
+        "Issue education IA",
+        "Advocacy urgency"
+      ],
+      "industries": [
+        "Nonprofit",
+        "NGO",
+        "Social Impact"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Campaign",
+        "Resources",
+        "Donation"
+      ],
+      "styles": [
+        "Bold",
+        "Institutional",
+        "Human-centered",
+        "Dark"
+      ],
+      "patterns": [
+        "Hero",
+        "CTA",
+        "Content Grid",
+        "Donation CTA",
+        "Storytelling"
+      ],
+      "tags": [
+        "high contrast",
+        "bold colors",
+        "documentary photography"
+      ]
+    },
+    {
+      "title": "World Food Programme \u2014 UN Agency Site",
+      "source": "Other",
+      "url": "https://www.wfp.org",
+      "type": "website",
+      "description": "A UN agency site communicating hunger relief programs, emergencies, and donation opportunities.",
+      "whySaved": "Good reference for institutional humanitarian branding with global scale.",
+      "whatToLearn": [
+        "Emergency response modules",
+        "Program storytelling",
+        "Institutional credibility",
+        "Donation paths"
+      ],
+      "industries": [
+        "Nonprofit",
+        "NGO",
+        "Government",
+        "Social Impact"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Donation",
+        "About",
+        "Resources"
+      ],
+      "styles": [
+        "Institutional",
+        "Human-centered",
+        "Clean",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Donation CTA",
+        "Statistics",
+        "Storytelling",
+        "Navigation"
+      ],
+      "tags": [
+        "documentary photography",
+        "grid layout",
+        "dense layout"
+      ]
+    },
+    {
+      "title": "Bill & Melinda Gates Foundation",
+      "source": "Other",
+      "url": "https://www.gatesfoundation.org",
+      "type": "website",
+      "description": "A philanthropic foundation site with program areas, reports, and institutional storytelling.",
+      "whySaved": "Useful for foundation/grantmaker information architecture and research publication design.",
+      "whatToLearn": [
+        "Program area IA",
+        "Report/publication design",
+        "Institutional philanthropy tone",
+        "Impact narratives"
+      ],
+      "industries": [
+        "Nonprofit",
+        "Social Impact",
+        "Education",
+        "Healthcare"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "About",
+        "Resources",
+        "Article"
+      ],
+      "styles": [
+        "Institutional",
+        "Clean",
+        "Editorial",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Content Grid",
+        "Storytelling",
+        "Navigation"
+      ],
+      "tags": [
+        "editorial grid",
+        "whitespace",
+        "serif typography"
+      ]
+    },
+    {
+      "title": "Kiva \u2014 Microfinance Nonprofit Platform",
+      "source": "Other",
+      "url": "https://www.kiva.org",
+      "type": "website",
+      "description": "A microfinance platform where users fund entrepreneurs, combining marketplace UX with social impact.",
+      "whySaved": "Excellent for nonprofit product UX that feels like a platform, not only a brochure.",
+      "whatToLearn": [
+        "Impact marketplace UX",
+        "Lender journey",
+        "Borrower story cards",
+        "Trust and transparency"
+      ],
+      "industries": [
+        "Nonprofit",
+        "Social Impact",
+        "Finance",
+        "Fintech"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "Donation"
+      ],
+      "styles": [
+        "Friendly",
+        "Human-centered",
+        "Clean",
+        "Light"
+      ],
+      "patterns": [
+        "Hero",
+        "Card Grid",
+        "Storytelling",
+        "CTA",
+        "Social Proof"
+      ],
+      "tags": [
+        "lifestyle photography",
+        "card grid",
+        "friendly"
+      ]
+    },
+    {
+      "title": "Oxfam \u2014 Global Poverty Nonprofit",
+      "source": "Other",
+      "url": "https://www.oxfam.org",
+      "type": "website",
+      "description": "A global poverty nonprofit site with campaigns, donation flows, and advocacy content.",
+      "whySaved": "Helpful for multi-country nonprofit brands and campaign-led homepage structures.",
+      "whatToLearn": [
+        "Campaign homepage modules",
+        "Donation conversion",
+        "Advocacy content",
+        "Global brand consistency"
+      ],
+      "industries": [
+        "Nonprofit",
+        "NGO",
+        "Social Impact"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Donation",
+        "Campaign",
+        "About"
+      ],
+      "styles": [
+        "Human-centered",
+        "Bold",
+        "Clean",
+        "Institutional"
+      ],
+      "patterns": [
+        "Hero",
+        "Donation CTA",
+        "Storytelling",
+        "Content Grid",
+        "CTA"
+      ],
+      "tags": [
+        "documentary photography",
+        "bold colors",
+        "grid layout"
+      ]
+    },
+    {
+      "title": "DonorsChoose \u2014 Education Crowdfunding Nonprofit",
+      "source": "Other",
+      "url": "https://www.donorschoose.org",
+      "type": "website",
+      "description": "An education crowdfunding nonprofit platform connecting donors to classroom projects.",
+      "whySaved": "Strong for project-card UX, donor journeys, and education-focused impact design.",
+      "whatToLearn": [
+        "Project card design",
+        "Donor journey",
+        "Teacher storytelling",
+        "Impact confirmation UX"
+      ],
+      "industries": [
+        "Nonprofit",
+        "Education",
+        "Social Impact"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "Donation"
+      ],
+      "styles": [
+        "Friendly",
+        "Human-centered",
+        "Clean",
+        "Playful"
+      ],
+      "patterns": [
+        "Hero",
+        "Card Grid",
+        "CTA",
+        "Storytelling",
+        "Social Proof"
+      ],
+      "tags": [
+        "lifestyle photography",
+        "card grid",
+        "colorful"
+      ]
+    }
+  ]
+}

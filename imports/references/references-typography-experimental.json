@@ -1,0 +1,204 @@
+{
+  "references": [
+    {
+      "title": "Typewolf \u2014 Typography Inspiration Resource",
+      "source": "Other",
+      "url": "https://www.typewolf.com",
+      "type": "website",
+      "description": "A typography inspiration resource analyzing font pairings and real-world type usage.",
+      "whySaved": "Essential for typographic research and font pairing education.",
+      "whatToLearn": [
+        "Font pairing analysis",
+        "Typography critique patterns",
+        "Inspiration index design",
+        "Type education UX"
+      ],
+      "industries": [
+        "Creative",
+        "Media",
+        "Agency"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Resources",
+        "Blog"
+      ],
+      "styles": [
+        "Editorial",
+        "Minimal",
+        "Technical",
+        "Clean"
+      ],
+      "patterns": [
+        "Content Grid",
+        "Editorial Layout",
+        "Navigation"
+      ],
+      "tags": [
+        "serif typography",
+        "typography focused",
+        "editorial grid"
+      ]
+    },
+    {
+      "title": "Google Fonts \u2014 Typeface Library",
+      "source": "Other",
+      "url": "https://fonts.google.com",
+      "type": "website",
+      "description": "A large typeface library with specimen tools, filters, and pairing utilities.",
+      "whySaved": "Useful for type specimen UI, filtering systems, and educational typography tooling.",
+      "whatToLearn": [
+        "Type specimen UI",
+        "Filter/faceted browse",
+        "Pairing utilities",
+        "Variable font presentation"
+      ],
+      "industries": [
+        "Technology",
+        "Creative",
+        "Education"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "Resources"
+      ],
+      "styles": [
+        "Minimal",
+        "Clean",
+        "Technical",
+        "Light"
+      ],
+      "patterns": [
+        "Content Grid",
+        "Navigation",
+        "Features"
+      ],
+      "tags": [
+        "typography focused",
+        "grid layout",
+        "whitespace"
+      ]
+    },
+    {
+      "title": "Hoefler&Co \u2014 Premium Type Foundry",
+      "source": "Other",
+      "url": "https://www.typography.com",
+      "type": "website",
+      "description": "A premium type foundry site with refined specimens and typographic brand authority.",
+      "whySaved": "Strong for luxury typographic branding and foundry product presentation.",
+      "whatToLearn": [
+        "Foundry product presentation",
+        "Specimen storytelling",
+        "Premium type branding",
+        "Licensing UX cues"
+      ],
+      "industries": [
+        "Creative",
+        "Agency",
+        "Media"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product",
+        "Resources"
+      ],
+      "styles": [
+        "Elegant",
+        "Editorial",
+        "Sophisticated",
+        "Minimal"
+      ],
+      "patterns": [
+        "Hero",
+        "Product Showcase",
+        "Content Grid",
+        "Navigation"
+      ],
+      "tags": [
+        "serif typography",
+        "typography focused",
+        "whitespace"
+      ]
+    },
+    {
+      "title": "Future Fonts \u2014 Independent Type Marketplace",
+      "source": "Other",
+      "url": "https://www.futurefonts.xyz",
+      "type": "website",
+      "description": "An independent type marketplace supporting in-progress typefaces with distinctive editorial design.",
+      "whySaved": "Useful for experimental marketplace design and WIP product narratives in type.",
+      "whatToLearn": [
+        "WIP product storytelling",
+        "Independent marketplace UX",
+        "Experimental editorial design",
+        "Type discovery"
+      ],
+      "industries": [
+        "Creative",
+        "E-commerce",
+        "Agency"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Product"
+      ],
+      "styles": [
+        "Experimental",
+        "Editorial",
+        "Bold",
+        "Artistic"
+      ],
+      "patterns": [
+        "Content Grid",
+        "Product Showcase",
+        "Navigation",
+        "CTA"
+      ],
+      "tags": [
+        "expressive typography",
+        "editorial grid",
+        "bold colors"
+      ]
+    },
+    {
+      "title": "Brutalist Websites \u2014 Experimental Web Archive",
+      "source": "Other",
+      "url": "https://brutalistwebsites.com",
+      "type": "website",
+      "description": "An archive of brutalist and anti-template websites celebrating raw experimental web aesthetics.",
+      "whySaved": "Important for anti-generic design references and raw experimental layout inspiration.",
+      "whatToLearn": [
+        "Brutalist aesthetic vocabulary",
+        "Anti-template layouts",
+        "Experimental archive UX",
+        "Raw web expression"
+      ],
+      "industries": [
+        "Creative",
+        "Media",
+        "Agency"
+      ],
+      "pageTypes": [
+        "Homepage",
+        "Portfolio"
+      ],
+      "styles": [
+        "Brutalist",
+        "Experimental",
+        "Monochrome",
+        "Artistic"
+      ],
+      "patterns": [
+        "Content Grid",
+        "Navigation",
+        "Portfolio"
+      ],
+      "tags": [
+        "monochrome",
+        "dense layout",
+        "borders"
+      ]
+    }
+  ]
+}
