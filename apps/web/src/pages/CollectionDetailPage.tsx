@@ -1,6 +1,6 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Briefcase, Pencil, Plus, Trash2 } from "lucide-react";
+import { Plus } from "lucide-react";
 import { toast } from "sonner";
 import {
   api,
@@ -9,8 +9,11 @@ import {
   type Reference,
 } from "@/lib/api";
 import { CollectionCover } from "@/components/collections/CollectionCover";
-import { ReferenceCard } from "@/components/references/ReferenceCard";
-import { Badge } from "@/components/ui/badge";
+import {
+  ReferenceCard,
+  ReferenceRow,
+} from "@/components/references/ReferenceCard";
+import { StyleTerm } from "@/components/references/StyleTerm";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -22,6 +25,19 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Empty,
+  ErrorNote,
+  HeaderActions,
+  HeaderTool,
+  Loading,
+  Meta,
+  Metric,
+  PageHeader,
+  Section,
+  Tag,
+  ViewToggle,
+} from "@/components/common/Primitives";
 
 export function CollectionDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -44,6 +60,7 @@ export function CollectionDetailPage() {
   );
   const [pickedProjects, setPickedProjects] = useState<string[]>([]);
   const [projectsLoading, setProjectsLoading] = useState(false);
+  const [view, setView] = useState<"grid" | "index">("grid");
 
   async function load() {
     if (!id) return;
@@ -187,110 +204,169 @@ export function CollectionDetailPage() {
     }
   }
 
-  if (error) {
-    return (
-      <div className="rounded-xl border border-destructive/30 bg-card p-6 text-destructive">
-        {error}
-      </div>
-    );
-  }
+  if (error) return <ErrorNote>{error}</ErrorNote>;
+  if (!collection) return <Loading>Loading collection…</Loading>;
 
-  if (!collection) {
-    return <div className="text-muted-foreground">Loading collection…</div>;
-  }
+  const coverStyles = [
+    ...new Set(collection.references.flatMap((r) => r.styles)),
+  ];
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <Button asChild variant="ghost">
-          <Link to="/collections">
-            <ArrowLeft /> Back to collections
-          </Link>
-        </Button>
-        <div className="flex flex-wrap gap-2">
-          <Button variant="outline" onClick={() => void openAddDialog()}>
-            <Plus /> Add references
-          </Button>
-          <Button variant="outline" onClick={() => void openAddProjectDialog()}>
-            <Briefcase /> Add to project
-          </Button>
-          <Button variant="outline" onClick={() => setEditOpen(true)}>
-            <Pencil /> Edit
-          </Button>
-          <Button variant="destructive" onClick={() => setDeleteOpen(true)}>
-            <Trash2 /> Delete
-          </Button>
-        </div>
-      </div>
+    <div className="flex flex-col gap-10">
+      <PageHeader
+        back={{ to: "/collections", label: "Collections" }}
+        eyebrow="Research set"
+        title={collection.name}
+        lede={collection.description ?? undefined}
+        actions={
+          <HeaderActions
+            primary={
+              <Button onClick={() => void openAddDialog()}>
+                <Plus /> Add references
+              </Button>
+            }
+            secondary={
+              <>
+                <HeaderTool onClick={() => void openAddProjectDialog()}>
+                  Link project
+                </HeaderTool>
+                <HeaderTool onClick={() => setEditOpen(true)}>Edit</HeaderTool>
+                <HeaderTool tone="danger" onClick={() => setDeleteOpen(true)}>
+                  Delete
+                </HeaderTool>
+              </>
+            }
+          />
+        }
+      />
 
-      <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="overflow-hidden rounded-2xl border bg-card shadow-sm">
-          <CollectionCover images={collection.coverImages} />
-        </div>
-        <div className="flex flex-col gap-3">
-          <h1 className="font-display text-4xl tracking-tight">
-            {collection.name}
-          </h1>
-          {collection.description && (
-            <p className="text-muted-foreground">{collection.description}</p>
+      {/* Editorial masthead — cover + archive meta */}
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-10">
+        <CollectionCover
+          images={collection.coverImages}
+          styles={coverStyles}
+          label={collection.name}
+          size="lg"
+          className="border bg-card"
+        />
+
+        <div className="flex flex-col justify-end gap-6">
+          <div className="flex flex-wrap gap-x-6 gap-y-3">
+            <Metric
+              value={collection.referenceCount}
+              label={`reference${collection.referenceCount === 1 ? "" : "s"}`}
+            />
+            <Metric
+              value={projects.length}
+              label={`project${projects.length === 1 ? "" : "s"}`}
+            />
+            {coverStyles.length > 0 && (
+              <Metric
+                value={coverStyles.length}
+                label={`style${coverStyles.length === 1 ? "" : "s"}`}
+              />
+            )}
+          </div>
+
+          <div className="flex flex-col gap-2 border-t pt-5">
+            <div className="flex items-center justify-between gap-3">
+              <Meta>Used in projects</Meta>
+              <button
+                type="button"
+                onClick={() => void openAddProjectDialog()}
+                className="meta transition-colors hover:text-foreground"
+              >
+                + Link
+              </button>
+            </div>
+            {projects.length === 0 ? (
+              <p className="text-sm text-muted-foreground">
+                Not linked to any project yet.
+              </p>
+            ) : (
+              <div className="flex flex-wrap gap-1.5">
+                {projects.map((project) => (
+                  <Link key={project.id} to={`/projects/${project.id}`}>
+                    <Tag className="transition-colors hover:border-rule-strong hover:bg-surface-2">
+                      {project.name}
+                      {project.status === "archived" ? " · archived" : ""}
+                    </Tag>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {coverStyles.length > 0 && (
+            <div className="flex flex-col gap-2 border-t pt-5">
+              <Meta>Style character</Meta>
+              <div className="flex flex-wrap gap-x-3 gap-y-1 text-lg leading-snug text-ink-2">
+                {coverStyles.slice(0, 8).map((term, i) => (
+                  <span key={term} className="inline-flex items-baseline gap-3">
+                    {i > 0 && (
+                      <span aria-hidden className="text-rule-strong">
+                        /
+                      </span>
+                    )}
+                    <StyleTerm term={term} />
+                  </span>
+                ))}
+              </div>
+            </div>
           )}
-          <p className="text-sm text-muted-foreground">
-            {collection.referenceCount} reference
-            {collection.referenceCount === 1 ? "" : "s"}
-          </p>
         </div>
       </div>
 
-      <section className="flex flex-col gap-3">
-        <div className="flex items-center justify-between gap-3">
-          <h2 className="font-display text-2xl tracking-tight">Used in projects</h2>
-          <Button size="sm" variant="outline" onClick={() => void openAddProjectDialog()}>
-            <Briefcase /> Add to project
-          </Button>
-        </div>
-        {projects.length === 0 ? (
-          <p className="text-sm text-muted-foreground">
-            This collection is not linked to any projects yet.
-          </p>
-        ) : (
-          <div className="flex flex-wrap gap-2">
-            {projects.map((project) => (
-              <Link key={project.id} to={`/projects/${project.id}`}>
-                <Badge
-                  variant={project.status === "active" ? "default" : "secondary"}
-                  className="cursor-pointer"
+      <Section
+        eyebrow="Contents"
+        title="References"
+        description="The curated board for this set — same specimen language as the library."
+        action={<ViewToggle value={view} onChange={setView} />}
+      >
+        {collection.references.length === 0 ? (
+          <Empty
+            eyebrow="Empty board"
+            action={
+              <Button onClick={() => void openAddDialog()}>
+                Add references
+              </Button>
+            }
+          >
+            This set has no references yet. Add from the library to build the
+            research board.
+          </Empty>
+        ) : view === "grid" ? (
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {collection.references.map((ref) => (
+              <div key={ref.id} className="group/item relative">
+                <ReferenceCard reference={ref} />
+                <button
+                  type="button"
+                  onClick={() => void handleRemove(ref.id)}
+                  className="meta absolute right-2.5 top-2.5 rounded-sm border border-rule-strong bg-card px-2 py-1 opacity-0 transition-opacity hover:border-destructive hover:text-destructive focus-visible:opacity-100 group-hover/item:opacity-100"
                 >
-                  {project.name}
-                  {project.status === "archived" ? " (archived)" : ""}
-                </Badge>
-              </Link>
+                  Remove
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="overflow-hidden border bg-card">
+            {collection.references.map((ref) => (
+              <div key={ref.id} className="group/row relative">
+                <ReferenceRow reference={ref} />
+                <button
+                  type="button"
+                  onClick={() => void handleRemove(ref.id)}
+                  className="meta absolute right-3 top-1/2 -translate-y-1/2 rounded-sm border border-rule-strong bg-card px-2 py-1 opacity-0 transition-opacity hover:border-destructive hover:text-destructive focus-visible:opacity-100 group-hover/row:opacity-100"
+                >
+                  Remove
+                </button>
+              </div>
             ))}
           </div>
         )}
-      </section>
-
-      {collection.references.length === 0 ? (
-        <div className="rounded-xl border bg-card p-10 text-center text-muted-foreground">
-          This collection is empty. Add references from the library or this
-          page.
-        </div>
-      ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {collection.references.map((ref) => (
-            <div key={ref.id} className="relative">
-              <ReferenceCard reference={ref} />
-              <Button
-                size="sm"
-                variant="secondary"
-                className="absolute right-3 top-3"
-                onClick={() => void handleRemove(ref.id)}
-              >
-                Remove
-              </Button>
-            </div>
-          ))}
-        </div>
-      )}
+      </Section>
 
       <Dialog open={editOpen} onOpenChange={setEditOpen}>
         <DialogContent>
@@ -368,19 +444,19 @@ export function CollectionDetailPage() {
             </DialogDescription>
           </DialogHeader>
           {libraryLoading ? (
-            <p className="text-sm text-muted-foreground">Loading…</p>
+            <Loading>Loading library…</Loading>
           ) : pickerRefs.length === 0 ? (
             <p className="text-sm text-muted-foreground">
               All library references are already in this collection.
             </p>
           ) : (
-            <div className="max-h-80 overflow-y-auto rounded-md border">
+            <div className="thin-scroll max-h-80 overflow-y-auto border">
               {pickerRefs.map((ref) => {
                 const checked = picked.includes(ref.id);
                 return (
                   <label
                     key={ref.id}
-                    className="flex cursor-pointer items-center gap-3 border-b px-3 py-2 last:border-0 hover:bg-muted"
+                    className="flex cursor-pointer items-center gap-3 border-b px-3 py-2.5 last:border-0 hover:bg-surface-2"
                   >
                     <input
                       type="checkbox"
@@ -393,7 +469,12 @@ export function CollectionDetailPage() {
                         )
                       }
                     />
-                    <span className="text-sm">{ref.title}</span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-sm">{ref.title}</span>
+                      <Meta className="mt-0.5 block truncate">
+                        {ref.type} · {ref.source}
+                      </Meta>
+                    </span>
                   </label>
                 );
               })}
@@ -418,14 +499,14 @@ export function CollectionDetailPage() {
       <Dialog open={addProjectOpen} onOpenChange={setAddProjectOpen}>
         <DialogContent className="max-w-lg">
           <DialogHeader>
-            <DialogTitle>Add to project</DialogTitle>
+            <DialogTitle>Link to project</DialogTitle>
             <DialogDescription>
-              Link this collection to one or more active projects. References
+              Attach this collection to one or more active projects. References
               are not copied.
             </DialogDescription>
           </DialogHeader>
           {projectsLoading ? (
-            <p className="text-sm text-muted-foreground">Loading…</p>
+            <Loading>Loading projects…</Loading>
           ) : availableProjects.length === 0 ? (
             <p className="text-sm text-muted-foreground">
               No other active projects available.{" "}
@@ -435,13 +516,13 @@ export function CollectionDetailPage() {
               first.
             </p>
           ) : (
-            <div className="max-h-80 overflow-y-auto rounded-md border">
+            <div className="thin-scroll max-h-80 overflow-y-auto border">
               {availableProjects.map((project) => {
                 const checked = pickedProjects.includes(project.id);
                 return (
                   <label
                     key={project.id}
-                    className="flex cursor-pointer items-center gap-3 border-b px-3 py-2 last:border-0 hover:bg-muted"
+                    className="flex cursor-pointer items-center gap-3 border-b px-3 py-2.5 last:border-0 hover:bg-surface-2"
                   >
                     <input
                       type="checkbox"
@@ -454,13 +535,13 @@ export function CollectionDetailPage() {
                         )
                       }
                     />
-                    <span className="text-sm">
-                      {project.name}
-                      {project.clientName ? (
-                        <span className="ml-2 text-muted-foreground">
-                          ({project.clientName})
-                        </span>
-                      ) : null}
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-sm">{project.name}</span>
+                      {project.clientName && (
+                        <Meta className="mt-0.5 block truncate">
+                          {project.clientName}
+                        </Meta>
+                      )}
                     </span>
                   </label>
                 );

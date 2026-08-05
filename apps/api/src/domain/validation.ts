@@ -395,7 +395,7 @@ export function validateImportPayload(
           field: "url",
           message: existingUrls.has(normalizedUrl)
             ? "URL already exists in the library"
-            : "Duplicate URL within this import file",
+            : "Duplicate URL within this import batch",
           severity: "error",
         });
       } else {

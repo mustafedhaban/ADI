@@ -1,6 +1,6 @@
 import { useEffect, useState, type FormEvent } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, FolderPlus, Pencil, Plus, Trash2 } from "lucide-react";
+import { useNavigate, useParams } from "react-router-dom";
+import { FolderPlus, Pencil, Plus } from "lucide-react";
 import { toast } from "sonner";
 import {
   api,
@@ -9,11 +9,11 @@ import {
   type ProjectInput,
   type Taxonomy,
 } from "@/lib/api";
-import { CollectionCover } from "@/components/collections/CollectionCover";
+import { CollectionCard } from "@/components/collections/CollectionCard";
+import { ProjectDesignDnaPanel } from "@/components/projects/ProjectDesignDnaPanel";
 import { ProjectResearchPanel } from "@/components/projects/ProjectResearchPanel";
 import { MultiCheckGroup } from "@/components/references/MultiCheckGroup";
 import { ReferenceCard } from "@/components/references/ReferenceCard";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -32,6 +32,122 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
+import {
+  Empty,
+  ErrorNote,
+  HeaderActions,
+  HeaderTool,
+  Loading,
+  Meta,
+  MetaRow,
+  Metric,
+  PageHeader,
+  Section,
+  StatusMark,
+  Tag,
+} from "@/components/common/Primitives";
+
+/**
+ * Stage rail — design direction §10.
+ * Makes the project pipeline legible instead of one undifferentiated scroll.
+ */
+const STAGES = [
+  { id: "overview", label: "Overview" },
+  { id: "brief", label: "Research Brief" },
+  { id: "research", label: "Research" },
+  { id: "collections", label: "Collections" },
+  { id: "design-dna", label: "Design DNA" },
+  { id: "references", label: "References" },
+] as const;
+
+function StageRail() {
+  const [activeId, setActiveId] = useState<string>(STAGES[0].id);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+        if (visible?.target.id) setActiveId(visible.target.id);
+      },
+      { rootMargin: "-80px 0px -60% 0px", threshold: 0 },
+    );
+
+    for (const stage of STAGES) {
+      const el = document.getElementById(stage.id);
+      if (el) observer.observe(el);
+    }
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <>
+      <nav
+        aria-label="Project stages"
+        className="hidden flex-col gap-0.5 lg:flex"
+      >
+        <Meta className="px-3 pb-2">Pipeline</Meta>
+        {STAGES.map((stage, index) => {
+          const active = activeId === stage.id;
+          return (
+            <a
+              key={stage.id}
+              href={`#${stage.id}`}
+              aria-current={active ? "true" : undefined}
+              className={cn(
+                "relative rounded-sm py-1.5 pl-3 pr-2 text-sm transition-colors",
+                active
+                  ? "font-medium text-foreground"
+                  : "text-ink-2 hover:bg-surface-2 hover:text-foreground",
+              )}
+            >
+              <span
+                aria-hidden
+                className={cn(
+                  "absolute left-0 top-1/2 h-4 w-0.5 -translate-y-1/2 rounded-full",
+                  active ? "bg-primary" : "bg-transparent",
+                )}
+              />
+              <span className="meta mr-2 tabular text-muted-foreground">
+                {String(index + 1).padStart(2, "0")}{" "}
+              </span>
+              {stage.label}
+            </a>
+          );
+        })}
+      </nav>
+
+      <nav
+        aria-label="Project stages"
+        className="thin-scroll -mx-5 flex gap-1 overflow-x-auto border-b px-5 pb-3 lg:hidden"
+      >
+        {STAGES.map((stage, index) => {
+          const active = activeId === stage.id;
+          return (
+            <a
+              key={stage.id}
+              href={`#${stage.id}`}
+              aria-current={active ? "true" : undefined}
+              className={cn(
+                "shrink-0 border-b-2 px-2.5 py-1.5 text-sm transition-colors",
+                active
+                  ? "border-primary font-medium text-foreground"
+                  : "border-transparent text-ink-2 hover:text-foreground",
+              )}
+            >
+              <span className="meta mr-1.5 tabular">
+                {String(index + 1).padStart(2, "0")}{" "}
+              </span>
+              {stage.label}
+            </a>
+          );
+        })}
+      </nav>
+    </>
+  );
+}
 
 function linesToArray(value: string): string[] {
   return [
@@ -58,10 +174,10 @@ function BriefText({
   if (!value) return null;
   return (
     <div>
-      <h3 className="text-xs uppercase tracking-wide text-muted-foreground">
-        {label}
-      </h3>
-      <p className="mt-1 whitespace-pre-wrap text-sm">{value}</p>
+      <Meta>{label}</Meta>
+      <p className="prose-measure mt-1.5 whitespace-pre-wrap text-sm leading-relaxed">
+        {value}
+      </p>
     </div>
   );
 }
@@ -70,14 +186,10 @@ function BriefTags({ label, values }: { label: string; values: string[] }) {
   if (!values.length) return null;
   return (
     <div>
-      <h3 className="text-xs uppercase tracking-wide text-muted-foreground">
-        {label}
-      </h3>
+      <Meta>{label}</Meta>
       <div className="mt-2 flex flex-wrap gap-1.5">
         {values.map((value) => (
-          <Badge key={value} variant="outline">
-            {value}
-          </Badge>
+          <Tag key={value}>{value}</Tag>
         ))}
       </div>
     </div>
@@ -341,17 +453,8 @@ export function ProjectDetailPage() {
     }
   }
 
-  if (error) {
-    return (
-      <div className="rounded-xl border border-destructive/30 bg-card p-6 text-destructive">
-        {error}
-      </div>
-    );
-  }
-
-  if (!project) {
-    return <div className="text-muted-foreground">Loading project…</div>;
-  }
+  if (error) return <ErrorNote>{error}</ErrorNote>;
+  if (!project) return <Loading>Loading project…</Loading>;
 
   const metaRows = [
     { label: "Client", value: project.clientName },
@@ -383,131 +486,134 @@ export function ProjectDetailPage() {
 
   return (
     <div className="flex flex-col gap-10">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <Button asChild variant="ghost">
-          <Link to="/projects">
-            <ArrowLeft /> Back to projects
-          </Link>
-        </Button>
-        <div className="flex flex-wrap gap-2">
-          <Button variant="outline" onClick={() => void openAddCollection()}>
-            <Plus /> Add Collection
-          </Button>
-          <Button variant="outline" onClick={() => setEditOpen(true)}>
-            <Pencil /> Edit Overview
-          </Button>
-          <Button variant="outline" onClick={() => void handleArchive()}>
-            {project.status === "active" ? "Archive" : "Restore"}
-          </Button>
-          <Button variant="destructive" onClick={() => setDeleteOpen(true)}>
-            <Trash2 /> Delete
-          </Button>
-        </div>
+      <PageHeader
+        back={{ to: "/projects", label: "Projects" }}
+        eyebrow={[project.industry, project.projectType]
+          .filter(Boolean)
+          .join(" · ") || "Project"}
+        title={project.name}
+        lede={project.description ?? undefined}
+        actions={
+          <HeaderActions
+            primary={
+              <Button onClick={() => void openAddCollection()}>
+                <Plus /> Add Collection
+              </Button>
+            }
+            secondary={
+              <>
+                <HeaderTool onClick={() => setEditOpen(true)}>Edit overview</HeaderTool>
+                <HeaderTool onClick={() => void handleArchive()}>
+                  {project.status === "active" ? "Archive" : "Restore"}
+                </HeaderTool>
+                <HeaderTool tone="danger" onClick={() => setDeleteOpen(true)}>
+                  Delete
+                </HeaderTool>
+              </>
+            }
+          />
+        }
+      />
+
+      <div className="flex flex-col gap-8">
+      <div className="lg:hidden">
+        <StageRail />
       </div>
 
-      <section className="flex flex-col gap-4">
-        <p className="text-xs uppercase tracking-wide text-muted-foreground">
-          Project Overview
-        </p>
-        <div className="flex flex-wrap items-center gap-3">
-          <h1 className="font-display text-4xl tracking-tight">{project.name}</h1>
-          <Badge
-            variant={project.status === "active" ? "default" : "secondary"}
-          >
-            {project.status}
-          </Badge>
+      <div className="flex flex-col gap-10 lg:flex-row lg:gap-12">
+        <div className="hidden lg:block lg:w-[200px] lg:shrink-0">
+          <div className="sticky top-8">
+            <StageRail />
+          </div>
         </div>
-        {project.description && (
-          <p className="max-w-3xl text-muted-foreground">{project.description}</p>
-        )}
-        {metaRows.length > 0 && (
-          <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {metaRows.map((row) => (
-              <div key={row.label}>
-                <dt className="text-xs uppercase tracking-wide text-muted-foreground">
-                  {row.label}
-                </dt>
-                <dd className="mt-1 text-sm">{row.value}</dd>
-              </div>
-            ))}
-          </dl>
-        )}
-        {project.designGoals && (
-          <div>
-            <h2 className="text-xs uppercase tracking-wide text-muted-foreground">
-              Design Goals
-            </h2>
-            <p className="mt-1 whitespace-pre-wrap text-sm">
-              {project.designGoals}
-            </p>
-          </div>
-        )}
-        <p className="text-sm text-muted-foreground">
-          {project.collectionCount} collection
-          {project.collectionCount === 1 ? "" : "s"} · {project.referenceCount}{" "}
-          unique reference
-          {project.referenceCount === 1 ? "" : "s"}
-        </p>
-      </section>
 
-      <section className="flex flex-col gap-5 rounded-2xl border bg-card p-6 shadow-sm">
-        <div className="flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">
-              Research Brief
-            </p>
-            <h2 className="mt-1 font-display text-3xl tracking-tight">
-              Design requirements
-            </h2>
-            <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-              Structured context for what is being designed and which qualities
-              to research. Used later by AI research — context only for now.
-            </p>
+        <div className="flex min-w-0 flex-1 flex-col gap-14">
+      <Section id="overview" eyebrow="01 · Context" title="Overview">
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <StatusMark tone={project.status === "active" ? "accent" : "muted"}>
+              {project.status === "active" ? "Active" : "Archived"}
+            </StatusMark>
+            <Metric
+              value={project.collectionCount}
+              label={`collection${project.collectionCount === 1 ? "" : "s"}`}
+            />
+            <Metric
+              value={project.referenceCount}
+              label={`reference${project.referenceCount === 1 ? "" : "s"}`}
+            />
+            <StatusMark tone={hasBriefContent(project) ? "ink" : "signal"}>
+              {hasBriefContent(project) ? "Brief ready" : "Brief incomplete"}
+            </StatusMark>
           </div>
+          {metaRows.length > 0 && (
+            <dl className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+              {metaRows.map((row) => (
+                <div key={row.label} className="border-l-2 border-border pl-4">
+                  <dt>
+                    <Meta>{row.label}</Meta>
+                  </dt>
+                  <dd className="mt-1 text-sm">{row.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
+          {project.designGoals && (
+            <BriefText label="Design goals" value={project.designGoals} />
+          )}
+        </div>
+      </Section>
+
+      <Section
+        id="brief"
+        eyebrow="02 · Brief"
+        title="Research Brief"
+        description="Structured context for what is being designed and which qualities to research. Read as context by AI research and Design DNA — never copied into them verbatim."
+        action={
           <Button onClick={openBriefEditor}>
-            <Pencil /> Edit Research Brief
+            <Pencil /> Edit Brief
           </Button>
-        </div>
-
+        }
+      >
         {!hasBriefContent(project) ? (
-          <div className="rounded-xl border border-dashed p-8 text-center text-muted-foreground">
-            No research brief yet. Add audience, goals, styles, and constraints
-            to guide collection curation.
-          </div>
+          <Empty action={<Button onClick={openBriefEditor}>Add brief</Button>}>
+            No research brief yet. Add audience, goals, styles and constraints to
+            guide curation.
+          </Empty>
         ) : (
-          <div className="grid gap-8 lg:grid-cols-2">
+          <div className="grid gap-8 border bg-card p-5 sm:p-6 lg:grid-cols-2">
             <div className="flex flex-col gap-4">
-              <h3 className="font-semibold">1. Audience</h3>
+              <Meta>01 · Audience</Meta>
               <BriefText label="Target audience" value={project.audience} />
               <BriefText label="Audience needs" value={project.audienceNeeds} />
             </div>
             <div className="flex flex-col gap-4">
-              <h3 className="font-semibold">2. Business Goals</h3>
+              <Meta>02 · Business Goals</Meta>
               <BriefText label="Business goals" value={project.businessGoals} />
             </div>
             <div className="flex flex-col gap-4">
-              <h3 className="font-semibold">3. Project Goals</h3>
+              <Meta>03 · Project Goals</Meta>
               <BriefText label="Project goals" value={project.projectGoals} />
             </div>
             <div className="flex flex-col gap-4">
-              <h3 className="font-semibold">4. Design Direction</h3>
+              <Meta>04 · Design Direction</Meta>
               <BriefTags label="Desired styles" values={project.desiredStyles} />
               <BriefTags label="Avoid styles" values={project.avoidStyles} />
             </div>
             <div className="flex flex-col gap-4">
-              <h3 className="font-semibold">5. Content</h3>
+              <Meta>05 · Content</Meta>
               <BriefText label="Key messages" value={project.keyMessages} />
               <BriefTags label="Content types" values={project.contentTypes} />
             </div>
             <div className="flex flex-col gap-4">
-              <h3 className="font-semibold">6. Functional Requirements</h3>
+              <Meta>06 · Functional Requirements</Meta>
               <BriefTags
                 label="Required features"
                 values={project.requiredFeatures}
               />
             </div>
             <div className="flex flex-col gap-4">
-              <h3 className="font-semibold">7. Inspiration</h3>
+              <Meta>07 · Inspiration</Meta>
               <BriefTags
                 label="Preferred sources"
                 values={project.preferredSources}
@@ -518,7 +624,7 @@ export function ProjectDetailPage() {
               />
             </div>
             <div className="flex flex-col gap-4">
-              <h3 className="font-semibold">8. Competitive Context</h3>
+              <Meta>08 · Competitive Context</Meta>
               <BriefTags label="Competitors" values={project.competitors} />
               <BriefText
                 label="Competitor notes"
@@ -526,25 +632,23 @@ export function ProjectDetailPage() {
               />
             </div>
             <div className="flex flex-col gap-4 lg:col-span-2">
-              <h3 className="font-semibold">9. Constraints</h3>
+              <Meta>09 · Constraints</Meta>
               <BriefText label="Constraints" value={project.constraints} />
             </div>
           </div>
         )}
-      </section>
+      </Section>
 
-      <ProjectResearchPanel project={project} onLibraryChanged={load} />
+      <Section id="research" eyebrow="03 · Research" title="Research">
+        <ProjectResearchPanel project={project} onLibraryChanged={load} />
+      </Section>
 
-      <section className="flex flex-col gap-4">
-        <div className="flex items-end justify-between gap-3">
-          <div>
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">
-              Research Collections
-            </p>
-            <h2 className="mt-1 font-display text-2xl tracking-tight">
-              Collections
-            </h2>
-          </div>
+      <Section
+        id="collections"
+        eyebrow="04 · Collections"
+        title="Research Collections"
+        description="Sets of references linked to this project. References stay in the library — collections only point at them."
+        action={
           <Button
             size="sm"
             variant="outline"
@@ -552,88 +656,88 @@ export function ProjectDetailPage() {
           >
             <FolderPlus /> Add
           </Button>
-        </div>
+        }
+      >
         {project.collections.length === 0 ? (
-          <div className="rounded-xl border bg-card p-8 text-center text-muted-foreground">
+          <Empty
+            action={
+              <Button onClick={() => void openAddCollection()}>
+                Add collection
+              </Button>
+            }
+          >
             No collections linked yet. Add an existing set or create a new one.
-          </div>
+          </Empty>
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
             {project.collections.map((collection) => (
-              <div
+              <CollectionCard
                 key={collection.id}
-                className="overflow-hidden rounded-xl border bg-card shadow-sm"
-              >
-                <Link to={`/collections/${collection.id}`}>
-                  <CollectionCover images={collection.coverImages} />
-                </Link>
-                <div className="flex flex-col gap-2 p-4">
-                  <Link
-                    to={`/collections/${collection.id}`}
-                    className="font-semibold hover:underline"
-                  >
-                    {collection.name}
-                  </Link>
-                  <p className="text-xs text-muted-foreground">
-                    {collection.referenceCount} reference
-                    {collection.referenceCount === 1 ? "" : "s"}
-                  </p>
-                  <Button
-                    size="sm"
-                    variant="secondary"
+                collection={collection}
+                footer={
+                  <button
+                    type="button"
                     onClick={() => void handleRemoveCollection(collection.id)}
+                    className="meta transition-colors hover:text-destructive"
                   >
                     Unlink
-                  </Button>
-                </div>
-              </div>
+                  </button>
+                }
+              />
             ))}
           </div>
         )}
-      </section>
+      </Section>
 
-      <section className="flex flex-col gap-4">
-        <div>
-          <p className="text-xs uppercase tracking-wide text-muted-foreground">
-            Aggregated References
-          </p>
-          <h2 className="mt-1 font-display text-2xl tracking-tight">
-            References
-          </h2>
-        </div>
+      <Section id="design-dna" eyebrow="05 · Synthesis" title="Design DNA">
+        <ProjectDesignDnaPanel project={project} />
+      </Section>
 
+      <Section
+        id="references"
+        eyebrow="06 · Evidence"
+        title="Aggregated References"
+        description="Every unique reference reachable through this project's collections — the exact set Design DNA analyses."
+      >
         {contextItems.length > 0 && (
-          <div className="rounded-xl border bg-muted/40 p-5">
-            <h3 className="text-sm font-semibold">Research Context</h3>
-            <p className="mt-1 text-sm text-muted-foreground">
+          <div className="border bg-surface-2 p-5">
+            <Meta>Research context</Meta>
+            <p className="prose-measure mt-1.5 text-sm text-muted-foreground">
               Why these references are being collected — from the research
               brief. Collections are not auto-filtered.
             </p>
-            <dl className="mt-4 grid gap-3 sm:grid-cols-2">
+            <dl className="mt-5 grid gap-4 sm:grid-cols-2">
               {contextItems.map((item) => (
-                <div key={item.label}>
-                  <dt className="text-xs uppercase tracking-wide text-muted-foreground">
-                    {item.label}
-                  </dt>
-                  <dd className="mt-1 text-sm">{item.value}</dd>
-                </div>
+                <MetaRow key={item.label} label={item.label}>
+                  {item.value}
+                </MetaRow>
               ))}
             </dl>
           </div>
         )}
 
         {project.references.length === 0 ? (
-          <div className="rounded-xl border bg-card p-8 text-center text-muted-foreground">
-            Aggregated references from project collections will appear here.
-          </div>
+          <Empty
+            action={
+              <Button onClick={() => void openAddCollection()}>
+                Add a collection
+              </Button>
+            }
+          >
+            Aggregated references from this project's collections will appear
+            here.
+          </Empty>
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {project.references.map((ref) => (
               <ReferenceCard key={ref.id} reference={ref} />
             ))}
           </div>
         )}
-      </section>
+      </Section>
+        </div>
+      </div>
+      </div>
 
       <Dialog open={editOpen} onOpenChange={setEditOpen}>
         <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-lg">

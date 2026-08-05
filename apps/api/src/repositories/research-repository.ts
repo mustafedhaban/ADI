@@ -8,7 +8,7 @@ import type {
   ResearchRunStatus,
   ResearchSourceOption,
 } from "../domain/research.js";
-import type { CandidateAnalysis } from "./types.js";
+import type { CandidateAnalysis } from "../research/types.js";
 
 function parseJsonArray(raw: string | null | undefined): string[] {
   if (!raw) return [];

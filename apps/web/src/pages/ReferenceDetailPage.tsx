@@ -1,20 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import {
-  ArrowLeft,
-  ExternalLink,
-  FolderPlus,
-  ImageOff,
-  Pencil,
-  Trash2,
-} from "lucide-react";
+import { ExternalLink, FolderPlus } from "lucide-react";
 import { toast } from "sonner";
-import {
-  api,
-  type CollectionSummary,
-  type Reference,
-} from "@/lib/api";
-import { Badge } from "@/components/ui/badge";
+import { api, type CollectionSummary, type Reference } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -23,20 +11,44 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
+import {
+  ErrorNote,
+  HeaderActions,
+  HeaderTool,
+  Loading,
+  Meta,
+  PageHeader,
+  Tag,
+} from "@/components/common/Primitives";
+import { StyleTerm } from "@/components/references/StyleTerm";
 import { AddToCollectionDialog } from "@/components/collections/AddToCollectionDialog";
 
-function TagList({ label, values }: { label: string; values: string[] }) {
+/** One taxonomy axis. Tags link back into a filtered library view. */
+function Axis({
+  label,
+  values,
+  axis,
+}: {
+  label: string;
+  values: string[];
+  axis?: "styles" | "patterns" | "industries" | "pageTypes" | "tags";
+}) {
   if (!values.length) return null;
   return (
-    <div className="flex flex-col gap-2">
-      <h3 className="text-sm font-medium text-muted-foreground">{label}</h3>
-      <div className="flex flex-wrap gap-2">
-        {values.map((value) => (
-          <Badge key={value} variant="secondary">
-            {value}
-          </Badge>
-        ))}
+    <div className="flex flex-col gap-2 border-t py-4 first:border-0 sm:flex-row sm:gap-6">
+      <Meta className="sm:w-28 sm:shrink-0 sm:pt-1">{label}</Meta>
+      <div className="flex flex-wrap gap-1.5">
+        {values.map((value) =>
+          axis ? (
+            <Link key={value} to={`/references?${axis}=${encodeURIComponent(value)}`}>
+              <Tag className="transition-colors hover:border-rule-strong hover:bg-surface-2">
+                {value}
+              </Tag>
+            </Link>
+          ) : (
+            <Tag key={value}>{value}</Tag>
+          ),
+        )}
       </div>
     </div>
   );
@@ -87,105 +99,100 @@ export function ReferenceDetailPage() {
     }
   }
 
-  if (error) {
-    return (
-      <div className="rounded-xl border border-destructive/30 bg-card p-6 text-destructive">
-        {error}
-      </div>
-    );
-  }
-
-  if (!reference) {
-    return <div className="text-muted-foreground">Loading reference…</div>;
-  }
+  if (error) return <ErrorNote>{error}</ErrorNote>;
+  if (!reference) return <Loading>Loading reference…</Loading>;
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <Button asChild variant="ghost">
-          <Link to="/references">
-            <ArrowLeft /> Back to library
-          </Link>
-        </Button>
-        <div className="flex flex-wrap gap-2">
-          <Button variant="outline" onClick={() => setPickerOpen(true)}>
-            <FolderPlus /> Add to Collection
-          </Button>
-          <Button asChild variant="outline">
-            <Link to={`/references/${reference.id}/edit`}>
-              <Pencil /> Edit
-            </Link>
-          </Button>
-          <Button variant="destructive" onClick={() => setConfirmOpen(true)}>
-            <Trash2 /> Delete
-          </Button>
-        </div>
+    <div className="flex flex-col gap-10">
+      <PageHeader
+        back={{ to: "/references", label: "Library" }}
+        eyebrow={`${reference.type} · ${reference.source}`}
+        title={reference.title}
+        actions={
+          <HeaderActions
+            primary={
+              <Button onClick={() => setPickerOpen(true)}>
+                <FolderPlus /> Add to Collection
+              </Button>
+            }
+            secondary={
+              <>
+                <HeaderTool
+                  onClick={() => navigate(`/references/${reference.id}/edit`)}
+                >
+                  Edit
+                </HeaderTool>
+                <HeaderTool tone="danger" onClick={() => setConfirmOpen(true)}>
+                  Delete
+                </HeaderTool>
+              </>
+            }
+          />
+        }
+      />
+
+      {/* The specimen: this reference's visual character, set large. */}
+      <div className="flex flex-col gap-5 bg-card p-8">
+        <Meta>Visual character</Meta>
+        {reference.styles.length ? (
+          <p className="flex flex-wrap items-baseline gap-x-5 gap-y-2 text-4xl leading-tight md:text-5xl">
+            {reference.styles.map((style, i) => (
+              <span key={style} className="inline-flex items-baseline gap-5">
+                {i > 0 && (
+                  <span aria-hidden className="text-rule-strong">
+                    /
+                  </span>
+                )}
+                <Link
+                  to={`/references?styles=${encodeURIComponent(style)}`}
+                  className="transition-opacity hover:opacity-60"
+                >
+                  <StyleTerm term={style} />
+                </Link>
+              </span>
+            ))}
+          </p>
+        ) : (
+          <p className="meta">Unclassified</p>
+        )}
+        <a
+          href={reference.url}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-2 break-all font-mono text-xs text-ink-2 transition-colors hover:text-primary"
+        >
+          {reference.url}
+          <ExternalLink aria-hidden className="size-3.5 shrink-0" />
+        </a>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="overflow-hidden rounded-2xl border bg-card shadow-sm">
-          <div className="aspect-[16/10] bg-muted">
-            {reference.image ? (
-              <img
-                src={reference.image}
-                alt=""
-                className="size-full object-cover"
-              />
-            ) : (
-              <div className="flex size-full flex-col items-center justify-center gap-2 text-muted-foreground">
-                <ImageOff className="size-10 opacity-50" />
-                <span className="text-sm">No preview image</span>
-              </div>
-            )}
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-5">
-          <div>
-            <div className="mb-3 flex flex-wrap gap-2">
-              <Badge>{reference.type}</Badge>
-              <Badge variant="outline">{reference.source}</Badge>
-            </div>
-            <h1 className="font-display text-4xl tracking-tight">
-              {reference.title}
-            </h1>
-            <a
-              href={reference.url}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-3 inline-flex items-center gap-2 text-sm text-primary hover:underline"
-            >
-              {reference.url}
-              <ExternalLink className="size-3.5" />
-            </a>
-          </div>
-
+      <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
+        <div className="flex flex-col gap-8">
           {reference.description && (
-            <p className="leading-relaxed text-muted-foreground">
+            <p className="prose-measure text-base leading-relaxed">
               {reference.description}
             </p>
           )}
 
-          <Separator />
-
           {reference.whySaved && (
-            <div>
-              <h2 className="mb-2 text-sm font-medium text-muted-foreground">
-                Why saved
-              </h2>
-              <p className="leading-relaxed">{reference.whySaved}</p>
+            <div className="border-l-2 border-primary pl-5">
+              <Meta>Why saved</Meta>
+              <p className="prose-measure mt-2 text-base italic leading-relaxed">
+                {reference.whySaved}
+              </p>
             </div>
           )}
 
           {reference.whatToLearn.length > 0 && (
-            <div>
-              <h2 className="mb-2 text-sm font-medium text-muted-foreground">
-                What to learn
-              </h2>
-              <ul className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-2">
+              <Meta>What to learn</Meta>
+              <ul className="flex flex-col">
                 {reference.whatToLearn.map((item) => (
-                  <li key={item} className="text-sm leading-relaxed">
-                    • {item}
+                  <li
+                    key={item}
+                    className="border-b py-2 text-sm last:border-0"
+                  >
+                    {item}
                   </li>
                 ))}
               </ul>
@@ -193,18 +200,17 @@ export function ReferenceDetailPage() {
           )}
 
           {collections.length > 0 && (
-            <div>
-              <h2 className="mb-2 text-sm font-medium text-muted-foreground">
-                Collections
-              </h2>
-              <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-2">
+              <Meta>In collections</Meta>
+              <div className="flex flex-wrap gap-1.5">
                 {collections.map((collection) => (
                   <Link
                     key={collection.id}
                     to={`/collections/${collection.id}`}
-                    className="text-sm text-primary hover:underline"
                   >
-                    {collection.name}
+                    <Tag className="transition-colors hover:border-rule-strong hover:bg-surface-2">
+                      {collection.name}
+                    </Tag>
                   </Link>
                 ))}
               </div>
@@ -213,20 +219,24 @@ export function ReferenceDetailPage() {
         </div>
       </div>
 
-      <div className="grid gap-6 rounded-xl border bg-card p-6 md:grid-cols-2">
-        <TagList label="Industries" values={reference.industries} />
-        <TagList label="Page types" values={reference.pageTypes} />
-        <TagList label="Styles" values={reference.styles} />
-        <TagList label="Patterns" values={reference.patterns} />
-        <TagList label="Tags" values={reference.tags} />
-      </div>
+      <section className="flex flex-col">
+        <Meta className="mb-3 block">Classification</Meta>
+        <div className="rounded-md border bg-card px-5 py-1">
+          <Axis label="Industries" values={reference.industries} axis="industries" />
+          <Axis label="Page types" values={reference.pageTypes} axis="pageTypes" />
+          <Axis label="Styles" values={reference.styles} axis="styles" />
+          <Axis label="Patterns" values={reference.patterns} axis="patterns" />
+          <Axis label="Tags" values={reference.tags} axis="tags" />
+        </div>
+      </section>
 
       <Dialog open={confirmOpen} onOpenChange={setConfirmOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Delete reference?</DialogTitle>
             <DialogDescription>
-              This will permanently remove “{reference.title}” from the library.
+              This permanently removes “{reference.title}” from the library and
+              from every collection it belongs to.
             </DialogDescription>
           </DialogHeader>
           <div className="flex justify-end gap-2">

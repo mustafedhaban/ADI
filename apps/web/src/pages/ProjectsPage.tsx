@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { Link } from "react-router-dom";
-import { Briefcase, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { toast } from "sonner";
 import {
   api,
@@ -8,7 +7,7 @@ import {
   type ProjectSummary,
   type Taxonomy,
 } from "@/lib/api";
-import { Badge } from "@/components/ui/badge";
+import { ProjectCard } from "@/components/projects/ProjectCard";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -27,18 +26,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-
-function formatDate(value: string) {
-  try {
-    return new Date(value).toLocaleDateString(undefined, {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  } catch {
-    return value;
-  }
-}
+import {
+  Empty,
+  Loading,
+  Meta,
+  PageHeader,
+  Section,
+} from "@/components/common/Primitives";
 
 const emptyForm: ProjectInput = {
   name: "",
@@ -326,134 +320,77 @@ export function ProjectsPage() {
     );
   }
 
-  function ProjectCard({ project }: { project: ProjectSummary }) {
-    return (
-      <div className="flex flex-col gap-3 rounded-xl border bg-card p-4 shadow-sm">
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <Link
-              to={`/projects/${project.id}`}
-              className="text-lg font-semibold leading-snug hover:underline"
-            >
-              {project.name}
-            </Link>
-            {project.clientName && (
-              <p className="mt-1 text-sm text-muted-foreground">
-                {project.clientName}
-              </p>
-            )}
-          </div>
-          <Badge variant={project.status === "active" ? "default" : "secondary"}>
-            {project.status}
-          </Badge>
-        </div>
-        <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
-          {project.industry && <span>{project.industry}</span>}
-          <span>
-            {project.collectionCount} collection
-            {project.collectionCount === 1 ? "" : "s"}
-          </span>
-          <span>
-            {project.referenceCount} reference
-            {project.referenceCount === 1 ? "" : "s"}
-          </span>
-          <span>Updated {formatDate(project.updatedAt)}</span>
-        </div>
-        <div className="flex flex-wrap gap-2 pt-1">
-          <Button asChild size="sm" variant="outline">
-            <Link to={`/projects/${project.id}`}>Open</Link>
-          </Button>
-          <Button size="sm" variant="outline" onClick={() => openEdit(project)}>
-            Edit
-          </Button>
-          {project.status === "active" ? (
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => void handleArchive(project)}
-            >
-              Archive
-            </Button>
-          ) : (
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => void handleRestore(project)}
-            >
-              Restore
-            </Button>
-          )}
-          <Button
-            size="sm"
-            variant="destructive"
-            onClick={() => void handleDelete(project)}
-          >
-            Delete
-          </Button>
-        </div>
-      </div>
-    );
-  }
+  const totalRefs = items.reduce((sum, p) => sum + p.referenceCount, 0);
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <h1 className="font-display text-4xl tracking-tight">Projects</h1>
-          <p className="mt-2 max-w-2xl text-muted-foreground">
-            Organize design research around real client work. Link collections
-            of references to each project brief — without copying assets.
-          </p>
+    <div className="flex flex-col gap-8">
+      <PageHeader
+        eyebrow="Work"
+        title="Projects"
+        lede="Design research organised around real client work. Each project links collections to a brief — the library stays the single source."
+        actions={
+          <Button onClick={openCreate}>
+            <Plus /> New Project
+          </Button>
+        }
+      />
+
+      {!loading && items.length > 0 && (
+        <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+          <Meta className="tabular" aria-live="polite">
+            {active.length} active · {archived.length} archived
+          </Meta>
+          <Meta className="tabular">
+            {totalRefs} aggregated reference{totalRefs === 1 ? "" : "s"}
+          </Meta>
         </div>
-        <Button onClick={openCreate}>
-          <Plus /> New Project
-        </Button>
-      </div>
+      )}
 
       {loading ? (
-        <p className="text-muted-foreground">Loading projects…</p>
+        <Loading>Loading projects…</Loading>
       ) : items.length === 0 ? (
-        <div className="rounded-xl border bg-card p-10 text-center">
-          <Briefcase className="mx-auto mb-3 size-8 text-muted-foreground" />
-          <p className="text-muted-foreground">
-            No projects yet. Create one to start organizing research.
-          </p>
-          <Button className="mt-4" onClick={openCreate}>
-            Create project
-          </Button>
-        </div>
+        <Empty action={<Button onClick={openCreate}>Create project</Button>}>
+          No projects yet. Create one to start organising research around client
+          work.
+        </Empty>
       ) : (
-        <>
-          <section className="flex flex-col gap-4">
-            <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
-              Active ({active.length})
-            </h2>
+        <div className="flex flex-col gap-12">
+          <Section eyebrow={`Active · ${active.length}`}>
             {active.length === 0 ? (
               <p className="text-sm text-muted-foreground">
                 No active projects.
               </p>
             ) : (
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
                 {active.map((project) => (
-                  <ProjectCard key={project.id} project={project} />
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    onEdit={openEdit}
+                    onArchive={(p) => void handleArchive(p)}
+                    onDelete={(p) => void handleDelete(p)}
+                  />
                 ))}
               </div>
             )}
-          </section>
+          </Section>
 
           {archived.length > 0 && (
-            <section className="flex flex-col gap-4 border-t pt-6">
-              <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
-                Archived ({archived.length})
-              </h2>
-              <div className="grid gap-4 opacity-80 sm:grid-cols-2 lg:grid-cols-3">
+            <Section eyebrow={`Archived · ${archived.length}`}>
+              <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
                 {archived.map((project) => (
-                  <ProjectCard key={project.id} project={project} />
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    onEdit={openEdit}
+                    onRestore={(p) => void handleRestore(p)}
+                    onDelete={(p) => void handleDelete(p)}
+                  />
                 ))}
               </div>
-            </section>
+            </Section>
           )}
-        </>
+        </div>
       )}
 
       <Dialog open={createOpen} onOpenChange={setCreateOpen}>

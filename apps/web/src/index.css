@@ -1,8 +1,20 @@
 @import "tailwindcss";
 
+/* ---------------------------------------------------------------------------
+   ADI design tokens — rebuilt from captured screenshots of the 24 references.
+
+   Evidence:
+   • Typewolf / Future Fonts / Brutalist / Hoefler all sit on a TINTED ground
+     with content floating on it — not white cards on off-white.
+   • Future Fonts sets its ENTIRE interface in mono.
+   • Google Fonts renders the thing itself instead of a thumbnail.
+--------------------------------------------------------------------------- */
+
 @theme inline {
   --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -21,31 +33,48 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
+
+  --color-ink-2: var(--ink-2);
+  --color-rule-strong: var(--rule-strong);
+  --color-surface-2: var(--surface-2);
+  --color-signal: var(--signal);
+  --color-signal-soft: var(--signal-soft);
+
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: #f7f5f1;
-  --foreground: #1c1917;
-  --card: #ffffff;
-  --card-foreground: #1c1917;
-  --popover: #ffffff;
-  --popover-foreground: #1c1917;
-  --primary: #1f3a2e;
-  --primary-foreground: #f7f5f1;
-  --secondary: #ebe6dc;
-  --secondary-foreground: #1c1917;
-  --muted: #efeae2;
-  --muted-foreground: #6b645c;
-  --accent: #d9c4a5;
-  --accent-foreground: #1c1917;
-  --destructive: #b42318;
-  --border: #ddd5c8;
-  --input: #ddd5c8;
-  --ring: #1f3a2e;
+  --radius: 0.25rem;
+
+  /* Tinted ground — the page is the tint, mats float on it (Typewolf). */
+  --background: #e9e4da;
+  --card: #fbfaf7;          /* the mat */
+  --popover: #fbfaf7;
+  --muted: #e0dace;
+  --surface-2: #e0dace;
+  --secondary: #ded7ca;
+  --accent: #ded7ca;
+
+  --foreground: #17150f;
+  --card-foreground: #17150f;
+  --popover-foreground: #17150f;
+  --secondary-foreground: #17150f;
+  --accent-foreground: #17150f;
+  --ink-2: #4c463c;         /* ~8.0:1 on ground */
+  --muted-foreground: #635c4f; /* ~5.4:1 on ground */
+
+  --border: #d2cabb;
+  --rule-strong: #b8ae9c;
+  --input: #c6bdac;
+
+  --primary: #1c3a2c;
+  --primary-foreground: #f4f1ea;
+  --ring: #1c3a2c;
+  --signal: #6f5218;
+  --signal-soft: #efe4cc;
+  --destructive: #8f2718;
 }
 
 * {
@@ -61,14 +90,126 @@ body,
 body {
   margin: 0;
   font-family: var(--font-sans);
-  background:
-    radial-gradient(ellipse 80% 50% at 10% -10%, #e8dfd0 0%, transparent 55%),
-    radial-gradient(ellipse 60% 40% at 100% 0%, #d7e3db 0%, transparent 45%),
-    var(--background);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  background: var(--background);
   color: var(--foreground);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* --- type roles ---------------------------------------------------------- */
 
 .font-display {
   font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+/* Monocle's masthead: enormous, high-contrast, the page's structural anchor. */
+.masthead {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 7vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+/* Future Fonts sets its whole interface in mono. Controls follow suit. */
+.meta {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.mono-ui {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: -0.01em;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.prose-measure {
+  max-width: 68ch;
+}
+
+/* Brutalist Websites uses an em-dash as a structural divider. */
+.em-rule::before {
+  content: "—";
+  display: block;
+  color: var(--rule-strong);
+  line-height: 1;
+}
+
+/* ---------------------------------------------------------------------------
+   Self-demonstrating taxonomy.
+
+   Google Fonts sets each "Feeling" filter pill in the style it names — the
+   filter demonstrates itself. ADI does the same for its 25 style terms, using
+   only the two families already loaded plus the system mono stack, so this
+   costs no extra network requests.
+--------------------------------------------------------------------------- */
+
+.sty { font-family: var(--font-sans); font-weight: 500; }
+
+.sty-editorial,
+.sty-elegant,
+.sty-sophisticated,
+.sty-luxury      { font-family: var(--font-display); font-weight: 400; font-size: 1.08em; letter-spacing: 0; }
+.sty-luxury      { letter-spacing: 0.14em; text-transform: uppercase; font-size: 0.94em; }
+.sty-premium     { font-family: var(--font-display); letter-spacing: 0.06em; }
+
+.sty-brutalist,
+.sty-technical,
+.sty-monochrome  { font-family: var(--font-mono); font-weight: 600; letter-spacing: -0.02em; }
+.sty-brutalist   { text-transform: uppercase; }
+
+.sty-minimal,
+.sty-clean       { font-weight: 300; letter-spacing: 0.06em; }
+.sty-bold        { font-weight: 700; letter-spacing: -0.02em; }
+.sty-experimental{ font-style: italic; font-weight: 700; letter-spacing: -0.04em; }
+.sty-playful     { font-weight: 700; letter-spacing: 0.02em; }
+.sty-futuristic  { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.9em; }
+.sty-retro       { font-family: var(--font-display); font-style: italic; }
+.sty-organic     { font-family: var(--font-display); font-style: italic; letter-spacing: 0.01em; }
+.sty-corporate,
+.sty-institutional { font-weight: 600; letter-spacing: -0.01em; }
+.sty-dark        { font-weight: 700; }
+.sty-light       { font-weight: 300; }
+.sty-artistic    { font-family: var(--font-display); font-style: italic; font-size: 1.08em; }
+.sty-cinematic   { text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.88em; font-weight: 500; }
+.sty-geometric   { font-family: var(--font-mono); letter-spacing: 0.1em; }
+.sty-colorful    { font-weight: 700; font-style: italic; }
+.sty-friendly    { font-weight: 500; letter-spacing: 0.02em; }
+.sty-human-centered { font-family: var(--font-display); }
+.sty-modern-african { font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.9em; }
+
+/* --- focus --------------------------------------------------------------- */
+
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* --- dense panels -------------------------------------------------------- */
+
+.thin-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule-strong) transparent;
+}
+.thin-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+.thin-scroll::-webkit-scrollbar-thumb { background: var(--rule-strong); border-radius: 999px; }
+.thin-scroll::-webkit-scrollbar-track { background: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

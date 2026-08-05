@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { ExternalLink, ImageOff, Search } from "lucide-react";
+import { ExternalLink, Search } from "lucide-react";
 import { toast } from "sonner";
 import {
   api,
@@ -10,8 +10,17 @@ import {
   type ResearchRunDetail,
   type ResearchRunSummary,
 } from "@/lib/api";
+import {
+  AiMark,
+  AiSurface,
+  Empty,
+  ErrorNote,
+  formatDateTime,
+  Meta,
+  StatusMark,
+  Tag,
+} from "@/components/common/Primitives";
 import { MultiCheckGroup } from "@/components/references/MultiCheckGroup";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -29,6 +38,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
 
 const RESEARCH_SOURCE_OPTIONS = [
   "Web",
@@ -42,18 +52,12 @@ const RESEARCH_SOURCE_OPTIONS = [
   "Other",
 ];
 
-function formatDate(value: string) {
-  try {
-    return new Date(value).toLocaleString(undefined, {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  } catch {
-    return value;
-  }
+function candidateTone(
+  status: ResearchCandidate["status"],
+): "signal" | "accent" | "muted" {
+  if (status === "accepted") return "accent";
+  if (status === "rejected") return "muted";
+  return "signal";
 }
 
 function CandidateCard({
@@ -69,9 +73,16 @@ function CandidateCard({
   onAccept: () => void;
   onReject: () => void;
 }) {
+  const reviewed = candidate.status !== "candidate";
+
   return (
-    <div className="flex flex-col overflow-hidden rounded-xl border bg-card shadow-sm">
-      <div className="relative aspect-[16/10] bg-muted">
+    <article
+      className={cn(
+        "flex flex-col border bg-card",
+        candidate.status === "rejected" && "opacity-60",
+      )}
+    >
+      <div className="relative aspect-[16/10] overflow-hidden bg-surface-2">
         {candidate.image ? (
           <img
             src={candidate.image}
@@ -79,80 +90,95 @@ function CandidateCard({
             className="size-full object-cover"
           />
         ) : (
-          <div className="flex size-full flex-col items-center justify-center gap-2 text-muted-foreground">
-            <ImageOff className="size-7 opacity-50" />
-            <span className="text-xs uppercase tracking-wide">No preview</span>
+          <div className="flex size-full flex-col justify-end gap-1 px-4 py-3">
+            <Meta>No preview</Meta>
+            <p className="font-display text-xl leading-tight text-ink-2 line-clamp-3">
+              {candidate.title}
+            </p>
           </div>
         )}
-        <label className="absolute left-3 top-3 flex items-center gap-2 rounded-md bg-card/95 px-2 py-1 text-xs">
+        <label className="absolute left-2.5 top-2.5 inline-flex items-center gap-1.5 border border-rule-strong bg-card px-2 py-1 text-xs">
           <input type="checkbox" checked={selected} onChange={onToggle} />
           Select
         </label>
-        <Badge className="absolute right-3 top-3" variant="secondary">
-          {candidate.status}
-        </Badge>
       </div>
+
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="text-base font-semibold leading-snug">
-            {candidate.title}
-          </h3>
+          <div className="min-w-0 flex-1">
+            <Meta className="mb-1.5 block">{candidate.source}</Meta>
+            <h3 className="font-display text-lg leading-tight text-balance">
+              {candidate.title}
+            </h3>
+          </div>
           <a
             href={candidate.url}
             target="_blank"
             rel="noreferrer"
-            className="text-muted-foreground hover:text-foreground"
+            aria-label="Open source"
+            className="shrink-0 text-muted-foreground transition-colors hover:text-foreground"
           >
             <ExternalLink className="size-4" />
           </a>
         </div>
-        <p className="text-sm text-muted-foreground">{candidate.source}</p>
-        <p className="truncate text-xs text-muted-foreground">{candidate.url}</p>
-        <div className="text-sm">
-          <span className="font-medium">
-            Score:{" "}
-            {candidate.relevanceScore === null
-              ? "—"
-              : candidate.relevanceScore}
-          </span>
-          <p className="mt-1 text-muted-foreground">
+
+        <p className="truncate font-mono text-xs text-muted-foreground">
+          {candidate.url}
+        </p>
+
+        <AiSurface reviewed={reviewed} className="px-3 py-2.5">
+          <div className="flex flex-wrap items-center gap-2">
+            {reviewed ? (
+              <StatusMark tone={candidateTone(candidate.status)}>
+                {candidate.status}
+              </StatusMark>
+            ) : (
+              <AiMark>AI draft</AiMark>
+            )}
+            <Meta className="tabular">
+              Score{" "}
+              {candidate.relevanceScore === null ? "—" : candidate.relevanceScore}
+            </Meta>
+          </div>
+          <p className="mt-2 text-sm text-ink-2">
             {candidate.relevanceReason ?? "AI analysis unavailable."}
           </p>
-        </div>
+        </AiSurface>
+
         {candidate.matchedCriteria.length > 0 && (
-          <div className="flex flex-wrap gap-1">
+          <div className="flex flex-wrap gap-1.5">
             {candidate.matchedCriteria.map((item) => (
-              <Badge key={item} variant="outline">
-                {item}
-              </Badge>
+              <Tag key={item}>{item}</Tag>
             ))}
           </div>
         )}
+
         {(candidate.suggestedStyles.length > 0 ||
           candidate.suggestedPatterns.length > 0 ||
           candidate.suggestedTags.length > 0) && (
-          <div className="space-y-2 text-xs text-muted-foreground">
+          <div className="space-y-1 font-mono text-xs text-muted-foreground">
             {candidate.suggestedStyles.length > 0 && (
-              <p>Styles: {candidate.suggestedStyles.join(", ")}</p>
+              <p>Styles — {candidate.suggestedStyles.join(", ")}</p>
             )}
             {candidate.suggestedPatterns.length > 0 && (
-              <p>Patterns: {candidate.suggestedPatterns.join(", ")}</p>
+              <p>Patterns — {candidate.suggestedPatterns.join(", ")}</p>
             )}
             {candidate.suggestedTags.length > 0 && (
-              <p>Tags: {candidate.suggestedTags.join(", ")}</p>
+              <p>Tags — {candidate.suggestedTags.join(", ")}</p>
             )}
           </div>
         )}
-        <div className="mt-auto flex flex-wrap gap-2 pt-1">
+
+        <div className="mt-auto flex flex-wrap gap-2 border-t pt-3">
           <Button size="sm" variant="outline" onClick={onAccept}>
             Accept
           </Button>
-          <Button size="sm" variant="secondary" onClick={onReject}>
+          <Button size="sm" variant="ghost" onClick={onReject}>
             Reject
           </Button>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 
@@ -303,7 +329,6 @@ export function ProjectResearchPanel({
     if (!active || !selected.length || !collectionId) return;
     setBusy(true);
     try {
-      // Ensure selected candidates are in the library first
       await api.addResearchToLibrary(active.id, selected);
       const result = await api.addResearchToCollection(
         active.id,
@@ -331,80 +356,99 @@ export function ProjectResearchPanel({
   }
 
   return (
-    <section className="flex flex-col gap-5">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <p className="text-xs uppercase tracking-wide text-muted-foreground">
-            Research
-          </p>
-          <h2 className="mt-1 font-display text-2xl tracking-tight">
-            AI Research Agent
-          </h2>
-          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Discover candidate references from the web using this project’s
-            research brief. Candidates are reviewed before entering the library.
-          </p>
-        </div>
-        <Button onClick={() => setConfigOpen(true)}>
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <p className="prose-measure text-pretty text-sm text-muted-foreground">
+          Discover candidate references from the web using this project’s
+          research brief. Candidates are machine-proposed and reviewed by a
+          human before entering the library.
+        </p>
+        <Button onClick={() => setConfigOpen(true)} className="shrink-0">
           <Search /> Research Design References
         </Button>
       </div>
 
       {providers && (
-        <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
-          <Badge variant={providers.search.available ? "default" : "secondary"}>
-            Search: {providers.search.available ? providers.search.name : "not configured"}
-          </Badge>
-          <Badge variant={providers.ai.available ? "default" : "secondary"}>
-            AI: {providers.ai.available ? providers.ai.name : "not configured"}
-          </Badge>
+        <div className="flex flex-wrap gap-x-5 gap-y-2 border-y py-3">
+          <StatusMark tone={providers.search.available ? "accent" : "signal"}>
+            Search{" "}
+            {providers.search.available
+              ? providers.search.name
+              : "not configured"}
+          </StatusMark>
+          <StatusMark tone={providers.ai.available ? "accent" : "signal"}>
+            AI {providers.ai.available ? providers.ai.name : "not configured"}
+          </StatusMark>
         </div>
       )}
 
-      <div className="rounded-xl border bg-card p-4">
-        <h3 className="text-sm font-semibold">Research History</h3>
+      <div className="flex flex-col gap-3">
+        <Meta>Research history</Meta>
         {history.length === 0 ? (
-          <p className="mt-2 text-sm text-muted-foreground">
-            No research runs yet.
-          </p>
+          <Empty
+            eyebrow="No runs yet"
+            action={
+              <Button onClick={() => setConfigOpen(true)}>
+                Start research
+              </Button>
+            }
+          >
+            Research history will appear here after the first search. Configure
+            search before running — candidates stay drafts until you accept them.
+          </Empty>
         ) : (
-          <div className="mt-3 divide-y rounded-md border">
-            {history.map((run) => (
-              <button
-                key={run.id}
-                type="button"
-                className="flex w-full flex-wrap items-center justify-between gap-2 px-3 py-2 text-left text-sm hover:bg-muted"
-                onClick={() =>
-                  void api.getResearch(run.id).then((detail) => {
-                    setActive(detail);
-                    setSelected([]);
-                  })
-                }
-              >
-                <span>{formatDate(run.createdAt)}</span>
-                <span className="text-muted-foreground">
-                  {run.focus || "Brief-based research"}
-                </span>
-                <span>
-                  {run.candidateCount} candidate
-                  {run.candidateCount === 1 ? "" : "s"}
-                </span>
-                <Badge variant="outline">{run.status}</Badge>
-              </button>
-            ))}
+          <div className="overflow-hidden border bg-card">
+            {history.map((run) => {
+              const isActive = active?.id === run.id;
+              return (
+                <button
+                  key={run.id}
+                  type="button"
+                  className={cn(
+                    "flex w-full flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b px-4 py-3 text-left last:border-0 transition-colors hover:bg-surface-2",
+                    isActive && "bg-surface-2",
+                  )}
+                  onClick={() =>
+                    void api.getResearch(run.id).then((detail) => {
+                      setActive(detail);
+                      setSelected([]);
+                    })
+                  }
+                >
+                  <span className="meta tabular">{formatDateTime(run.createdAt)}</span>
+                  <span className="min-w-0 flex-1 truncate text-sm">
+                    {run.focus || "Brief-based research"}
+                  </span>
+                  <span className="meta tabular">
+                    {run.candidateCount} candidate
+                    {run.candidateCount === 1 ? "" : "s"}
+                  </span>
+                  <StatusMark
+                    tone={run.status === "completed" ? "ink" : "signal"}
+                  >
+                    {run.status}
+                  </StatusMark>
+                </button>
+              );
+            })}
           </div>
         )}
       </div>
 
       {active && (
         <div className="flex flex-col gap-4">
-          <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h3 className="font-semibold">
-                Results · {active.candidates.length} candidates
+              <h3 className="font-display text-xl leading-tight">
+                Candidates
               </h3>
+              <Meta className="mt-1.5 block tabular">
+                {active.candidates.length} result
+                {active.candidates.length === 1 ? "" : "s"}
+                {selected.length > 0 ? ` · ${selected.length} selected` : ""}
+              </Meta>
               {active.message && (
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
                   {active.message}
                 </p>
               )}
@@ -416,24 +460,22 @@ export function ProjectResearchPanel({
                 disabled={!selected.length || busy}
                 onClick={() => void handleAddToLibrary()}
               >
-                Add Selected to Library
+                Add to Library
               </Button>
               <Button
                 size="sm"
                 disabled={!selected.length || busy}
                 onClick={() => void openCollectionDialog()}
               >
-                Add Selected to Collection
+                Add to Collection
               </Button>
             </div>
           </div>
 
           {active.candidates.length === 0 ? (
-            <div className="rounded-xl border border-dashed p-8 text-center text-muted-foreground">
-              No candidates in this run.
-            </div>
+            <Empty>No candidates in this run.</Empty>
           ) : (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
               {active.candidates.map((candidate) => (
                 <CandidateCard
                   key={candidate.id}
@@ -465,15 +507,14 @@ export function ProjectResearchPanel({
             </DialogDescription>
           </DialogHeader>
 
-          <div className="rounded-lg border bg-muted/40 p-4">
-            <p className="text-sm font-medium">{project.name}</p>
-            <div className="mt-3 flex flex-wrap gap-2">
+          <div className="border bg-surface-2 p-4">
+            <Meta>Brief context</Meta>
+            <p className="mt-2 font-display text-lg leading-tight">
+              {project.name}
+            </p>
+            <div className="mt-3 flex flex-wrap gap-1.5">
               {briefChips.length ? (
-                briefChips.map((chip) => (
-                  <Badge key={chip} variant="outline">
-                    {chip}
-                  </Badge>
-                ))
+                briefChips.map((chip) => <Tag key={chip}>{chip}</Tag>)
               ) : (
                 <p className="text-sm text-muted-foreground">
                   No brief details yet — add a research brief for better
@@ -521,12 +562,12 @@ export function ProjectResearchPanel({
               maxHeight="max-h-40"
             />
             {!providers?.search.available && (
-              <p className="text-sm text-destructive">
+              <ErrorNote>
                 Search is not configured. Set TAVILY_API_KEY on the API server.
-              </p>
+              </ErrorNote>
             )}
             {!providers?.ai.available && (
-              <p className="text-sm text-muted-foreground">
+              <p className="font-mono text-xs text-muted-foreground">
                 AI analysis is not configured (OPENAI_API_KEY). Candidates can
                 still be returned without relevance scoring.
               </p>
@@ -592,6 +633,6 @@ export function ProjectResearchPanel({
           </div>
         </DialogContent>
       </Dialog>
-    </section>
+    </div>
   );
 }

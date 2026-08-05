@@ -1,0 +1,162 @@
+/* Final direction — Future Studio polish layer (selected) */
+
+.final-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding: 0.75rem clamp(1.25rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--warm) 12%, var(--panel));
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.final-banner__status {
+  color: var(--accent);
+}
+
+.final-banner__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.final-banner__links a {
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.final-banner__links a:hover {
+  color: var(--fg);
+  border-bottom-color: var(--line);
+}
+
+.final .r2c__h1 {
+  max-width: 12ch;
+}
+
+.final .r2c__nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+.final-about {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+}
+
+.final-about__panel {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  min-height: 220px;
+}
+
+.final-about__panel .r2c-form {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  right: -40px;
+  bottom: -50px;
+  opacity: 0.45;
+}
+
+.final-about__panel > *:not(.r2c-form) {
+  position: relative;
+  z-index: 1;
+}
+
+.final-selected {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.final-selected::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--warm);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--warm) 25%, transparent);
+}
+
+.r2-index__selected {
+  margin: 0 0 2rem;
+  padding: 1.15rem 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line));
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.r2-index__selected strong {
+  display: block;
+  color: var(--fg);
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+}
+
+.r2-index__selected p {
+  margin: 0 0 0.85rem;
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 0.92rem;
+}
+
+.r2-index__selected a {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+.r2-index__item--chosen a {
+  opacity: 1;
+}
+
+.r2-index__badge {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  padding: 0.15rem 0.4rem;
+  vertical-align: middle;
+}
+
+@media (max-width: 900px) {
+  .final-about {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .final .r2c-form,
+  .final .r2c-transition__bar,
+  .final .r2c__section--light::before {
+    animation: none !important;
+  }
+}
