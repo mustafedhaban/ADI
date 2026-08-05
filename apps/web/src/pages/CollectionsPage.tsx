@@ -1,9 +1,8 @@
 import { useEffect, useState, type FormEvent } from "react";
-import { Link } from "react-router-dom";
-import { FolderPlus, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { toast } from "sonner";
 import { api, type CollectionSummary } from "@/lib/api";
-import { CollectionCover } from "@/components/collections/CollectionCover";
+import { CollectionCard } from "@/components/collections/CollectionCard";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -15,18 +14,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-
-function formatDate(value: string) {
-  try {
-    return new Date(value).toLocaleDateString(undefined, {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  } catch {
-    return value;
-  }
-}
+import {
+  Empty,
+  Loading,
+  Meta,
+  PageHeader,
+} from "@/components/common/Primitives";
 
 export function CollectionsPage() {
   const [items, setItems] = useState<CollectionSummary[]>([]);
@@ -76,61 +69,49 @@ export function CollectionsPage() {
     }
   }
 
+  const totalRefs = items.reduce((sum, c) => sum + c.referenceCount, 0);
+
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <h1 className="font-display text-4xl tracking-tight">Collections</h1>
-          <p className="mt-2 max-w-2xl text-muted-foreground">
-            Group references into reusable inspiration sets for projects,
-            clients, and research themes. References are not moved — they can
-            belong to many collections.
-          </p>
+    <div className="flex flex-col gap-8">
+      <PageHeader
+        eyebrow="Sets"
+        title="Collections"
+        lede="Curated visual research sets — each one an argument about taste, not a folder. A reference can belong to many collections; nothing is moved or copied."
+        actions={
+          <Button onClick={() => setCreateOpen(true)}>
+            <Plus /> New Collection
+          </Button>
+        }
+      />
+
+      {!loading && items.length > 0 && (
+        <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+          <Meta className="tabular" aria-live="polite">
+            {items.length} collection{items.length === 1 ? "" : "s"}
+          </Meta>
+          <Meta className="tabular">
+            {totalRefs} linked reference{totalRefs === 1 ? "" : "s"}
+          </Meta>
         </div>
-        <Button onClick={() => setCreateOpen(true)}>
-          <Plus /> New Collection
-        </Button>
-      </div>
+      )}
 
       {loading ? (
-        <p className="text-muted-foreground">Loading collections…</p>
+        <Loading>Loading collections…</Loading>
       ) : items.length === 0 ? (
-        <div className="rounded-xl border bg-card p-10 text-center">
-          <FolderPlus className="mx-auto mb-3 size-8 text-muted-foreground" />
-          <p className="text-muted-foreground">
-            No collections yet. Create one to start grouping references.
-          </p>
-          <Button className="mt-4" onClick={() => setCreateOpen(true)}>
-            Create collection
-          </Button>
-        </div>
+        <Empty
+          action={
+            <Button onClick={() => setCreateOpen(true)}>
+              Create collection
+            </Button>
+          }
+        >
+          No collections yet. Create one to start grouping references into a
+          curated research set.
+        </Empty>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {items.map((collection) => (
-            <Link
-              key={collection.id}
-              to={`/collections/${collection.id}`}
-              className="group overflow-hidden rounded-xl border bg-card shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-            >
-              <CollectionCover images={collection.coverImages} />
-              <div className="flex flex-col gap-2 p-4">
-                <h2 className="text-lg font-semibold leading-snug">
-                  {collection.name}
-                </h2>
-                {collection.description && (
-                  <p className="line-clamp-2 text-sm text-muted-foreground">
-                    {collection.description}
-                  </p>
-                )}
-                <div className="mt-1 flex items-center justify-between text-xs text-muted-foreground">
-                  <span>
-                    {collection.referenceCount} reference
-                    {collection.referenceCount === 1 ? "" : "s"}
-                  </span>
-                  <span>{formatDate(collection.createdAt)}</span>
-                </div>
-              </div>
-            </Link>
+            <CollectionCard key={collection.id} collection={collection} />
           ))}
         </div>
       )}
@@ -140,7 +121,7 @@ export function CollectionsPage() {
           <DialogHeader>
             <DialogTitle>Create collection</DialogTitle>
             <DialogDescription>
-              Name a set for a project, client, or research theme.
+              Name a curated set for a project, client, or research theme.
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleCreate} className="flex flex-col gap-4">
@@ -159,6 +140,7 @@ export function CollectionsPage() {
                 id="collection-description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+                placeholder="What argument does this set make?"
               />
             </div>
             <div className="flex justify-end gap-2">

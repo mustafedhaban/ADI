@@ -1,28 +1,23 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  ArrowLeft,
-  ExternalLink,
-  ImageOff,
-  Link2,
-  LoaderCircle,
-} from "lucide-react";
+import { ExternalLink, Link2, LoaderCircle } from "lucide-react";
 import { toast } from "sonner";
+import {
+  AiMark,
+  AiSurface,
+  ErrorNote,
+  Meta,
+  PageHeader,
+  Section,
+  StatusMark,
+} from "@/components/common/Primitives";
 import {
   api,
   type ReferenceInput,
   type ResolveUrlResponse,
   type Taxonomy,
 } from "@/lib/api";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -116,7 +111,6 @@ export function QuickUrlImportPage() {
         return;
       }
 
-      // Non-safety failures: allow manual creation with the typed URL
       applyPreview({
         originalUrl: urlInput.trim(),
         url: urlInput.trim(),
@@ -215,94 +209,85 @@ export function QuickUrlImportPage() {
   }
 
   return (
-    <div className="mx-auto flex max-w-4xl flex-col gap-6">
-      <div>
-        <Button asChild variant="ghost" className="mb-2 px-0">
-          <Link to="/references">
-            <ArrowLeft /> Back to library
-          </Link>
-        </Button>
-        <h1 className="font-display text-4xl tracking-tight">
-          Quick Import URL
-        </h1>
-        <p className="mt-2 text-muted-foreground">
-          Paste a public webpage URL, review extracted metadata, then save it to
-          the Reference Library.
-        </p>
-      </div>
+    <div className="flex flex-col gap-8">
+      <PageHeader
+        back={{ to: "/references", label: "Library" }}
+        eyebrow="Add"
+        title="Quick Import URL"
+        lede="Paste a public webpage URL, review extracted metadata, then save it to the Reference Library."
+      />
 
       {stage === "enter" && (
-        <Card>
-          <CardHeader>
-            <CardTitle>Enter URL</CardTitle>
-            <CardDescription>
-              Fetches publicly available Open Graph / Twitter / HTML metadata
-              only — no crawling.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleResolve} className="flex flex-col gap-4">
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="quick-url">Webpage URL</Label>
-                <Input
-                  id="quick-url"
-                  type="url"
-                  required
-                  placeholder="https://"
-                  value={urlInput}
-                  onChange={(e) => setUrlInput(e.target.value)}
-                  disabled={resolving}
-                />
-              </div>
-              {resolveError && (
-                <p className="text-sm text-destructive">{resolveError}</p>
-              )}
-              <div className="flex justify-end">
-                <Button type="submit" disabled={resolving || !urlInput.trim()}>
-                  {resolving ? (
-                    <>
-                      <LoaderCircle className="animate-spin" /> Fetching…
-                    </>
-                  ) : (
-                    <>
-                      <Link2 /> Fetch Reference
-                    </>
-                  )}
-                </Button>
-              </div>
-            </form>
-          </CardContent>
-        </Card>
+        <Section
+          eyebrow="01 · Resolve"
+          title="Enter URL"
+          description="Fetches publicly available Open Graph / Twitter / HTML metadata only — no crawling."
+        >
+          <form
+            onSubmit={handleResolve}
+            className="flex flex-col gap-4 border bg-card p-5 sm:p-6"
+          >
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="quick-url">Webpage URL</Label>
+              <Input
+                id="quick-url"
+                type="url"
+                required
+                placeholder="https://"
+                value={urlInput}
+                onChange={(e) => setUrlInput(e.target.value)}
+                disabled={resolving}
+              />
+            </div>
+            {resolveError && <ErrorNote>{resolveError}</ErrorNote>}
+            <div className="flex justify-end">
+              <Button type="submit" disabled={resolving || !urlInput.trim()}>
+                {resolving ? (
+                  <>
+                    <LoaderCircle className="animate-spin" /> Fetching…
+                  </>
+                ) : (
+                  <>
+                    <Link2 /> Fetch Reference
+                  </>
+                )}
+              </Button>
+            </div>
+          </form>
+        </Section>
       )}
 
       {stage === "edit" && preview && taxonomy && (
         <>
           {preview.existingId && (
-            <div className="rounded-xl border border-amber-500/40 bg-amber-50 px-4 py-3 text-sm text-amber-950">
-              This URL already exists in the library.{" "}
-              <Link
-                className="font-medium underline"
-                to={`/references/${preview.existingId}`}
-              >
-                View existing reference
-              </Link>
-            </div>
+            <AiSurface>
+              <AiMark>Already in library</AiMark>
+              <p className="mt-2 text-sm text-ink-2">
+                This URL already exists.{" "}
+                <Link
+                  className="underline transition-colors hover:text-foreground"
+                  to={`/references/${preview.existingId}`}
+                >
+                  View existing reference
+                </Link>
+              </p>
+            </AiSurface>
           )}
 
           {preview.warnings.length > 0 && (
-            <div className="rounded-xl border bg-card px-4 py-3 text-sm text-muted-foreground">
-              <p className="mb-1 font-medium text-foreground">Notes</p>
-              <ul className="flex flex-col gap-1">
+            <div className="border bg-surface-2 px-4 py-3">
+              <Meta>Notes</Meta>
+              <ul className="mt-2 flex flex-col gap-1 text-sm text-ink-2">
                 {preview.warnings.map((warning) => (
-                  <li key={warning}>• {warning}</li>
+                  <li key={warning}>— {warning}</li>
                 ))}
               </ul>
             </div>
           )}
 
-          <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-            <Card className="overflow-hidden">
-              <div className="aspect-[16/10] bg-muted">
+          <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+            <aside className="flex flex-col overflow-hidden border bg-card">
+              <div className="aspect-[16/10] bg-surface-2">
                 {image ? (
                   <img
                     src={image}
@@ -314,40 +299,41 @@ export function QuickUrlImportPage() {
                     }}
                   />
                 ) : (
-                  <div className="flex size-full flex-col items-center justify-center gap-2 text-muted-foreground">
-                    <ImageOff className="size-8 opacity-50" />
-                    <span className="text-xs uppercase tracking-wide">
-                      No preview image
-                    </span>
+                  <div className="flex size-full flex-col justify-end gap-1 px-4 py-3">
+                    <Meta>No preview image</Meta>
+                    <p className="font-display text-xl leading-tight text-ink-2 line-clamp-3">
+                      {title || "Untitled reference"}
+                    </p>
                   </div>
                 )}
               </div>
-              <CardContent className="flex flex-col gap-3 p-4">
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="secondary">{source || "Other"}</Badge>
+              <div className="flex flex-col gap-3 border-t p-4">
+                <div className="flex flex-wrap gap-x-3 gap-y-1">
+                  <StatusMark tone="ink">{source || "Other"}</StatusMark>
                   {preview.fetchFailed && (
-                    <Badge variant="outline">Manual fill</Badge>
+                    <AiMark>Manual fill</AiMark>
                   )}
                 </div>
-                <p className="text-sm font-medium leading-snug">
+                <p className="font-display text-lg leading-tight text-balance">
                   {title || "Untitled reference"}
                 </p>
                 <a
                   href={url || preview.originalUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1 truncate text-xs text-primary hover:underline"
+                  className="inline-flex items-center gap-1 truncate font-mono text-xs text-primary hover:underline"
                 >
                   {url || preview.originalUrl}
-                  <ExternalLink className="size-3 shrink-0" />
+                  <ExternalLink className="size-3 shrink-0" aria-hidden />
                 </a>
-              </CardContent>
-            </Card>
+              </div>
+            </aside>
 
             <form
               onSubmit={handleSave}
-              className="flex flex-col gap-4 rounded-xl border bg-card p-6 shadow-sm"
+              className="flex flex-col gap-4 border bg-card p-5 sm:p-6"
             >
+              <Meta>Review & save</Meta>
               <div className="flex flex-col gap-2">
                 <Label htmlFor="qi-title">Title *</Label>
                 <Input
@@ -357,7 +343,7 @@ export function QuickUrlImportPage() {
                   onChange={(e) => setTitle(e.target.value)}
                 />
               </div>
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-2">
                 <div className="flex flex-col gap-2">
                   <Label>Type *</Label>
                   <Select value={type} onValueChange={setType}>
@@ -433,7 +419,7 @@ export function QuickUrlImportPage() {
                 />
               </div>
 
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-2">
                 <MultiCheckGroup
                   label="Industries"
                   options={taxonomy.industries}
@@ -480,7 +466,7 @@ export function QuickUrlImportPage() {
                 />
               </div>
 
-              <div className="flex flex-wrap justify-end gap-2">
+              <div className="flex flex-wrap justify-end gap-2 border-t pt-4">
                 <Button type="button" variant="outline" onClick={reset}>
                   Try another URL
                 </Button>

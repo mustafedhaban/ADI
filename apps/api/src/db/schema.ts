@@ -305,6 +305,7 @@ export const projectCollections = sqliteTable(
 export const projectsRelations = relations(projects, ({ many }) => ({
   collections: many(projectCollections),
   researchRuns: many(researchRuns),
+  designDna: many(designDna),
 }));
 
 export const projectCollectionsRelations = relations(
@@ -389,6 +390,82 @@ export const researchCandidatesRelations = relations(
     }),
     reference: one(references, {
       fields: [researchCandidates.referenceId],
+      references: [references.id],
+    }),
+  }),
+);
+
+export const designDna = sqliteTable(
+  "design_dna",
+  {
+    id: text("id").primaryKey(),
+    projectId: text("project_id")
+      .notNull()
+      .references(() => projects.id, { onDelete: "cascade" }),
+    version: integer("version").notNull(),
+    status: text("status").notNull().default("draft"),
+    /** Full structured DNA document (see domain/design-dna.ts). */
+    content: text("content").notNull(),
+    referenceCount: integer("reference_count").notNull().default(0),
+    sourceCollectionIds: text("source_collection_ids"), // JSON array
+    generatedAt: text("generated_at")
+      .notNull()
+      .default(sql`(datetime('now'))`),
+    updatedAt: text("updated_at")
+      .notNull()
+      .default(sql`(datetime('now'))`),
+  },
+  (table) => [
+    uniqueIndex("design_dna_project_version_idx").on(
+      table.projectId,
+      table.version,
+    ),
+  ],
+);
+
+export const designDnaEvidence = sqliteTable(
+  "design_dna_evidence",
+  {
+    id: text("id").primaryKey(),
+    dnaId: text("dna_id")
+      .notNull()
+      .references(() => designDna.id, { onDelete: "cascade" }),
+    referenceId: text("reference_id")
+      .notNull()
+      .references(() => references.id, { onDelete: "cascade" }),
+    section: text("section").notNull(),
+    insight: text("insight").notNull(),
+    createdAt: text("created_at")
+      .notNull()
+      .default(sql`(datetime('now'))`),
+  },
+  (table) => [
+    uniqueIndex("design_dna_evidence_idx").on(
+      table.dnaId,
+      table.referenceId,
+      table.section,
+      table.insight,
+    ),
+  ],
+);
+
+export const designDnaRelations = relations(designDna, ({ one, many }) => ({
+  project: one(projects, {
+    fields: [designDna.projectId],
+    references: [projects.id],
+  }),
+  evidence: many(designDnaEvidence),
+}));
+
+export const designDnaEvidenceRelations = relations(
+  designDnaEvidence,
+  ({ one }) => ({
+    dna: one(designDna, {
+      fields: [designDnaEvidence.dnaId],
+      references: [designDna.id],
+    }),
+    reference: one(references, {
+      fields: [designDnaEvidence.referenceId],
       references: [references.id],
     }),
   }),

@@ -248,6 +248,69 @@ export interface ResearchStartResponse {
   candidates: ResearchCandidate[];
 }
 
+export type DesignDnaStatus = "draft" | "published";
+
+export type DesignDnaSectionKey =
+  | "visualLanguage"
+  | "colorDirection"
+  | "typography"
+  | "layout"
+  | "imagery"
+  | "components"
+  | "motionInteraction"
+  | "contentPresentation"
+  | "patterns"
+  | "antiPatterns"
+  | "keyInsights";
+
+/** Field-group sections are objects of string arrays; keyInsights is a flat array. */
+export type DesignDnaSectionValue = Record<string, string[]> | string[];
+
+export type DesignDnaStructure = Record<
+  DesignDnaSectionKey,
+  DesignDnaSectionValue
+>;
+
+export interface DesignDnaSectionMeta {
+  key: DesignDnaSectionKey;
+  label: string;
+  fields: string[] | null;
+}
+
+export interface DesignDnaEvidenceGroup {
+  section: DesignDnaSectionKey;
+  insight: string;
+  references: Reference[];
+}
+
+export interface DesignDnaSummary {
+  id: string;
+  projectId: string;
+  version: number;
+  status: DesignDnaStatus;
+  referenceCount: number;
+  sourceCollectionIds: string[];
+  evidenceCount: number;
+  generatedAt: string;
+  updatedAt: string;
+}
+
+export interface DesignDnaDetail extends DesignDnaSummary {
+  structure: DesignDnaStructure;
+  evidence: DesignDnaEvidenceGroup[];
+}
+
+export interface DesignDnaProviderStatus {
+  ai: { name: string; available: boolean };
+}
+
+export interface ProjectDesignDnaResponse {
+  current: DesignDnaDetail | null;
+  versions: DesignDnaSummary[];
+  referenceCount: number;
+  providers: DesignDnaProviderStatus;
+}
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(path, {
     headers: {
@@ -443,5 +506,35 @@ export const api = {
     }>(`/api/research/${researchId}/collection`, {
       method: "POST",
       body: JSON.stringify({ collectionId, candidateIds }),
+    }),
+  getDesignDnaSections: () =>
+    request<{ items: DesignDnaSectionMeta[] }>("/api/design-dna/sections"),
+  getProjectDesignDna: (projectId: string) =>
+    request<ProjectDesignDnaResponse>(`/api/projects/${projectId}/design-dna`),
+  listProjectDesignDnaVersions: (projectId: string) =>
+    request<{ items: DesignDnaSummary[]; total: number }>(
+      `/api/projects/${projectId}/design-dna/versions`,
+    ),
+  generateDesignDna: (projectId: string) =>
+    request<DesignDnaDetail>(`/api/projects/${projectId}/design-dna`, {
+      method: "POST",
+      body: JSON.stringify({}),
+    }),
+  getDesignDna: (id: string) =>
+    request<DesignDnaDetail>(`/api/design-dna/${id}`),
+  updateDesignDna: (id: string, structure: Partial<DesignDnaStructure>) =>
+    request<DesignDnaDetail>(`/api/design-dna/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ structure }),
+    }),
+  publishDesignDna: (id: string) =>
+    request<DesignDnaDetail>(`/api/design-dna/${id}/publish`, {
+      method: "POST",
+      body: JSON.stringify({}),
+    }),
+  unpublishDesignDna: (id: string) =>
+    request<DesignDnaDetail>(`/api/design-dna/${id}/unpublish`, {
+      method: "POST",
+      body: JSON.stringify({}),
     }),
 };

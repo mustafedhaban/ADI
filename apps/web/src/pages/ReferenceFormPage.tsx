@@ -1,6 +1,5 @@
 import { useEffect, useState, type FormEvent } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import {
   api,
@@ -19,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { MultiCheckGroup } from "@/components/references/MultiCheckGroup";
+import { Loading, PageHeader, Section } from "@/components/common/Primitives";
 
 const emptyForm: ReferenceInput = {
   title: "",
@@ -125,170 +125,179 @@ export function ReferenceFormPage() {
   }
 
   if (loading || !taxonomy) {
-    return <div className="text-muted-foreground">Loading form…</div>;
+    return <Loading>Loading form…</Loading>;
   }
 
   return (
-    <div className="mx-auto flex max-w-4xl flex-col gap-6">
-      <div>
-        <Button asChild variant="ghost" className="mb-2 px-0">
-          <Link to={isEdit ? `/references/${id}` : "/references"}>
-            <ArrowLeft /> Back
-          </Link>
-        </Button>
-        <h1 className="font-display text-4xl tracking-tight">
-          {isEdit ? "Edit reference" : "Add reference"}
-        </h1>
-        <p className="mt-2 text-muted-foreground">
-          Capture what it is, why it matters, and what to learn from it.
-        </p>
-      </div>
+    <div className="flex flex-col gap-8">
+      <PageHeader
+        back={{
+          to: isEdit ? `/references/${id}` : "/references",
+          label: isEdit ? "Reference" : "Library",
+        }}
+        eyebrow={isEdit ? "Edit" : "Add"}
+        title={isEdit ? "Edit reference" : "Add reference"}
+        lede="Capture what it is, why it matters, and what to learn from it."
+      />
 
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-6 rounded-xl border bg-card p-6 shadow-sm"
-      >
-        <div className="grid gap-4 md:grid-cols-2">
-          <div className="flex flex-col gap-2 md:col-span-2">
-            <Label htmlFor="title">Title *</Label>
-            <Input
-              id="title"
-              required
-              value={form.title}
-              onChange={(e) => update("title", e.target.value)}
-            />
+      <form onSubmit={handleSubmit} className="flex flex-col gap-10">
+        <Section eyebrow="Identity" title="Core fields">
+          <div className="grid gap-4 border bg-card p-5 sm:p-6 md:grid-cols-2">
+            <div className="flex flex-col gap-2 md:col-span-2">
+              <Label htmlFor="title">Title *</Label>
+              <Input
+                id="title"
+                required
+                value={form.title}
+                onChange={(e) => update("title", e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label>Type *</Label>
+              <Select
+                value={form.type}
+                onValueChange={(value) => update("type", value)}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {taxonomy.types.map((type) => (
+                    <SelectItem key={type} value={type}>
+                      {type}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label>Source *</Label>
+              <Select
+                value={form.source || undefined}
+                onValueChange={(value) => update("source", value)}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select source" />
+                </SelectTrigger>
+                <SelectContent>
+                  {taxonomy.sources.map((source) => (
+                    <SelectItem key={source} value={source}>
+                      {source}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex flex-col gap-2 md:col-span-2">
+              <Label htmlFor="url">URL *</Label>
+              <Input
+                id="url"
+                type="url"
+                required
+                placeholder="https://"
+                value={form.url}
+                onChange={(e) => update("url", e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col gap-2 md:col-span-2">
+              <Label htmlFor="image">Image path or URL</Label>
+              <Input
+                id="image"
+                placeholder="references/example.webp"
+                value={form.image ?? ""}
+                onChange={(e) => update("image", e.target.value)}
+              />
+            </div>
           </div>
-          <div className="flex flex-col gap-2">
-            <Label>Type *</Label>
-            <Select
-              value={form.type}
-              onValueChange={(value) => update("type", value)}
-            >
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {taxonomy.types.map((type) => (
-                  <SelectItem key={type} value={type}>
-                    {type}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="flex flex-col gap-2">
-            <Label>Source *</Label>
-            <Select
-              value={form.source || undefined}
-              onValueChange={(value) => update("source", value)}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Select source" />
-              </SelectTrigger>
-              <SelectContent>
-                {taxonomy.sources.map((source) => (
-                  <SelectItem key={source} value={source}>
-                    {source}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="flex flex-col gap-2 md:col-span-2">
-            <Label htmlFor="url">URL *</Label>
-            <Input
-              id="url"
-              type="url"
-              required
-              placeholder="https://"
-              value={form.url}
-              onChange={(e) => update("url", e.target.value)}
-            />
-          </div>
-          <div className="flex flex-col gap-2 md:col-span-2">
-            <Label htmlFor="image">Image path or URL</Label>
-            <Input
-              id="image"
-              placeholder="references/example.webp"
-              value={form.image ?? ""}
-              onChange={(e) => update("image", e.target.value)}
-            />
-          </div>
-          <div className="flex flex-col gap-2 md:col-span-2">
-            <Label htmlFor="description">Description</Label>
-            <Textarea
-              id="description"
-              value={form.description ?? ""}
-              onChange={(e) => update("description", e.target.value)}
-            />
-          </div>
-          <div className="flex flex-col gap-2 md:col-span-2">
-            <Label htmlFor="whySaved">Why saved</Label>
-            <Textarea
-              id="whySaved"
-              value={form.whySaved ?? ""}
-              onChange={(e) => update("whySaved", e.target.value)}
-            />
-          </div>
-          <div className="flex flex-col gap-2 md:col-span-2">
-            <Label htmlFor="whatToLearn">What to learn (one per line)</Label>
-            <Textarea
-              id="whatToLearn"
-              value={whatToLearnText}
-              onChange={(e) => setWhatToLearnText(e.target.value)}
-            />
-          </div>
-        </div>
+        </Section>
 
-        <div className="grid gap-4 md:grid-cols-2">
-          <MultiCheckGroup
-            label="Industries"
-            options={taxonomy.industries}
-            values={form.industries ?? []}
-            onChange={(industries) => update("industries", industries)}
-            maxHeight="max-h-48"
-          />
-          <MultiCheckGroup
-            label="Page types"
-            options={taxonomy.pageTypes}
-            values={form.pageTypes ?? []}
-            onChange={(pageTypes) => update("pageTypes", pageTypes)}
-            maxHeight="max-h-48"
-          />
-          <MultiCheckGroup
-            label="Styles"
-            options={taxonomy.styles}
-            values={form.styles ?? []}
-            onChange={(styles) => update("styles", styles)}
-            maxHeight="max-h-48"
-          />
-          <MultiCheckGroup
-            label="Patterns"
-            options={taxonomy.patterns}
-            values={form.patterns ?? []}
-            onChange={(patterns) => update("patterns", patterns)}
-            maxHeight="max-h-48"
-          />
-        </div>
+        <Section
+          eyebrow="Judgement"
+          title="Why it belongs"
+          description="Editorial notes — the curator’s voice that makes this reference useful later."
+        >
+          <div className="grid gap-4 border bg-card p-5 sm:p-6">
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="description">Description</Label>
+              <Textarea
+                id="description"
+                value={form.description ?? ""}
+                onChange={(e) => update("description", e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="whySaved">Why saved</Label>
+              <Textarea
+                id="whySaved"
+                value={form.whySaved ?? ""}
+                onChange={(e) => update("whySaved", e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="whatToLearn">What to learn (one per line)</Label>
+              <Textarea
+                id="whatToLearn"
+                value={whatToLearnText}
+                onChange={(e) => setWhatToLearnText(e.target.value)}
+              />
+            </div>
+          </div>
+        </Section>
 
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="tags">Additional tags (comma-separated)</Label>
-          <Input
-            id="tags"
-            placeholder="large typography, scroll animation"
-            value={tagsText}
-            onChange={(e) => setTagsText(e.target.value)}
-          />
-          <MultiCheckGroup
-            label="Suggested tags"
-            options={taxonomy.tags}
-            values={form.tags ?? []}
-            onChange={(tags) => update("tags", tags)}
-            maxHeight="max-h-36"
-          />
-        </div>
+        <Section
+          eyebrow="Taxonomy"
+          title="Classification"
+          description="Axes used by the library filters. Prefer the controlled vocabulary."
+        >
+          <div className="grid gap-4 border bg-card p-5 sm:p-6 md:grid-cols-2">
+            <MultiCheckGroup
+              label="Industries"
+              options={taxonomy.industries}
+              values={form.industries ?? []}
+              onChange={(industries) => update("industries", industries)}
+              maxHeight="max-h-48"
+            />
+            <MultiCheckGroup
+              label="Page types"
+              options={taxonomy.pageTypes}
+              values={form.pageTypes ?? []}
+              onChange={(pageTypes) => update("pageTypes", pageTypes)}
+              maxHeight="max-h-48"
+            />
+            <MultiCheckGroup
+              label="Styles"
+              options={taxonomy.styles}
+              values={form.styles ?? []}
+              onChange={(styles) => update("styles", styles)}
+              maxHeight="max-h-48"
+            />
+            <MultiCheckGroup
+              label="Patterns"
+              options={taxonomy.patterns}
+              values={form.patterns ?? []}
+              onChange={(patterns) => update("patterns", patterns)}
+              maxHeight="max-h-48"
+            />
+            <div className="flex flex-col gap-2 md:col-span-2">
+              <Label htmlFor="tags">Additional tags (comma-separated)</Label>
+              <Input
+                id="tags"
+                placeholder="large typography, scroll animation"
+                value={tagsText}
+                onChange={(e) => setTagsText(e.target.value)}
+              />
+              <MultiCheckGroup
+                label="Suggested tags"
+                options={taxonomy.tags}
+                values={form.tags ?? []}
+                onChange={(tags) => update("tags", tags)}
+                maxHeight="max-h-36"
+              />
+            </div>
+          </div>
+        </Section>
 
-        <div className="flex justify-end gap-2">
+        <div className="flex flex-wrap justify-end gap-2 border-t pt-5">
           <Button
             type="button"
             variant="outline"
