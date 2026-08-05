@@ -21,6 +21,7 @@ import { Round2IndexPage } from "@/concepts/round2/Round2IndexPage";
 import { AiEditorialPage } from "@/concepts/round2/AiEditorialPage";
 import { CreativeSystemsPage } from "@/concepts/round2/CreativeSystemsPage";
 import { FutureStudioPage } from "@/concepts/round2/FutureStudioPage";
+import { FinalDirectionPage } from "@/concepts/final/FinalDirectionPage";
 
 export default function App() {
   return (
@@ -53,6 +54,7 @@ export default function App() {
           path="concepts/round-2/future-studio"
           element={<FutureStudioPage />}
         />
+        <Route path="concepts/final" element={<FinalDirectionPage />} />
 
         <Route element={<AppLayout />}>
           <Route index element={<DashboardPage />} />

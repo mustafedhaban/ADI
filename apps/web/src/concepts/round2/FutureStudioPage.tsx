@@ -16,6 +16,27 @@ export function FutureStudioPage() {
     <div className="alool-concept r2c">
       <ConceptBackLink tone="dark" to="/concepts/round-2" label="Round 2" />
 
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+          gap: "0.75rem",
+          padding: "0.75rem clamp(1.25rem, 5vw, 4rem)",
+          borderBottom: "1px solid var(--line)",
+          fontFamily: "IBM Plex Mono, monospace",
+          fontSize: "0.68rem",
+          letterSpacing: "0.12em",
+          textTransform: "uppercase",
+          color: "var(--accent)",
+        }}
+      >
+        <span>Selected final direction · Graphic Form</span>
+        <a href="/concepts/final" style={{ color: "var(--muted)" }}>
+          Open final homepage →
+        </a>
+      </div>
+
       <header className="r2c__nav">
         <a className="r2c__brand" href="#top">
           <StudioMark /> {BRAND}

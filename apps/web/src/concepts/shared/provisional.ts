@@ -152,3 +152,6 @@ export const ROUND2_CONCEPTS = [
 
 export const ROUND2_FOOTER =
   "Round 2 refined exploration · Provisional content · Not final brand" as const;
+
+export const FINAL_FOOTER =
+  "Selected direction · Future Studio × Graphic Form · Provisional content · Not final brand" as const;

@@ -10,14 +10,20 @@ export function ConceptsIndexPage() {
         <p className="cx-index__eyebrow">Alool Technologies · Round 1</p>
         <h1 className="cx-index__title">Homepage concept explorer</h1>
         <p className="cx-index__lede">
-          Five strategically different homepage directions for the Alool
-          Technologies website redesign. Provisional content only — no invented
-          clients, metrics, or awards. Selected for Round 2: AI-First and Premium
-          Creative Technology.
+          Five strategically different homepage directions. Round 2 advanced AI-First
+          and Premium Creative Technology. Final selection: Future Studio × Graphic
+          Form.
         </p>
-        <p style={{ margin: "0 0 2rem" }}>
+        <p
+          style={{
+            margin: "0 0 1rem",
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "1rem",
+          }}
+        >
           <Link
-            to="/concepts/round-2"
+            to="/concepts/final"
             style={{
               fontFamily: "IBM Plex Mono, monospace",
               fontSize: "0.72rem",
@@ -29,7 +35,22 @@ export function ConceptsIndexPage() {
               paddingBottom: "0.2rem",
             }}
           >
-            Open Round 2 →
+            Open final homepage →
+          </Link>
+          <Link
+            to="/concepts/round-2"
+            style={{
+              fontFamily: "IBM Plex Mono, monospace",
+              fontSize: "0.72rem",
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "#9a958a",
+              textDecoration: "none",
+              borderBottom: "1px solid #2a2a2a",
+              paddingBottom: "0.2rem",
+            }}
+          >
+            Round 2 explorer →
           </Link>
         </p>
         <ul className="cx-index__list">
@@ -42,7 +63,7 @@ export function ConceptsIndexPage() {
                   <span className="cx-index__num">{c.number}</span>
                   <span className="cx-index__name">
                     {c.title}
-                    {advanced ? " · selected" : ""}
+                    {advanced ? " · advanced" : ""}
                   </span>
                   <span className="cx-index__go">Open →</span>
                   <span className="cx-index__blurb">{c.blurb}</span>
