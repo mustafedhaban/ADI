@@ -74,7 +74,7 @@ export function CollectionsPage() {
   return (
     <div className="flex flex-col gap-8">
       <PageHeader
-        eyebrow="Sets"
+        eyebrow="Collections"
         title="Collections"
         lede="Curated visual research sets — each one an argument about taste, not a folder. A reference can belong to many collections; nothing is moved or copied."
         actions={

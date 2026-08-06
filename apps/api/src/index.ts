@@ -8,6 +8,7 @@ import {
 import { CollectionRepository } from "./repositories/collection-repository.js";
 import { ProjectRepository } from "./repositories/project-repository.js";
 import { ResearchRepository } from "./repositories/research-repository.js";
+import { AssetRepository } from "./repositories/asset-repository.js";
 import { DesignDnaRepository } from "./repositories/design-dna-repository.js";
 import { ResearchAgent } from "./research/agent.js";
 import { createSearchProvider } from "./research/search/tavily.js";
@@ -21,7 +22,13 @@ import { importRoutes } from "./routes/import.js";
 import { collectionRoutes } from "./routes/collections.js";
 import { projectRoutes } from "./routes/projects.js";
 import { researchRoutes } from "./routes/research.js";
+import { captureRoutes } from "./routes/capture.js";
+import { CaptureService } from "./capture/service.js";
+import { BatchCaptureProcessor } from "./capture/batch.js";
+import { createCaptureDriver } from "./capture/driver.js";
 import { designDnaRoutes } from "./routes/design-dna.js";
+import { ObservationRepository } from "./repositories/observation-repository.js";
+import { observationRoutes } from "./routes/observations.js";
 
 const PORT = Number(process.env.PORT ?? 3001);
 const HOST = process.env.HOST ?? "127.0.0.1";
@@ -37,7 +44,9 @@ const taxonomyRepo = new TaxonomyRepository(db);
 const collectionRepo = new CollectionRepository(db);
 const projectRepo = new ProjectRepository(db);
 const researchRepo = new ResearchRepository(db);
+const assetRepo = new AssetRepository(db);
 const designDnaRepo = new DesignDnaRepository(db);
+const observationRepo = new ObservationRepository(db);
 const researchAgent = new ResearchAgent(
   researchRepo,
   referenceRepo,
@@ -56,6 +65,18 @@ await dashboardRoutes(app, referenceRepo);
 await importRoutes(app, referenceRepo);
 await collectionRoutes(app, collectionRepo);
 await projectRoutes(app, projectRepo);
+const captureService = new CaptureService(
+  createCaptureDriver(),
+  assetRepo,
+  referenceRepo,
+);
+const batchProcessor = new BatchCaptureProcessor(captureService, assetRepo);
+// Runs orphaned by a restart cannot progress; mark them so the UI is truthful.
+const reconciled = batchProcessor.reconcileInterruptedRuns();
+if (reconciled) {
+  console.log(`Reconciled ${reconciled} interrupted capture run(s)`);
+}
+
 await researchRoutes(app, {
   agent: researchAgent,
   researchRepo,
@@ -69,9 +90,27 @@ await designDnaRoutes(app, {
   projectRepo,
 });
 
+await captureRoutes(app, {
+  service: captureService,
+  batch: batchProcessor,
+  assets: assetRepo,
+  referencesRepo: referenceRepo,
+});
+
+await observationRoutes(app, {
+  observations: observationRepo,
+  referencesRepo: referenceRepo,
+  collections: collectionRepo,
+});
+
+app.addHook("onClose", async () => {
+  await captureService.dispose();
+});
+
 app.get("/api/health", async () => ({
   ok: true,
   research: researchAgent.getProviderStatus(),
+  capture: captureService.getStatus(),
   designDna: designDnaService.getProviderStatus(),
 }));
 

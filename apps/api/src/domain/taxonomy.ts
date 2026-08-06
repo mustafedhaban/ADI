@@ -57,6 +57,8 @@ export const INDUSTRIES = [
   "Agriculture",
   "Social Impact",
   "Creative",
+  "Architecture",
+  "Developer Tools",
   "Other",
 ] as const;
 
@@ -82,6 +84,8 @@ export const PAGE_TYPES = [
   "Login",
   "Signup",
   "Settings",
+  "Documentation",
+  "Marketplace",
   "Other",
 ] as const;
 
@@ -165,6 +169,14 @@ export const PATTERNS = [
   "Large Footer",
   "Minimal Footer",
   "Multi Column Footer",
+  // --- product / application patterns (v2 taxonomy extension) ---
+  // The audit found 102/104 references were marketing homepages, so the
+  // vocabulary had no way to describe an actual product interface.
+  "Search",
+  "Filtering",
+  "Content Discovery",
+  "Dashboard",
+  "Portfolio Grid",
 ] as const;
 
 /** Suggested tags from taxonomy — tags may also be freeform. */

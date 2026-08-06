@@ -166,6 +166,24 @@ export function QuickUrlImportPage() {
     try {
       const created = await api.createReference(payload);
       toast.success("Reference saved");
+
+      // Kick off the visual capture without blocking navigation — the detail
+      // page shows live status and offers a retry if it fails.
+      void api
+        .captureReference(created.id)
+        .then((outcome) => {
+          if (outcome.status === "completed") {
+            toast.success(`Captured ${outcome.assets.length} screenshots`);
+          } else {
+            toast.error(
+              `Capture failed: ${outcome.error ?? "unknown"} — retry from the reference page`,
+            );
+          }
+        })
+        .catch(() => {
+          toast.error("Capture could not start — retry from the reference page");
+        });
+
       navigate(`/references/${created.id}`);
     } catch (err) {
       const anyErr = err as Error & {

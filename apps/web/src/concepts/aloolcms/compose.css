@@ -1,0 +1,100 @@
+.compose {
+  --bg: #f2f0ea;
+  --ink: #141414;
+  --mod: #fff;
+  --blue: #1f4bff;
+  --yellow: #f0c419;
+  --red: #e23d2b;
+  min-height: 100dvh;
+  color: var(--ink);
+  font-family: "Space Grotesk", "DM Sans", system-ui, sans-serif;
+  background:
+    linear-gradient(to right, rgba(20, 20, 20, 0.06) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(to bottom, rgba(20, 20, 20, 0.06) 1px, transparent 1px) 0 0 / 24px 24px,
+    var(--bg);
+}
+.compose__top {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 16px; background: rgba(242, 240, 234, 0.92);
+  border-bottom: 2px solid var(--ink); position: sticky; top: 44px; z-index: 5;
+}
+.compose__brand { font-weight: 600; letter-spacing: -0.03em; }
+.compose__brand b {
+  display: inline-block; width: 10px; height: 10px; background: var(--red); margin: 0 8px 0 2px;
+}
+.compose__top button {
+  border: 2px solid var(--ink); background: var(--mod); padding: 8px 12px;
+  font: inherit; font-size: 12px; font-weight: 500; margin-left: 6px; cursor: pointer;
+}
+.compose__top button.on { background: var(--yellow); }
+.compose__top button.p, .compose__empty .p { background: var(--blue); color: #fff; border-color: var(--blue); }
+.compose__ws {
+  display: grid; grid-template-columns: 200px 1fr 280px; gap: 14px;
+  padding: 18px; min-height: calc(100dvh - 110px);
+}
+.compose__box { border: 2px solid var(--ink); background: var(--mod); }
+.compose__h {
+  padding: 10px 12px; border-bottom: 2px solid var(--ink);
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  background: var(--yellow); font-weight: 600;
+}
+.compose__mod {
+  padding: 12px; border-bottom: 2px solid var(--ink); font-size: 14px;
+}
+.compose__mod small { display: block; color: #555; font-size: 12px; margin-top: 3px; }
+.compose__bar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 14px; border-bottom: 2px solid var(--ink);
+}
+.compose__bar h1 {
+  margin: 0; font-family: Newsreader, Georgia, serif; font-size: 28px; font-weight: 500;
+}
+.compose__bar span { font-size: 12px; }
+.compose__blocks { padding: 14px; display: grid; gap: 12px; }
+.compose__blocks article {
+  border: 2px solid var(--ink); padding: 16px; position: relative;
+}
+.compose__blocks span {
+  position: absolute; top: -9px; left: 10px; background: var(--blue); color: #fff;
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 7px;
+}
+.compose__blocks h3 {
+  margin: 10px 0 6px; font-family: Newsreader, Georgia, serif; font-size: 24px; font-weight: 500;
+}
+.compose__blocks p { margin: 0; font-size: 14px; max-width: 48ch; }
+.compose__field { padding: 12px; border-bottom: 2px solid var(--ink); font-size: 13px; }
+.compose__field label {
+  display: block; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px;
+}
+.compose__field input, .compose__field textarea {
+  width: 100%; border: 2px solid var(--ink); padding: 8px; font: inherit;
+}
+.compose__desk { padding: 48px 24px; max-width: 720px; margin: 0 auto; }
+.compose__desk h1 {
+  font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 36px; margin: 0 0 20px;
+}
+.compose__tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.compose__tiles button {
+  border: 2px solid var(--ink); background: var(--mod); padding: 20px; text-align: left;
+  font: inherit; cursor: pointer;
+}
+.compose__tiles em {
+  display: block; font-style: normal; font-size: 10px; letter-spacing: 0.12em;
+  text-transform: uppercase; margin-bottom: 8px;
+}
+.compose__empty {
+  min-height: calc(100dvh - 110px); display: grid; place-content: center; text-align: center; gap: 10px;
+}
+.compose__grid-mark {
+  width: 64px; height: 64px; margin: 0 auto 8px;
+  border: 2px solid var(--ink);
+  background:
+    linear-gradient(to right, rgba(20,20,20,.15) 1px, transparent 1px) 0 0/16px 16px,
+    linear-gradient(to bottom, rgba(20,20,20,.15) 1px, transparent 1px) 0 0/16px 16px;
+}
+.compose__empty h1 { font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 36px; margin: 0; }
+.compose__empty p { margin: 0 0 12px; color: #555; }
+.compose__empty button { justify-self: center; padding: 10px 16px; font: inherit; cursor: pointer; border: 2px solid var(--ink); }
+@media (max-width: 960px) {
+  .compose__ws, .compose__tiles { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>D2 Spec Instrument</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0B0D10;--panel:#12151A;--line:#242A33;--text:#E8ECF1;--mute:#8B95A5;--signal:#3DFF9A;--sans:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",monospace}
+*{box-sizing:border-box}body{margin:0;min-height:100dvh;background:var(--bg);color:var(--text);font-family:var(--sans);display:grid;grid-template-columns:64px 1fr}
+.rail{background:#07080A;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 0}
+.dot{width:36px;height:36px;border:1px solid var(--line);display:grid;place-items:center;font-family:var(--mono);font-size:11px;color:var(--mute);text-decoration:none}
+.dot.on{border-color:var(--signal);color:var(--signal)}
+.cmd{border-bottom:1px solid var(--line);padding:10px 16px;display:flex;gap:10px;align-items:center;background:#0E1014}
+.cmd kbd{font-family:var(--mono);font-size:11px;color:var(--signal);border:1px solid rgba(61,255,154,.35);padding:2px 6px}
+.cmd input{flex:1;background:transparent;border:0;color:var(--text);font:inherit;outline:0}
+.top{padding:16px 20px 8px;display:flex;justify-content:space-between}.top h1{margin:0;font-size:18px;font-weight:500}
+.top span{font-family:var(--mono);font-size:11px;color:var(--mute)}
+.board{padding:8px 16px 24px;display:grid;grid-template-columns:280px 1fr 280px;gap:10px}
+.panel{background:var(--panel);border:1px solid var(--line);min-height:400px}
+.ph{padding:12px 14px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.08em}
+.item{padding:12px 14px;border-bottom:1px solid var(--line);font-size:13px}
+.item small{display:block;color:var(--mute);font-family:var(--mono);font-size:11px;margin-top:4px}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--signal);display:inline-block;margin-right:8px}
+.note{grid-column:1/-1;font-size:12px;color:var(--mute)}
+@media(max-width:960px){.board{grid-template-columns:1fr}}
+</style></head>
+<body>
+<aside class="rail"><a class="dot on" href="#">OP</a><a class="dot" href="#">PG</a><a class="dot" href="#">CT</a><a class="dot" href="#">MD</a></aside>
+<div>
+  <div class="cmd"><kbd>⌘K</kbd><input placeholder="Jump to page, collection, action…"/></div>
+  <div class="top"><h1>Operations</h1><span>ADI D2 · KEYBOARD PRIMARY</span></div>
+  <div class="board">
+    <p class="note">Evidence: Keyboard Shortcut Hint · Dark Theme · Monospace Accent · High/Medium density. Not for long-form comfort — ops mode.</p>
+    <section class="panel"><div class="ph">Signals</div>
+      <div class="item"><span class="pulse"></span>Publish conflict on Home<small>2 editors · 2m</small></div>
+      <div class="item"><span class="pulse"></span>Broken collectionRef<small>ProgrammeGrid · id 14</small></div>
+    </section>
+    <section class="panel"><div class="ph">Active surface</div>
+      <div class="item">Pages tree<small>OK · 42ms</small></div>
+      <div class="item">Programmes<small>DRAFT×4</small></div>
+      <div class="item">Auth<small>FLAT — roles owed v0.8</small></div>
+    </section>
+    <section class="panel"><div class="ph">Inspector</div>
+      <div class="item">Home / Hero<small>block_id=12</small></div>
+      <div class="item">Status: modified<small>next: diff · publish</small></div>
+    </section>
+  </div>
+</div>
+</body></html>

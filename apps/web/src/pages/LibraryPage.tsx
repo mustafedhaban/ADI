@@ -8,6 +8,14 @@ import {
   type Taxonomy,
 } from "@/lib/api";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Sheet,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { Empty, ErrorNote, Meta, ViewToggle } from "@/components/common/Primitives";
 import {
@@ -18,7 +26,6 @@ import { FacetRail } from "@/components/references/FacetRail";
 import { FilterSentence } from "@/components/references/FilterSentence";
 import { StyleTerm } from "@/components/references/StyleTerm";
 import { AddToCollectionDialog } from "@/components/collections/AddToCollectionDialog";
-import { cn } from "@/lib/utils";
 
 const emptyFilters: ReferenceFilters = {
   q: "",
@@ -227,13 +234,19 @@ export function LibraryPage() {
   const filtered = activeFilterCount > 0 || Boolean(filters.q);
 
   return (
-    <div className="flex flex-col gap-10">
-      {/* Monocle: the masthead is the structural anchor, not a heading. */}
-      <header className="flex flex-col gap-6 border-b pb-8">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div className="flex flex-col gap-2">
-            <Meta>Index — {libraryTotal ?? "—"} references</Meta>
-            <h1 className="masthead">Library</h1>
+    <div className="flex min-w-0 flex-col gap-8 overflow-x-hidden">
+      <header className="flex flex-col gap-5 border-b border-border pb-6">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div className="flex min-w-0 flex-col gap-2">
+            <Meta className="text-primary">Library index</Meta>
+            <h1 className="font-display text-3xl tracking-tight md:text-4xl">
+              Library
+            </h1>
+            <p className="prose-measure text-sm text-ink-2">
+              Metadata-first vault.{" "}
+              <span className="font-mono text-primary">whySaved</span> stays
+              visible — imagery is optional, judgment is not.
+            </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <Button
@@ -252,7 +265,6 @@ export function LibraryPage() {
           </div>
         </div>
 
-        {/* Pentagram: the filter is a sentence you read. */}
         <FilterSentence
           taxonomy={taxonomy}
           filters={filters}
@@ -260,57 +272,25 @@ export function LibraryPage() {
         />
       </header>
 
-      <div className="flex flex-col gap-8 lg:flex-row lg:gap-10">
-        <div className="lg:w-[248px] lg:shrink-0">
-          <div className="flex items-center justify-between lg:hidden">
-            <button
-              type="button"
-              onClick={() => setFacetsOpen((v) => !v)}
-              aria-expanded={facetsOpen}
-              className="meta border px-3 py-2 text-foreground"
-            >
-              All filters{activeFilterCount ? ` · ${activeFilterCount}` : ""}
-            </button>
-            {filtered && (
-              <button
-                type="button"
-                onClick={clearFilters}
-                className="meta hover:text-foreground"
-              >
-                Reset
-              </button>
-            )}
+      <div className="flex min-w-0 flex-col gap-5">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+            {[
+              { label: "References", value: libraryTotal ?? "—" },
+              { label: "Visible", value: loading ? "—" : items.length },
+              { label: "Active filters", value: activeFilterCount },
+              { label: "View", value: view },
+            ].map((s) => (
+              <Card key={s.label}>
+                <CardContent className="p-3 md:p-4">
+                  <Meta>{s.label}</Meta>
+                  <div className="tabular mt-1 font-display text-2xl leading-none capitalize">
+                    {s.value}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
 
-          <div
-            className={cn(
-              "lg:sticky lg:top-8 lg:block",
-              facetsOpen ? "mt-5 block" : "hidden",
-            )}
-          >
-            <div className="mb-4 hidden items-center justify-between lg:flex">
-              <Meta>All filters</Meta>
-              {filtered && (
-                <button
-                  type="button"
-                  onClick={clearFilters}
-                  className="meta transition-colors hover:text-foreground"
-                >
-                  Reset
-                </button>
-              )}
-            </div>
-            <div className="thin-scroll lg:max-h-[calc(100vh-9rem)] lg:overflow-y-auto lg:pr-3">
-              <FacetRail
-                taxonomy={taxonomy}
-                filters={filters}
-                onChange={setFilters}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="flex min-w-0 flex-1 flex-col gap-5">
           <div className="relative">
             <Search
               aria-hidden
@@ -336,7 +316,17 @@ export function LibraryPage() {
               <ActiveChips filters={filters} onChange={setFilters} />
             </div>
 
-            <ViewToggle value={view} onChange={setView} />
+            <div className="flex items-center gap-2">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setFacetsOpen(true)}
+              >
+                Facets{activeFilterCount ? ` · ${activeFilterCount}` : ""}
+              </Button>
+              <ViewToggle value={view} onChange={setView} />
+            </div>
           </div>
 
           {selectMode && (
@@ -390,21 +380,47 @@ export function LibraryPage() {
               No references match these filters.
             </Empty>
           ) : view === "grid" ? (
-            /* Hoefler&Co: edge-to-edge specimen band, hairline gutters only. */
-            <div className="grid gap-px bg-border sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-2">
               {items.map((ref) => (
                 <ReferenceCard key={ref.id} {...cardProps(ref)} />
               ))}
             </div>
           ) : (
-            <div className="bg-card">
+            <div className="overflow-hidden rounded-md border border-border bg-card">
               {items.map((ref) => (
                 <ReferenceRow key={ref.id} {...cardProps(ref)} />
               ))}
             </div>
           )}
         </div>
-      </div>
+
+      <Sheet open={facetsOpen} onOpenChange={setFacetsOpen}>
+        <SheetContent
+          side="right"
+          className="flex w-full flex-col gap-0 overflow-hidden p-0 sm:max-w-md"
+        >
+          <SheetHeader className="shrink-0 border-b border-border px-5 py-4 text-left">
+            <SheetTitle className="font-display text-xl">Facets</SheetTitle>
+          </SheetHeader>
+          <div className="thin-scroll min-h-0 flex-1 overflow-y-auto overflow-x-hidden p-5">
+            <FacetRail
+              taxonomy={taxonomy}
+              filters={filters}
+              onChange={setFilters}
+            />
+          </div>
+          <SheetFooter className="flex-row justify-end gap-2 border-t border-border px-5 py-3">
+            {filtered && (
+              <Button type="button" variant="outline" onClick={clearFilters}>
+                Reset
+              </Button>
+            )}
+            <Button type="button" onClick={() => setFacetsOpen(false)}>
+              Done
+            </Button>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
 
       <AddToCollectionDialog
         open={pickerOpen}

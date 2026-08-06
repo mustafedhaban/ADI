@@ -15,6 +15,95 @@ export interface Reference {
   tags: string[];
   createdAt: string;
   updatedAt: string;
+  // --- visual capture pipeline (v2) ---
+  captureStatus: CaptureStatus;
+  captureError: string | null;
+  capturedAt: string | null;
+  captureAttempts: number;
+  /** Locally-stored capture; falls back to `image` when null. */
+  thumbnailUrl: string | null;
+}
+
+export type CaptureStatus =
+  | "pending"
+  | "queued"
+  | "processing"
+  | "completed"
+  | "failed";
+
+export type AssetKind =
+  | "desktop"
+  | "mobile"
+  | "fullpage"
+  | "hero"
+  | "thumbnail";
+
+export interface ReferenceAsset {
+  id: string;
+  referenceId: string;
+  kind: AssetKind;
+  path: string;
+  url: string;
+  format: string;
+  width: number;
+  height: number;
+  fileSize: number;
+  checksum: string;
+  viewportWidth: number | null;
+  viewportHeight: number | null;
+  deviceScaleFactor: number | null;
+  version: number;
+  capturedAt: string;
+  createdAt: string;
+}
+
+export interface AssetsResponse {
+  referenceId: string;
+  captureStatus: CaptureStatus;
+  captureError: string | null;
+  capturedAt: string | null;
+  captureAttempts: number;
+  items: ReferenceAsset[];
+  total: number;
+}
+
+export interface CaptureOutcome {
+  referenceId: string;
+  status: CaptureStatus;
+  assets: ReferenceAsset[];
+  error: string | null;
+  version: number;
+}
+
+export interface CaptureRun {
+  id: string;
+  status: "pending" | "running" | "completed" | "failed" | "cancelled";
+  total: number;
+  completed: number;
+  failed: number;
+  skipped: number;
+  message: string | null;
+  startedAt: string | null;
+  finishedAt: string | null;
+  createdAt: string;
+}
+
+export interface CaptureStats {
+  byStatus: Record<CaptureStatus, number>;
+  totalReferences: number;
+  referencesWithAssets: number;
+  assetCount: number;
+  assetBytes: number;
+  storage: { files: number; bytes: number };
+}
+
+export interface CaptureStatusResponse {
+  driver: string;
+  available: boolean;
+  running: boolean;
+  currentRunId: string | null;
+  stats: Omit<CaptureStats, "storage">;
+  storage: { files: number; bytes: number };
 }
 
 export interface ReferenceInput {
@@ -311,14 +400,104 @@ export interface ProjectDesignDnaResponse {
   providers: DesignDnaProviderStatus;
 }
 
+
+/* --- structured visual observations (v3) --- */
+
+export type ObservationCategory =
+  | "navigation" | "search" | "layout" | "typography" | "content"
+  | "interaction" | "density" | "ai" | "conversion" | "accessibility"
+  | "media" | "theme";
+
+/** observed = fact read off a capture; inferred = conclusion; authored = note. */
+export type Provenance = "observed" | "inferred" | "authored";
+
+export interface Observation {
+  id: string;
+  referenceId: string;
+  category: ObservationCategory;
+  trait: string;
+  provenance: Provenance;
+  detail: string | null;
+  confidence: number | null;
+  evidenceAssetId: string | null;
+  evidenceNote: string | null;
+  recordedBy: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ObservationVocabulary {
+  categories: { id: ObservationCategory; label: string; traits: string[] }[];
+  provenances: { id: Provenance; label: string }[];
+}
+
+export interface ReferenceObservations {
+  referenceId: string;
+  total: number;
+  counts: Record<Provenance, number>;
+  byCategory: {
+    category: ObservationCategory;
+    label: string;
+    items: Observation[];
+  }[];
+  items: Observation[];
+}
+
+export interface TraitCount {
+  category: ObservationCategory;
+  trait: string;
+  count: number;
+  share: number;
+}
+
+export interface ObservationPatterns {
+  provenance: Provenance;
+  category: ObservationCategory | null;
+  coverage: { referencesWithObservations: number; totalObservations: number };
+  traits: TraitCount[];
+  byCategory: { category: ObservationCategory; label: string; traits: TraitCount[] }[];
+  cooccurrence: {
+    category: ObservationCategory; trait: string;
+    otherCategory: ObservationCategory; otherTrait: string; count: number;
+  }[];
+}
+
+export interface ObservationComparison {
+  provenance: Provenance;
+  references: { id: string; title: string; url: string }[];
+  totalTraits: number;
+  sharedCount: number;
+  rows: {
+    category: ObservationCategory;
+    label: string;
+    trait: string;
+    presentIn: string[];
+    count: number;
+    shared: boolean;
+    unique: boolean;
+  }[];
+}
+
+export interface CollectionObservations {
+  collectionId: string;
+  referenceCount: number;
+  observedReferenceCount: number;
+  topTraits: TraitCount[];
+  distinctive: (TraitCount & { libraryShare: number; lift: number })[];
+  byCategory: { category: ObservationCategory; label: string; traits: TraitCount[] }[];
+}
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(path, {
-    headers: {
-      "Content-Type": "application/json",
-      ...(init?.headers ?? {}),
-    },
-    ...init,
-  });
+  // Only declare a JSON body when one is actually being sent. Fastify rejects a
+  // request that advertises application/json but carries an empty body with
+  // FST_ERR_CTP_EMPTY_JSON_BODY (400), which is what bodyless POSTs like
+  // /api/capture/retry-failed and every DELETE were hitting.
+  const headers: Record<string, string> = {
+    ...(init?.body === undefined ? {} : { "Content-Type": "application/json" }),
+    ...((init?.headers as Record<string, string> | undefined) ?? {}),
+  };
+
+  const res = await fetch(path, { ...init, headers });
 
   if (res.status === 204) {
     return undefined as T;
@@ -360,6 +539,44 @@ export const api = {
       `/api/references${toQuery(filters)}`,
     ),
   getReference: (id: string) => request<Reference>(`/api/references/${id}`),
+
+  // --- visual capture pipeline (v2) ---
+  getReferenceAssets: (id: string, all = false) =>
+    request<AssetsResponse>(
+      `/api/references/${id}/assets${all ? "?all=true" : ""}`,
+    ),
+  captureReference: (id: string, force = false) =>
+    request<CaptureOutcome>(`/api/references/${id}/capture`, {
+      method: "POST",
+      body: JSON.stringify({ force }),
+    }),
+  getCaptureStatus: () =>
+    request<CaptureStatusResponse>("/api/capture/status"),
+  getCaptureStats: () => request<CaptureStats>("/api/capture/stats"),
+  startCaptureBatch: (body: {
+    referenceIds?: string[];
+    force?: boolean;
+    includeFailed?: boolean;
+    limit?: number;
+  } = {}) =>
+    request<{ accepted: boolean; runId: string | null; queued: number | null }>(
+      "/api/capture/batch",
+      { method: "POST", body: JSON.stringify(body) },
+    ),
+  retryFailedCaptures: () =>
+    request<{ accepted: boolean; runId: string | null }>(
+      "/api/capture/retry-failed",
+      { method: "POST" },
+    ),
+  cancelCapture: () =>
+    request<{ cancelled: boolean; runId: string | null }>(
+      "/api/capture/cancel",
+      { method: "POST" },
+    ),
+  listCaptureRuns: () =>
+    request<{ items: CaptureRun[]; total: number }>("/api/capture/runs"),
+  getCaptureRun: (runId: string) =>
+    request<CaptureRun>(`/api/capture/runs/${runId}`),
   createReference: (body: ReferenceInput) =>
     request<Reference>("/api/references", {
       method: "POST",
@@ -537,4 +754,36 @@ export const api = {
       method: "POST",
       body: JSON.stringify({}),
     }),
+
+  // --- structured visual observations (v3) ---
+  getObservationVocabulary: () =>
+    request<ObservationVocabulary>("/api/observations/vocabulary"),
+  getReferenceObservations: (id: string) =>
+    request<ReferenceObservations>(`/api/references/${id}/observations`),
+  addObservations: (id: string, observations: unknown[]) =>
+    request<{ accepted: number; items: Observation[] }>(
+      `/api/references/${id}/observations`,
+      { method: "POST", body: JSON.stringify({ observations }) },
+    ),
+  deleteObservation: (observationId: string) =>
+    request<void>(`/api/observations/${observationId}`, { method: "DELETE" }),
+  getObservationPatterns: (params: { category?: string; minCount?: number } = {}) => {
+    const q = new URLSearchParams();
+    if (params.category) q.set("category", params.category);
+    if (params.minCount) q.set("minCount", String(params.minCount));
+    const qs = q.toString();
+    return request<ObservationPatterns>(
+      `/api/observations/patterns${qs ? `?${qs}` : ""}`,
+    );
+  },
+  compareObservations: (referenceIds: string[]) =>
+    request<ObservationComparison>(
+      `/api/observations/compare?referenceIds=${referenceIds.join(",")}`,
+    ),
+  getCollectionObservations: (id: string) =>
+    request<CollectionObservations>(`/api/collections/${id}/observations`),
+  getReferencesWithTrait: (category: string, trait: string) =>
+    request<{ category: string; trait: string; total: number; items: { id: string; title: string; url: string }[] }>(
+      `/api/observations/trait?category=${encodeURIComponent(category)}&trait=${encodeURIComponent(trait)}`,
+    ),
 };

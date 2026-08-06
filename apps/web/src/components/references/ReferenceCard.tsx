@@ -2,22 +2,15 @@ import { Link } from "react-router-dom";
 import { Check } from "lucide-react";
 import type { Reference } from "@/lib/api";
 import { StyleTerm } from "@/components/references/StyleTerm";
+import {
+  CaptureBadge,
+  ReferenceVisual,
+} from "@/components/references/ReferenceVisual";
 import { cn } from "@/lib/utils";
 
 /* ---------------------------------------------------------------------------
-   Reference specimen — rebuilt from captured screenshots.
-
-   The previous version put a beige "specimen plate" across 60% of every card.
-   With 88% of the library sourced as "Other", that plate rendered the word
-   OTHER on 91 of 104 cards: the empty box it claimed to replace.
-
-   Google Fonts solves this properly — it has no thumbnails either, so each row
-   renders THE THING ITSELF (the typeface setting a sentence) as the visual.
-   ADI's equivalent: the reference's own design attributes are the specimen.
-   The styles, set in their own character, ARE the image.
-
-   Typewolf frames each entry in a white mat on a tinted ground; that is the
-   surface treatment here.
+   Reference index card — Obsidian Archive.
+   Dense metadata row with mint signal spine; whySaved stays visible.
 --------------------------------------------------------------------------- */
 
 export type ReferenceCardProps = {
@@ -99,9 +92,12 @@ export function ReferenceCard({
 }: ReferenceCardProps) {
   const content = (
     <>
+      {(reference.thumbnailUrl || reference.image) ? (
+        <ReferenceVisual reference={reference} className="mb-0 w-auto" aspect="16/9" />
+      ) : null}
+
       <div className="flex items-start justify-between gap-3">
-        <MetaLine reference={reference} />
-        {selectable && (
+        {selectable ? (
           <span
             className={cn(
               "flex size-5 shrink-0 items-center justify-center border",
@@ -110,23 +106,29 @@ export function ReferenceCard({
           >
             {selected ? <Check className="size-3" /> : null}
           </span>
+        ) : (
+          <span className="meta">REF</span>
         )}
+        {reference.whySaved ? (
+          <span className="meta text-primary">whySaved</span>
+        ) : null}
       </div>
 
-      <h3 className="font-display text-[1.375rem] leading-[1.15]">
+      <h3 className="font-display text-base leading-tight tracking-tight md:text-lg">
         {reference.title}
       </h3>
 
-      {/* The specimen — the reference's own visual character, set large. */}
-      <div className="border-y py-4">
-        <StyleSpecimen reference={reference} />
-      </div>
+      <MetaLine reference={reference} />
 
       {reference.whySaved && (
         <p className="line-clamp-3 text-sm leading-relaxed text-ink-2">
           {reference.whySaved}
         </p>
       )}
+
+      <div className="border-y border-border/80 py-3">
+        <StyleSpecimen reference={reference} size="sm" />
+      </div>
 
       {reference.whatToLearn.length > 0 && (
         <ul className="mt-auto flex flex-col gap-1 pt-1">
@@ -143,6 +145,8 @@ export function ReferenceCard({
           ))}
         </ul>
       )}
+
+      <CaptureBadge status={reference.captureStatus} />
 
       {reference.patterns.length > 0 && (
         <div className="flex flex-wrap gap-1.5 pt-1">
@@ -170,7 +174,14 @@ export function ReferenceCard({
   );
 
   const mat =
-    "group flex flex-col gap-3 bg-card p-5 text-left transition-colors hover:bg-white";
+    "group grid grid-cols-[4px_1fr] overflow-hidden rounded-md border border-border bg-card text-left transition-colors hover:border-rule-strong";
+
+  const body = (
+    <>
+      <div aria-hidden className="bg-primary" />
+      <div className="flex flex-col gap-3 p-4 md:p-5">{content}</div>
+    </>
+  );
 
   if (selectable) {
     return (
@@ -180,14 +191,14 @@ export function ReferenceCard({
         aria-pressed={selected}
         className={cn(mat, selected && "ring-2 ring-primary")}
       >
-        {content}
+        {body}
       </button>
     );
   }
 
   return (
     <Link to={`/references/${reference.id}`} className={mat}>
-      {content}
+      {body}
     </Link>
   );
 }
@@ -215,9 +226,14 @@ export function ReferenceRow({
         </span>
       )}
 
+      <ReferenceVisual
+        reference={reference}
+        className="hidden size-12 shrink-0 sm:block"
+      />
+
       <span className="flex min-w-0 flex-1 flex-col gap-1">
         <span className="flex flex-wrap items-baseline gap-x-3">
-          <span className="font-display text-lg leading-tight">
+          <span className="font-display text-base leading-tight tracking-tight">
             {reference.title}
           </span>
           <MetaLine reference={reference} full />
@@ -236,7 +252,7 @@ export function ReferenceRow({
   );
 
   const shell =
-    "flex w-full items-center gap-4 border-b px-4 py-4 text-left transition-colors last:border-0 hover:bg-card";
+    "flex w-full items-center gap-4 border-b border-border px-4 py-4 text-left transition-colors last:border-0 hover:bg-surface-2";
 
   if (selectable) {
     return (

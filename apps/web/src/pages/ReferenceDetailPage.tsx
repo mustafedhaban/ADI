@@ -21,6 +21,8 @@ import {
   Tag,
 } from "@/components/common/Primitives";
 import { StyleTerm } from "@/components/references/StyleTerm";
+import { ObservationPanel } from "@/components/observations/ObservationPanel";
+import { ReferenceAssets } from "@/components/references/ReferenceAssets";
 import { AddToCollectionDialog } from "@/components/collections/AddToCollectionDialog";
 
 /** One taxonomy axis. Tags link back into a filtered library view. */
@@ -218,6 +220,10 @@ export function ReferenceDetailPage() {
           )}
         </div>
       </div>
+
+      <ReferenceAssets referenceId={reference.id} />
+
+      <ObservationPanel referenceId={reference.id} />
 
       <section className="flex flex-col">
         <Meta className="mb-3 block">Classification</Meta>

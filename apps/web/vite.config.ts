@@ -20,6 +20,11 @@ export default defineConfig({
         target: "http://127.0.0.1:3001",
         changeOrigin: true,
       },
+      // Captured screenshots are served by the API from local storage.
+      "/assets": {
+        target: "http://127.0.0.1:3001",
+        changeOrigin: true,
+      },
     },
   },
 });

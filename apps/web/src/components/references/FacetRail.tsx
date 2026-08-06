@@ -5,19 +5,13 @@ import { StyleTerm } from "@/components/references/StyleTerm";
 import { cn } from "@/lib/utils";
 
 /* ---------------------------------------------------------------------------
-   Facet pills — evidence: Hugging Face.
-
-   Its model filters are wrapped PILL BUTTONS with a "+44" overflow, not
-   stacked checkbox lists. Far denser and far more scannable. The previous
-   ADI rail used seven collapsible checkbox groups, which needed roughly four
-   screens of scrolling to see the vocabulary.
-
-   Style pills are set in the character they name (Google Fonts' "Feeling").
+   Facet rail — Obsidian Archive.
+   Compact wrap pills inside a scroll-contained panel (not full-page height).
 --------------------------------------------------------------------------- */
 
 type ArrayAxis = "industries" | "pageTypes" | "styles" | "patterns" | "tags";
 
-const INITIAL_VISIBLE = 10;
+const INITIAL_VISIBLE = 8;
 
 function PillGroup({
   label,
@@ -25,65 +19,81 @@ function PillGroup({
   values,
   onToggle,
   demonstrate = false,
+  defaultOpen = false,
 }: {
   label: string;
   options: string[];
   values: string[];
   onToggle: (value: string) => void;
   demonstrate?: boolean;
+  defaultOpen?: boolean;
 }) {
+  const [open, setOpen] = useState(defaultOpen || values.length > 0);
   const [expanded, setExpanded] = useState(false);
   const visible = expanded ? options : options.slice(0, INITIAL_VISIBLE);
   const hidden = options.length - visible.length;
 
   return (
-    <fieldset className="flex flex-col gap-2">
+    <fieldset className="flex flex-col gap-2 border-b border-border pb-4 last:border-0 last:pb-0">
       <legend className="sr-only">{label}</legend>
-      <Meta>
-        {label}
-        {values.length > 0 && (
-          <span className="ml-1.5 text-primary">{values.length}</span>
-        )}
-      </Meta>
-      <div className="flex flex-wrap gap-1.5">
-        {visible.map((option) => {
-          const on = values.includes(option);
-          return (
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex w-full items-center justify-between gap-2 text-left"
+        aria-expanded={open}
+      >
+        <Meta>
+          {label}
+          {values.length > 0 && (
+            <span className="ml-1.5 text-primary">{values.length}</span>
+          )}
+        </Meta>
+        <span className="font-mono text-[0.65rem] text-muted-foreground">
+          {open ? "−" : "+"}
+        </span>
+      </button>
+
+      {open && (
+        <div className="flex flex-wrap gap-1.5">
+          {visible.map((option) => {
+            const on = values.includes(option);
+            return (
+              <button
+                key={option}
+                type="button"
+                aria-pressed={on}
+                onClick={() => onToggle(option)}
+                className={cn(
+                  "border px-2 py-1 text-[0.75rem] leading-tight transition-colors",
+                  on
+                    ? "border-primary bg-primary/15 text-primary"
+                    : "border-border bg-card text-ink-2 hover:border-rule-strong hover:bg-surface-2",
+                )}
+              >
+                {demonstrate ? <StyleTerm term={option} /> : option}
+              </button>
+            );
+          })}
+          {hidden > 0 && (
             <button
-              key={option}
               type="button"
-              aria-pressed={on}
-              onClick={() => onToggle(option)}
-              className={cn(
-                "border px-2 py-1 text-[0.8125rem] leading-tight transition-colors",
-                on
-                  ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border bg-card text-ink-2 hover:border-rule-strong hover:bg-surface-2",
-              )}
+              onClick={() => setExpanded(true)}
+              className="border border-dashed border-rule-strong px-2 py-1 font-mono text-[0.7rem] text-muted-foreground transition-colors hover:text-foreground"
             >
-              {demonstrate ? <StyleTerm term={option} /> : option}
+              +{hidden}
             </button>
-          );
-        })}
-        {hidden > 0 && (
-          <button
-            type="button"
-            onClick={() => setExpanded(true)}
-            className="border border-dashed border-rule-strong px-2 py-1 font-mono text-[0.75rem] text-muted-foreground transition-colors hover:text-foreground"
-          >
-            +{hidden}
-          </button>
-        )}
-        {expanded && options.length > INITIAL_VISIBLE && (
-          <button
-            type="button"
-            onClick={() => setExpanded(false)}
-            className="px-2 py-1 font-mono text-[0.75rem] text-muted-foreground transition-colors hover:text-foreground"
-          >
-            less
-          </button>
-        )}
-      </div>
+          )}
+          {expanded && options.length > INITIAL_VISIBLE && (
+            <button
+              type="button"
+              onClick={() => setExpanded(false)}
+              className="px-2 py-1 font-mono text-[0.7rem] text-muted-foreground transition-colors hover:text-foreground"
+            >
+              less
+            </button>
+          )}
+        </div>
+      )}
     </fieldset>
   );
 }
@@ -114,13 +124,14 @@ export function FacetRail({
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-4">
       <PillGroup
         label="Styles"
         options={taxonomy.styles}
         values={filters.styles ?? []}
         onToggle={(v) => toggleArray("styles", v)}
         demonstrate
+        defaultOpen
       />
       <PillGroup
         label="Patterns"

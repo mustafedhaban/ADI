@@ -21,6 +21,12 @@ export function CollectionCard({
   footer?: ReactNode;
   className?: string;
 }) {
+  /* Only render a cover when there is real material behind it. On the index,
+     summaries carry no reference styles, so a cover would just repeat the
+     title inside a tinted box. */
+  const hasCover =
+    collection.coverImages.some(Boolean) || (styles?.length ?? 0) > 0;
+
   return (
     <article
       className={cn(
@@ -28,21 +34,23 @@ export function CollectionCard({
         className,
       )}
     >
-      <Link to={`/collections/${collection.id}`} className="block">
-        <CollectionCover
-          images={collection.coverImages}
-          styles={styles}
-          label={collection.name}
-        />
-      </Link>
-      <div className="flex flex-1 flex-col gap-2 border-t p-4">
+      {hasCover && (
+        <Link to={`/collections/${collection.id}`} className="block border-b">
+          <CollectionCover
+            images={collection.coverImages}
+            styles={styles}
+            label={collection.name}
+          />
+        </Link>
+      )}
+      <div className="flex flex-1 flex-col gap-2 p-5">
         <Meta className="tabular">
           {collection.referenceCount} reference
           {collection.referenceCount === 1 ? "" : "s"}
         </Meta>
         <Link
           to={`/collections/${collection.id}`}
-          className="font-display text-xl leading-tight text-balance transition-colors hover:text-primary"
+          className="font-display text-2xl leading-tight text-balance transition-colors hover:text-primary"
         >
           {collection.name}
         </Link>

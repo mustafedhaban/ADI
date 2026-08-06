@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
-/* ---------------------------------------------------------------------------
-   ADI design tokens — rebuilt from captured screenshots of the 24 references.
+@custom-variant dark (&:is(.dark *));
 
-   Evidence:
-   • Typewolf / Future Fonts / Brutalist / Hoefler all sit on a TINTED ground
-     with content floating on it — not white cards on off-white.
-   • Future Fonts sets its ENTIRE interface in mono.
-   • Google Fonts renders the thing itself instead of a thumbnail.
+/* ---------------------------------------------------------------------------
+   ADI design tokens — Obsidian Archive (winner).
+
+   Direction: dark research vault. Mono metadata, deep charcoal, mint signal.
+   Anchors: Cursor · Raycast · Linear · Vercel
+   Kills: warm paper + Instrument Serif + forest-green archive look.
 --------------------------------------------------------------------------- */
 
 @theme inline {
-  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -39,42 +39,61 @@
   --color-surface-2: var(--surface-2);
   --color-signal: var(--signal);
   --color-signal-soft: var(--signal-soft);
+  --color-rail: var(--rail);
 
   --radius-sm: calc(var(--radius) - 2px);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 2px);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
 }
 
 :root {
   --radius: 0.25rem;
 
-  /* Tinted ground — the page is the tint, mats float on it (Typewolf). */
-  --background: #e9e4da;
-  --card: #fbfaf7;          /* the mat */
-  --popover: #fbfaf7;
-  --muted: #e0dace;
-  --surface-2: #e0dace;
-  --secondary: #ded7ca;
-  --accent: #ded7ca;
+  --background: #070809;
+  --rail: #0d0f12;
+  --card: #10141a;
+  --popover: #10141a;
+  --muted: #151922;
+  --surface-2: #151922;
+  --secondary: #151922;
+  --accent: #151922;
 
-  --foreground: #17150f;
-  --card-foreground: #17150f;
-  --popover-foreground: #17150f;
-  --secondary-foreground: #17150f;
-  --accent-foreground: #17150f;
-  --ink-2: #4c463c;         /* ~8.0:1 on ground */
-  --muted-foreground: #635c4f; /* ~5.4:1 on ground */
+  --foreground: #e8eaed;
+  --card-foreground: #e8eaed;
+  --popover-foreground: #e8eaed;
+  --secondary-foreground: #e8eaed;
+  --accent-foreground: #e8eaed;
+  --ink-2: #9aa3af;
+  --muted-foreground: #8b93a0;
 
-  --border: #d2cabb;
-  --rule-strong: #b8ae9c;
-  --input: #c6bdac;
+  --border: #252b36;
+  --rule-strong: #2a3140;
+  --input: #2a3140;
 
-  --primary: #1c3a2c;
-  --primary-foreground: #f4f1ea;
-  --ring: #1c3a2c;
-  --signal: #6f5218;
-  --signal-soft: #efe4cc;
-  --destructive: #8f2718;
+  --primary: #7dd3c0;
+  --primary-foreground: #070809;
+  --ring: #7dd3c0;
+  --signal: #e8b86d;
+  --signal-soft: #1c1912;
+  --destructive: #f07167;
+
+  /* shadcn Sidebar — Obsidian vault rail */
+  --sidebar: #0d0f12;
+  --sidebar-foreground: #e8eaed;
+  --sidebar-primary: #7dd3c0;
+  --sidebar-primary-foreground: #070809;
+  --sidebar-accent: #151922;
+  --sidebar-accent-foreground: #e8eaed;
+  --sidebar-border: #1c2028;
+  --sidebar-ring: #7dd3c0;
 }
 
 * {
@@ -85,6 +104,7 @@ html,
 body,
 #root {
   min-height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -102,19 +122,18 @@ body {
 
 .font-display {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 
-/* Monocle's masthead: enormous, high-contrast, the page's structural anchor. */
 .masthead {
   font-family: var(--font-display);
-  font-size: clamp(2.75rem, 7vw, 4.5rem);
-  line-height: 0.95;
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  font-weight: 600;
+  line-height: 1.05;
   letter-spacing: -0.03em;
 }
 
-/* Future Fonts sets its whole interface in mono. Controls follow suit. */
 .meta {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
@@ -138,7 +157,6 @@ body {
   max-width: 68ch;
 }
 
-/* Brutalist Websites uses an em-dash as a structural divider. */
 .em-rule::before {
   content: "—";
   display: block;
@@ -147,12 +165,8 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
-   Self-demonstrating taxonomy.
-
-   Google Fonts sets each "Feeling" filter pill in the style it names — the
-   filter demonstrates itself. ADI does the same for its 25 style terms, using
-   only the two families already loaded plus the system mono stack, so this
-   costs no extra network requests.
+   Self-demonstrating taxonomy (styles).
+   Obsidian keeps specimens in Plex families — no warm serif lock-in.
 --------------------------------------------------------------------------- */
 
 .sty { font-family: var(--font-sans); font-weight: 500; }
@@ -160,9 +174,9 @@ body {
 .sty-editorial,
 .sty-elegant,
 .sty-sophisticated,
-.sty-luxury      { font-family: var(--font-display); font-weight: 400; font-size: 1.08em; letter-spacing: 0; }
-.sty-luxury      { letter-spacing: 0.14em; text-transform: uppercase; font-size: 0.94em; }
-.sty-premium     { font-family: var(--font-display); letter-spacing: 0.06em; }
+.sty-luxury      { font-family: var(--font-sans); font-weight: 400; font-style: italic; font-size: 1.05em; letter-spacing: 0; }
+.sty-luxury      { letter-spacing: 0.14em; text-transform: uppercase; font-size: 0.94em; font-style: normal; font-weight: 500; }
+.sty-premium     { letter-spacing: 0.06em; font-weight: 600; }
 
 .sty-brutalist,
 .sty-technical,
@@ -175,18 +189,18 @@ body {
 .sty-experimental{ font-style: italic; font-weight: 700; letter-spacing: -0.04em; }
 .sty-playful     { font-weight: 700; letter-spacing: 0.02em; }
 .sty-futuristic  { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.9em; }
-.sty-retro       { font-family: var(--font-display); font-style: italic; }
-.sty-organic     { font-family: var(--font-display); font-style: italic; letter-spacing: 0.01em; }
+.sty-retro       { font-style: italic; }
+.sty-organic     { font-style: italic; letter-spacing: 0.01em; }
 .sty-corporate,
 .sty-institutional { font-weight: 600; letter-spacing: -0.01em; }
 .sty-dark        { font-weight: 700; }
 .sty-light       { font-weight: 300; }
-.sty-artistic    { font-family: var(--font-display); font-style: italic; font-size: 1.08em; }
+.sty-artistic    { font-style: italic; font-size: 1.05em; }
 .sty-cinematic   { text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.88em; font-weight: 500; }
 .sty-geometric   { font-family: var(--font-mono); letter-spacing: 0.1em; }
 .sty-colorful    { font-weight: 700; font-style: italic; }
 .sty-friendly    { font-weight: 500; letter-spacing: 0.02em; }
-.sty-human-centered { font-family: var(--font-display); }
+.sty-human-centered { font-style: italic; }
 .sty-modern-african { font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.9em; }
 
 /* --- focus --------------------------------------------------------------- */
@@ -213,3 +227,4 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+

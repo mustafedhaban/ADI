@@ -1,0 +1,151 @@
+.ledger {
+  --paper: #f7f8f6;
+  --ink: #1b2420;
+  --line: #c9d0c8;
+  --teal: #0b4f6c;
+  --crimson: #9b1d20;
+  min-height: 100dvh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Source Sans 3", "DM Sans", system-ui, sans-serif;
+}
+.ledger__mast {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 24px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  border-bottom: 2px solid var(--line);
+}
+.ledger__badge {
+  display: inline-block;
+  border: 2px solid var(--teal);
+  color: var(--teal);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  margin-bottom: 8px;
+}
+.ledger__word {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 32px;
+}
+.ledger__mast nav { display: flex; gap: 4px; flex-wrap: wrap; }
+.ledger__mast button {
+  appearance: none; border: 0; background: transparent; font: inherit;
+  font-size: 13px; padding: 8px 12px; cursor: pointer; color: #4a554f;
+  border-bottom: 2px solid transparent;
+}
+.ledger__mast button.on { color: var(--teal); border-bottom-color: var(--teal); }
+.ledger__main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+.ledger__main h1 {
+  margin: 0 0 22px;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 36px;
+  font-weight: 600;
+}
+.ledger__tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.ledger__tiles article {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 20px;
+}
+.ledger__tiles em {
+  font-style: normal;
+  font-family: "Source Code Pro", ui-monospace, monospace;
+  font-size: 12px;
+  color: #6a746e;
+}
+.ledger__tiles h2 {
+  margin: 10px 0 6px;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 24px;
+  font-weight: 600;
+}
+.ledger__tiles p { margin: 0; font-size: 13px; color: #4a554f; }
+.ledger__table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+.ledger__table th, .ledger__table td {
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+.ledger__table th {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6a746e;
+  font-weight: 600;
+}
+.ledger__table td:first-child,
+.ledger__table td:nth-child(3) {
+  font-family: "Source Code Pro", ui-monospace, monospace;
+  font-size: 12px;
+}
+.stamp {
+  display: inline-block;
+  border: 2px solid;
+  padding: 2px 8px;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  transform: rotate(-2deg);
+}
+.stamp.live { color: var(--teal); border-color: var(--teal); }
+.stamp.draft { color: #6a746e; border-color: #6a746e; }
+.stamp.mod { color: var(--crimson); border-color: var(--crimson); }
+.ledger__record-head {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
+}
+.ledger__record-head h1 { margin: 0; }
+.ledger__record {
+  display: grid; gap: 12px;
+}
+.ledger__record section {
+  background: #fff; border: 1px solid var(--line); padding: 18px 20px;
+}
+.ledger__record h3 {
+  margin: 0 0 8px;
+  font-family: "Source Code Pro", ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6a746e;
+  font-weight: 600;
+}
+.ledger__record p {
+  margin: 0;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 22px;
+}
+.ledger__empty p { color: #4a554f; max-width: 40ch; }
+.ledger__empty button {
+  margin-top: 16px;
+  background: var(--teal);
+  color: #fff;
+  border: 0;
+  padding: 10px 16px;
+  font: inherit;
+  cursor: pointer;
+}
+@media (max-width: 800px) {
+  .ledger__tiles { grid-template-columns: 1fr; }
+  .ledger__mast { flex-direction: column; align-items: start; }
+}

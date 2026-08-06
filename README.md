@@ -17,6 +17,19 @@ npm install
 npm run db:setup
 ```
 
+### Research AI (optional)
+
+Copy env into the API package, then set keys:
+
+```bash
+cp .env.example apps/api/.env
+```
+
+- `TAVILY_API_KEY` — required for web research search
+- `OPENAI_API_KEY` — optional; enables candidate relevance scoring/suggestions
+
+Restart the API after changing env. Check status at `GET /api/research/providers`.
+
 ## Run
 
 ```bash

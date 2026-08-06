@@ -38,6 +38,7 @@ import {
   Tag,
   ViewToggle,
 } from "@/components/common/Primitives";
+import { CollectionObservationSummary } from "@/components/observations/CollectionObservationSummary";
 
 export function CollectionDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -240,8 +241,10 @@ export function CollectionDetailPage() {
         }
       />
 
-      {/* Editorial masthead — cover + archive meta */}
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-10">
+      {/* Specimen band — the set's own visual character, edge to edge
+          (Hoefler&Co). Replaces a cover tile that duplicated the style list
+          below it and left most of its box empty. */}
+      {collection.coverImages.some(Boolean) ? (
         <CollectionCover
           images={collection.coverImages}
           styles={coverStyles}
@@ -249,8 +252,31 @@ export function CollectionDetailPage() {
           size="lg"
           className="border bg-card"
         />
+      ) : coverStyles.length > 0 ? (
+        <div className="flex flex-col gap-4 bg-card p-8">
+          <Meta>Style character — what this set demonstrates</Meta>
+          <p className="flex flex-wrap items-baseline gap-x-4 gap-y-2 text-3xl leading-tight md:text-4xl">
+            {coverStyles.slice(0, 10).map((term, i) => (
+              <span key={term} className="inline-flex items-baseline gap-4">
+                {i > 0 && (
+                  <span aria-hidden className="text-rule-strong">
+                    /
+                  </span>
+                )}
+                <Link
+                  to={`/references?styles=${encodeURIComponent(term)}`}
+                  className="transition-opacity hover:opacity-60"
+                >
+                  <StyleTerm term={term} />
+                </Link>
+              </span>
+            ))}
+          </p>
+        </div>
+      ) : null}
 
-        <div className="flex flex-col justify-end gap-6">
+      <div className="grid gap-6 lg:grid-cols-2 lg:gap-10">
+        <div className="flex flex-col gap-6">
           <div className="flex flex-wrap gap-x-6 gap-y-3">
             <Metric
               value={collection.referenceCount}
@@ -297,23 +323,6 @@ export function CollectionDetailPage() {
             )}
           </div>
 
-          {coverStyles.length > 0 && (
-            <div className="flex flex-col gap-2 border-t pt-5">
-              <Meta>Style character</Meta>
-              <div className="flex flex-wrap gap-x-3 gap-y-1 text-lg leading-snug text-ink-2">
-                {coverStyles.slice(0, 8).map((term, i) => (
-                  <span key={term} className="inline-flex items-baseline gap-3">
-                    {i > 0 && (
-                      <span aria-hidden className="text-rule-strong">
-                        /
-                      </span>
-                    )}
-                    <StyleTerm term={term} />
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
@@ -367,6 +376,8 @@ export function CollectionDetailPage() {
           </div>
         )}
       </Section>
+
+      <CollectionObservationSummary collectionId={collection.id} />
 
       <Dialog open={editOpen} onOpenChange={setEditOpen}>
         <DialogContent>

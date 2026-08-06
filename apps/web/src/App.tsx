@@ -6,6 +6,8 @@ import { LibraryPage } from "@/pages/LibraryPage";
 import { ReferenceDetailPage } from "@/pages/ReferenceDetailPage";
 import { ReferenceFormPage } from "@/pages/ReferenceFormPage";
 import { ImportPage } from "@/pages/ImportPage";
+import { CapturePage } from "@/pages/CapturePage";
+import { PatternsPage } from "@/pages/PatternsPage";
 import { QuickUrlImportPage } from "@/pages/QuickUrlImportPage";
 import { CollectionsPage } from "@/pages/CollectionsPage";
 import { CollectionDetailPage } from "@/pages/CollectionDetailPage";
@@ -22,6 +24,12 @@ import { AiEditorialPage } from "@/concepts/round2/AiEditorialPage";
 import { CreativeSystemsPage } from "@/concepts/round2/CreativeSystemsPage";
 import { FutureStudioPage } from "@/concepts/round2/FutureStudioPage";
 import { FinalDirectionPage } from "@/concepts/final/FinalDirectionPage";
+import { AloolcmsIndexPage } from "@/concepts/aloolcms/AloolcmsIndexPage";
+import { FolioShellPage } from "@/concepts/aloolcms/FolioShellPage";
+import { SpecInstrumentPage } from "@/concepts/aloolcms/SpecInstrumentPage";
+import { ComposePairPage } from "@/concepts/aloolcms/ComposePairPage";
+import { LedgerIndexPage } from "@/concepts/aloolcms/LedgerIndexPage";
+import { FacetDeskPage } from "@/concepts/aloolcms/FacetDeskPage";
 
 export default function App() {
   return (
@@ -56,6 +64,14 @@ export default function App() {
         />
         <Route path="concepts/final" element={<FinalDirectionPage />} />
 
+        {/* AloolCMS console directions — ADI-owned design exploration */}
+        <Route path="concepts/aloolcms" element={<AloolcmsIndexPage />} />
+        <Route path="concepts/aloolcms/folio" element={<FolioShellPage />} />
+        <Route path="concepts/aloolcms/spec" element={<SpecInstrumentPage />} />
+        <Route path="concepts/aloolcms/compose" element={<ComposePairPage />} />
+        <Route path="concepts/aloolcms/ledger" element={<LedgerIndexPage />} />
+        <Route path="concepts/aloolcms/facet" element={<FacetDeskPage />} />
+
         <Route element={<AppLayout />}>
           <Route index element={<DashboardPage />} />
           <Route path="references" element={<LibraryPage />} />
@@ -71,10 +87,12 @@ export default function App() {
           <Route path="projects" element={<ProjectsPage />} />
           <Route path="projects/:id" element={<ProjectDetailPage />} />
           <Route path="import" element={<ImportPage />} />
+          <Route path="capture" element={<CapturePage />} />
+          <Route path="patterns" element={<PatternsPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
-      <Toaster richColors position="top-right" />
+      <Toaster theme="dark" richColors position="top-right" />
     </BrowserRouter>
   );
 }

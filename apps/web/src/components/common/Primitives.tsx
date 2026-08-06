@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 /* ---------------------------------------------------------------------------
-   ADI shared primitives — see docs/ADI-UI-DESIGN-DIRECTION.md §7
+   ADI shared primitives — Obsidian Archive shell language.
 --------------------------------------------------------------------------- */
 
 /**
@@ -52,8 +52,8 @@ export function PageHeader({
       )}
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div className="flex min-w-0 flex-col gap-2">
-          {eyebrow && <Meta>{eyebrow}</Meta>}
-          <h1 className="font-display text-[2.25rem] leading-[1.1] text-balance md:text-[2.75rem]">
+          {eyebrow && <Meta className="text-primary">{eyebrow}</Meta>}
+          <h1 className="font-display text-[2rem] leading-[1.1] tracking-tight text-balance md:text-[2.5rem]">
             {title}
           </h1>
           {lede && (
@@ -138,7 +138,7 @@ export function Stat({
   );
 
   const base =
-    "block border-l-2 border-border pl-4 transition-colors";
+    "block border border-border bg-card p-3 md:p-4 transition-colors";
 
   if (to) {
     return (

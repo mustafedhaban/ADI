@@ -38,6 +38,13 @@ export interface ReferenceRecord extends ReferenceInput {
   tags: string[];
   createdAt: string;
   updatedAt: string;
+  // --- visual capture pipeline (v2) ---
+  captureStatus: string;
+  captureError: string | null;
+  capturedAt: string | null;
+  captureAttempts: number;
+  /** Best available captured image; falls back to `image` when absent. */
+  thumbnailUrl: string | null;
 }
 
 export type ValidationSeverity = "error" | "warning";

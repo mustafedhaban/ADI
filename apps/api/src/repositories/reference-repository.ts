@@ -15,6 +15,8 @@ import {
   tags,
 } from "../db/schema.js";
 import type { ReferenceInput, ReferenceRecord } from "../domain/validation.js";
+import { referenceAssets } from "../db/schema.js";
+import { assetUrl } from "../capture/storage.js";
 
 export interface ReferenceFilters {
   q?: string;
@@ -177,6 +179,7 @@ function loadRelations(db: Db, referenceId: string) {
 function toRecord(
   row: typeof references.$inferSelect,
   relations: ReturnType<typeof loadRelations>,
+  thumbnailUrl: string | null = null,
 ): ReferenceRecord {
   return {
     id: row.id,
@@ -195,7 +198,48 @@ function toRecord(
     tags: relations.tags,
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,
+    captureStatus: row.captureStatus ?? "pending",
+    captureError: row.captureError ?? null,
+    capturedAt: row.capturedAt ?? null,
+    captureAttempts: row.captureAttempts ?? 0,
+    thumbnailUrl,
   };
+}
+
+/**
+ * Current thumbnail per reference, resolved in a single query.
+ * Highest asset version wins; `references.image` remains the fallback and is
+ * never overwritten by the capture pipeline.
+ */
+function loadThumbnails(db: Db, ids?: string[]): Map<string, string> {
+  const rows = db
+    .select({
+      referenceId: referenceAssets.referenceId,
+      path: referenceAssets.path,
+      version: referenceAssets.version,
+    })
+    .from(referenceAssets)
+    .where(
+      ids?.length
+        ? and(
+            eq(referenceAssets.kind, "thumbnail"),
+            inArray(referenceAssets.referenceId, ids),
+          )
+        : eq(referenceAssets.kind, "thumbnail"),
+    )
+    .all();
+
+  const best = new Map<string, { version: number; path: string }>();
+  for (const row of rows) {
+    const current = best.get(row.referenceId);
+    if (!current || row.version > current.version) {
+      best.set(row.referenceId, { version: row.version, path: row.path });
+    }
+  }
+
+  const map = new Map<string, string>();
+  for (const [id, entry] of best) map.set(id, assetUrl(entry.path));
+  return map;
 }
 
 export class ReferenceRepository {
@@ -213,7 +257,11 @@ export class ReferenceRepository {
       .where(eq(references.id, id))
       .get();
     if (!row) return null;
-    return toRecord(row, loadRelations(this.db, id));
+    return toRecord(
+      row,
+      loadRelations(this.db, id),
+      loadThumbnails(this.db, [id]).get(id) ?? null,
+    );
   }
 
   findByUrl(url: string): ReferenceRecord | null {
@@ -223,7 +271,11 @@ export class ReferenceRepository {
       .where(eq(references.url, url))
       .get();
     if (!row) return null;
-    return toRecord(row, loadRelations(this.db, row.id));
+    return toRecord(
+      row,
+      loadRelations(this.db, row.id),
+      loadThumbnails(this.db, [row.id]).get(row.id) ?? null,
+    );
   }
 
   list(filters: ReferenceFilters = {}): ReferenceRecord[] {
@@ -257,8 +309,12 @@ export class ReferenceRepository {
       .orderBy(desc(references.createdAt))
       .all();
 
+    const thumbs = loadThumbnails(
+      this.db,
+      rows.map((r) => r.id),
+    );
     let results = rows.map((row) =>
-      toRecord(row, loadRelations(this.db, row.id)),
+      toRecord(row, loadRelations(this.db, row.id), thumbs.get(row.id) ?? null),
     );
 
     if (filters.industries?.length) {

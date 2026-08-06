@@ -9,3 +9,6 @@ data/*.db
 data/*.db-*
 .vite/
 *.tsbuildinfo
+
+# Local visual-capture storage (do not commit binaries)
+data/assets/

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>D1 Folio Shell</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--paper:#FBF9F5;--ink:#0A0A0A;--mute:#6B6B6B;--rule:rgba(0,0,0,.08);--accent:#FF5E3A;--sans:Geist,system-ui,sans-serif;--serif:"Instrument Serif",Georgia,serif;--mono:"JetBrains Mono",monospace}
+*{box-sizing:border-box}body{margin:0;min-height:100dvh;display:grid;grid-template-columns:240px 1fr;font-family:var(--sans);background:var(--paper);color:var(--ink)}
+aside{background:#0A0A0A;color:#fff;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column}
+.brand{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,.06);font-family:var(--serif);font-size:22px}
+.brand i{color:var(--accent);font-style:normal}.brand small{display:block;margin-top:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+nav{padding:14px 0;flex:1}.g{margin-top:16px}.g label{display:block;padding:0 20px 6px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.g a{display:block;padding:7px 20px;color:rgba(255,255,255,.6);text-decoration:none;font-size:13px;border-left:2px solid transparent}
+.g a.on{color:#fff;background:rgba(255,255,255,.04);border-left-color:var(--accent)}
+header{border-bottom:1px solid var(--rule);padding:18px 28px;display:flex;justify-content:space-between;align-items:end;position:sticky;top:0;background:var(--paper)}
+.k{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}h1{font-family:var(--serif);font-size:28px;font-weight:400;margin:4px 0 0}
+.stage{padding:28px;max-width:1100px;display:grid;gap:20px}
+.note{font-size:12px;color:var(--mute)}.cmd{font-family:var(--mono);font-size:11px;border:1px solid var(--rule);padding:8px 12px;color:var(--mute)}
+.board{display:grid;grid-template-columns:1.3fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.card{background:var(--paper);padding:20px}.card h2{font-family:var(--serif);font-size:22px;font-weight:400;margin:0 0 12px}
+.row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--rule);font-size:13px}.row:last-child{border-bottom:0}
+.tag{font-family:var(--mono);font-size:10px;color:var(--accent)}.btn{background:var(--accent);color:#fff;border:0;padding:9px 14px;font-size:13px}
+@media(max-width:860px){body{grid-template-columns:1fr}aside{display:none}.board{grid-template-columns:1fr}}
+</style></head>
+<body>
+<aside>
+  <div class="brand">Alool<i>·</i>cms<small>Folio shell · ADI D1</small></div>
+  <nav>
+    <div class="g"><a class="on" href="#">Desk</a></div>
+    <div class="g"><label>Site</label><a href="#">Config</a><a href="#">Navigation</a></div>
+    <div class="g"><label>Pages</label><a href="#">All pages</a></div>
+    <div class="g"><label>Content</label><a href="#">Programmes</a><a href="#">Posts</a><a href="#">Team</a></div>
+    <div class="g"><label>Library</label><a href="#">Media</a></div>
+  </nav>
+</aside>
+<main>
+  <header><div><div class="k">Today’s desk</div><h1>What needs an editor</h1></div><button class="btn">New page</button></header>
+  <div class="stage">
+    <p class="note">Evidence: Grouped Sidebar Sections · Medium Density · Mixed Serif/Sans · Dark Shell Light Body · Single Accent. Marketing traits excluded.</p>
+    <div class="cmd">⌘K Jump to page, collection, media…</div>
+    <div class="board">
+      <div class="card"><h2>Waiting on you</h2>
+        <div class="row"><span>Home · unpublished edits</span><span class="tag">MODIFIED</span></div>
+        <div class="row"><span>Programmes index</span><span class="tag">DRAFT</span></div>
+        <div class="row"><span>About · missing OG</span><span class="tag">SEO</span></div>
+      </div>
+      <div class="card"><h2>Recently touched</h2>
+        <div class="row"><span>Field clinic programme</span><span class="tag">14:02</span></div>
+        <div class="row"><span>Partner — Red Crescent</span><span class="tag">YDAY</span></div>
+      </div>
+    </div>
+  </div>
+</main>
+</body></html>

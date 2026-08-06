@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>D4 Ledger Index</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&family=Source+Sans+3:wght@400;600;700&family=Source+Code+Pro:wght@500&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#F7F8F6;--ink:#1B2420;--line:#C9D0C8;--panel:#fff;--civic:#0B4F6C;--stamp:#0E7C66;--alert:#9B2226;--sans:"Source Sans 3",system-ui,sans-serif;--serif:"Source Serif 4",Georgia,serif;--mono:"Source Code Pro",monospace}
+*{box-sizing:border-box}body{margin:0;font-family:var(--sans);background:var(--bg);color:var(--ink)}
+header{background:var(--panel);border-bottom:1px solid var(--line)}
+.mast{max-width:1100px;margin:0 auto;padding:18px 20px 10px;display:flex;justify-content:space-between;align-items:end}
+.mast h1{margin:0;font-family:var(--serif);font-size:30px;font-weight:600}
+.mast p{margin:4px 0 0;color:#4A5852;font-size:14px}
+.badge{border:2px solid var(--civic);color:var(--civic);padding:6px 10px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+nav{max-width:1100px;margin:0 auto;padding:0 12px;display:flex;gap:4px;overflow:auto}
+nav a{text-decoration:none;color:var(--ink);padding:12px;font-size:14px;font-weight:600;border-bottom:3px solid transparent;white-space:nowrap}
+nav a.on{border-bottom-color:var(--civic);color:var(--civic)}
+main{max-width:1100px;margin:0 auto;padding:24px 20px 64px;display:grid;gap:16px}
+.note{font-size:13px;color:#4A5852}
+.index{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.index a{background:var(--panel);border:1px solid var(--line);padding:14px;text-decoration:none;color:inherit;font-weight:600;font-size:14px}
+.index a small{display:block;font-weight:400;color:#4A5852;margin-top:4px;font-size:12px;font-family:var(--mono)}
+.panel{background:var(--panel);border:1px solid var(--line)}
+.panel h2{margin:0;padding:14px 16px;font-family:var(--serif);font-size:22px;font-weight:600;border-bottom:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:12px 16px;border-bottom:1px solid var(--line);text-align:left}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#4A5852}
+.stamp{display:inline-block;border:2px solid var(--stamp);color:var(--stamp);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;transform:rotate(-2deg)}
+.stamp.a{border-color:var(--alert);color:var(--alert)}.stamp.d{border-color:var(--civic);color:var(--civic)}
+@media(max-width:860px){.index{grid-template-columns:1fr}}
+</style></head>
+<body>
+<header>
+  <div class="mast"><div><h1>AloolCMS Ledger</h1><p>Publication register — archive IA, trust-first.</p></div><div class="badge">ADI D4</div></div>
+  <nav><a class="on" href="#">Overview</a><a href="#">Pages</a><a href="#">Collections</a><a href="#">Media</a><a href="#">Users</a></nav>
+</header>
+<main>
+  <p class="note">Evidence: Top nav (translated) · Light Theme · Single Accent · Pentagram/Sagmeister archive IA. Composer not hero here.</p>
+  <div class="index">
+    <a href="#">Pages<small>12 records</small></a>
+    <a href="#">Programmes<small>9 records</small></a>
+    <a href="#">Posts<small>24 records</small></a>
+    <a href="#">Team<small>11 records</small></a>
+  </div>
+  <section class="panel"><h2>Publication register</h2>
+    <table><thead><tr><th>Record</th><th>Type</th><th>Status</th><th>Owner</th></tr></thead>
+    <tbody>
+      <tr><td>Home</td><td>Page</td><td><span class="stamp a">Modified</span></td><td>Amina</td></tr>
+      <tr><td>Field clinics</td><td>Programme</td><td><span class="stamp">Published</span></td><td>Yusuf</td></tr>
+      <tr><td>Annual note</td><td>Post</td><td><span class="stamp d">Draft</span></td><td>Sara</td></tr>
+    </tbody></table>
+  </section>
+</main>
+</body></html>

@@ -13,6 +13,12 @@ export const references = sqliteTable(
     description: text("description"),
     whySaved: text("why_saved"),
     whatToLearn: text("what_to_learn"), // JSON array string
+    // --- visual capture pipeline (v2) ---
+    /** pending | queued | processing | completed | failed */
+    captureStatus: text("capture_status").notNull().default("pending"),
+    captureError: text("capture_error"),
+    capturedAt: text("captured_at"),
+    captureAttempts: integer("capture_attempts").notNull().default(0),
     createdAt: text("created_at")
       .notNull()
       .default(sql`(datetime('now'))`),
@@ -467,6 +473,138 @@ export const designDnaEvidenceRelations = relations(
     reference: one(references, {
       fields: [designDnaEvidence.referenceId],
       references: [references.id],
+    }),
+  }),
+);
+
+/* ---------------------------------------------------------------------------
+   Visual capture pipeline (v2)
+
+   `references.image` is intentionally left untouched — it remains the single
+   author-supplied/preview URL. Captured assets live in their own table so a
+   reference can carry many assets, of many kinds, across versions.
+--------------------------------------------------------------------------- */
+
+export const referenceAssets = sqliteTable(
+  "reference_assets",
+  {
+    id: text("id").primaryKey(),
+    referenceId: text("reference_id")
+      .notNull()
+      .references(() => references.id, { onDelete: "cascade" }),
+    /** desktop | mobile | fullpage | hero | thumbnail — open for future kinds. */
+    kind: text("kind").notNull(),
+    /** Path relative to the assets root; never an external URL. */
+    path: text("path").notNull(),
+    format: text("format").notNull(),
+    width: integer("width").notNull(),
+    height: integer("height").notNull(),
+    fileSize: integer("file_size").notNull(),
+    checksum: text("checksum").notNull(),
+    viewportWidth: integer("viewport_width"),
+    viewportHeight: integer("viewport_height"),
+    deviceScaleFactor: integer("device_scale_factor"),
+    /** Bumped on every recapture so history is preserved, not overwritten. */
+    version: integer("version").notNull().default(1),
+    capturedAt: text("captured_at")
+      .notNull()
+      .default(sql`(datetime('now'))`),
+    createdAt: text("created_at")
+      .notNull()
+      .default(sql`(datetime('now'))`),
+  },
+  (table) => [
+    uniqueIndex("reference_asset_kind_version_idx").on(
+      table.referenceId,
+      table.kind,
+      table.version,
+    ),
+  ],
+);
+
+export const captureRuns = sqliteTable("capture_runs", {
+  id: text("id").primaryKey(),
+  /** pending | running | completed | failed | cancelled */
+  status: text("status").notNull().default("pending"),
+  total: integer("total").notNull().default(0),
+  completed: integer("completed").notNull().default(0),
+  failed: integer("failed").notNull().default(0),
+  skipped: integer("skipped").notNull().default(0),
+  message: text("message"),
+  startedAt: text("started_at"),
+  finishedAt: text("finished_at"),
+  createdAt: text("created_at")
+    .notNull()
+    .default(sql`(datetime('now'))`),
+});
+
+export const referenceAssetsRelations = relations(referenceAssets, ({ one }) => ({
+  reference: one(references, {
+    fields: [referenceAssets.referenceId],
+    references: [references.id],
+  }),
+}));
+
+/* ---------------------------------------------------------------------------
+   Structured visual observations.
+
+   One row = one objectively checkable statement about a captured reference,
+   drawn from the closed vocabulary in domain/observations.ts. This is the layer
+   AI Research and Design DNA read instead of re-analysing screenshots.
+--------------------------------------------------------------------------- */
+export const referenceObservations = sqliteTable(
+  "reference_observations",
+  {
+    id: text("id").primaryKey(),
+    referenceId: text("reference_id")
+      .notNull()
+      .references(() => references.id, { onDelete: "cascade" }),
+    /** navigation | search | layout | typography | content | interaction | density | ai | conversion | accessibility | media | theme */
+    category: text("category").notNull(),
+    /** Controlled vocabulary term; validated in the domain layer. */
+    trait: text("trait").notNull(),
+    /** observed | inferred | authored — observed facts are the source of truth. */
+    provenance: text("provenance").notNull().default("observed"),
+    detail: text("detail"),
+    /** 0-100, only meaningful for `inferred`. */
+    confidence: integer("confidence"),
+    /**
+     * SET NULL rather than cascade: a recapture replaces assets, and losing the
+     * evidence pointer must not delete the observation it justified.
+     */
+    evidenceAssetId: text("evidence_asset_id").references(
+      () => referenceAssets.id,
+      { onDelete: "set null" },
+    ),
+    evidenceNote: text("evidence_note"),
+    recordedBy: text("recorded_by"),
+    createdAt: text("created_at")
+      .notNull()
+      .default(sql`(datetime('now'))`),
+    updatedAt: text("updated_at")
+      .notNull()
+      .default(sql`(datetime('now'))`),
+  },
+  (table) => [
+    uniqueIndex("observation_unique_idx").on(
+      table.referenceId,
+      table.category,
+      table.trait,
+      table.provenance,
+    ),
+  ],
+);
+
+export const referenceObservationsRelations = relations(
+  referenceObservations,
+  ({ one }) => ({
+    reference: one(references, {
+      fields: [referenceObservations.referenceId],
+      references: [references.id],
+    }),
+    evidenceAsset: one(referenceAssets, {
+      fields: [referenceObservations.evidenceAssetId],
+      references: [referenceAssets.id],
     }),
   }),
 );
